@@ -1,104 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimalistic Wallpaper Collection — Curated Minimal & Nature Wallpapers</title>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Minimalistic Wallpaper Collection — Curated Minimal & Nature Wallpapers
+    </title>
+
     <!-- SEO & Metadata -->
-    <meta name="description" content="A curated gallery of 300+ clean, high-resolution minimalistic, flat art, and digital nature wallpapers with a lightweight random wallpaper API.">
-    <meta name="keywords" content="wallpapers, minimalistic, minimalist wallpaper, nature backgrounds, 4k wallpapers, desktop backgrounds, random wallpaper api">
-    <meta name="author" content="SumanCH8514">
-    <meta name="theme-color" content="#0f1117">
+    <meta
+      name="description"
+      content="A curated gallery of 300+ clean, high-resolution minimalistic, flat art, and digital nature wallpapers with a lightweight random wallpaper API."
+    />
+    <meta
+      name="keywords"
+      content="wallpapers, minimalistic, minimalist wallpaper, nature backgrounds, 4k wallpapers, desktop backgrounds, random wallpaper api"
+    />
+    <meta name="author" content="SumanCH8514" />
+    <meta name="theme-color" content="#0f1117" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Minimalistic Wallpaper Collection">
-    <meta property="og:description" content="Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
-    <meta property="og:image" content="https://user-images.githubusercontent.com/20955511/186479660-475532e8-427d-4df1-a19d-7f94090805b1.png">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Minimalistic Wallpaper Collection" />
+    <meta
+      property="og:description"
+      content="Curated gallery of 300+ minimalistic and nature wallpapers with random API."
+    />
+    <meta
+      property="og:image"
+      content="https://user-images.githubusercontent.com/20955511/186479660-475532e8-427d-4df1-a19d-7f94090805b1.png"
+    />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Minimalistic Wallpaper Collection">
-    <meta name="twitter:description" content="Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Minimalistic Wallpaper Collection" />
+    <meta
+      name="twitter:description"
+      content="Curated gallery of 300+ minimalistic and nature wallpapers with random API."
+    />
 
     <!-- Google Fonts & GLightbox CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
+    />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
     <!-- Sticky Navigation Bar -->
     <header class="navbar">
-        <a href="/" class="brand">
-            <span class="brand-icon">🖼️</span>
-            <span>Minimal Wallpapers</span>
+      <a href="/" class="brand">
+        <span class="brand-icon">🖼️</span>
+        <span>Minimal Wallpapers</span>
+      </a>
+      <div class="nav-actions">
+        <button
+          id="randomBtn"
+          class="btn btn-primary"
+          title="Press 'R' for Random Wallpaper"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 8h.01"></path>
+            <path d="M8 8h.01"></path>
+            <path d="M8 16h.01"></path>
+            <path d="M16 16h.01"></path>
+            <path d="M12 12h.01"></path>
+          </svg>
+          <span>Random (R)</span>
+        </button>
+        <a
+          href="https://github.com/SumanCH8514/Wallpaper-Collection-Project"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-secondary"
+          title="View Source on GitHub"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+            />
+          </svg>
+          <span>GitHub</span>
         </a>
-        <div class="nav-actions">
-            <button id="randomBtn" class="btn btn-primary" title="Press 'R' for Random Wallpaper">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 8h.01"></path>
-                    <path d="M8 8h.01"></path>
-                    <path d="M8 16h.01"></path>
-                    <path d="M16 16h.01"></path>
-                    <path d="M12 12h.01"></path>
-                </svg>
-                <span>Random (R)</span>
-            </button>
-            <a href="https://github.com/SumanCH8514/Wallpaper-Collection-Project" target="_blank" rel="noopener" class="btn btn-secondary" title="View Source on GitHub">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
-                <span>GitHub</span>
-            </a>
-        </div>
+      </div>
     </header>
 
     <!-- Hero Header -->
     <section class="hero">
-        <h1 class="hero-title">Minimalistic Wallpaper Collection</h1>
-        <p class="hero-subtitle">Handpicked catalog of flat art, vector landscapes, and aesthetic digital nature wallpapers.</p>
+      <h1 class="hero-title">Minimalistic Wallpaper Collection</h1>
+      <p class="hero-subtitle">
+        Handpicked catalog of flat art, vector landscapes, and aesthetic digital
+        nature wallpapers.
+      </p>
     </section>
 
     <!-- Search and Filters Container -->
     <section class="controls-container">
-        <div class="search-box">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search wallpapers by title, artist, or tag... (Press '/' to focus)" autocomplete="off">
-            <span class="search-badge" id="searchBadge">/</span>
-        </div>
+      <div class="search-box">
+        <svg
+          class="search-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search wallpapers by title, artist, or tag... (Press '/' to focus)"
+          autocomplete="off"
+        />
+        <span class="search-badge" id="searchBadge">/</span>
+      </div>
 
-        <div class="tags-scroll" id="tagsContainer">
-            <!-- Populated via JavaScript -->
-        </div>
+      <div class="tags-scroll" id="tagsContainer">
+        <!-- Populated via JavaScript -->
+      </div>
 
-        <div class="stats-bar">
-            <span id="statsCount">Loading collection...</span>
-            <span>API: <code>/api/random</code></span>
-        </div>
+      <div class="stats-bar">
+        <span id="statsCount">Loading collection...</span>
+        <span>API: <code>/api/random</code></span>
+      </div>
     </section>
 
     <!-- Gallery Grid Container -->
     <main class="gallery-container">
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- Dynamically populated by app.js -->
-        </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Dynamically populated by app.js -->
+      </div>
     </main>
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top" title="Back to Top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
     </button>
 
     <!-- Toast Notifications -->
@@ -106,16 +171,27 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-links">
-            <a href="https://github.com/SumanCH8514/Wallpaper-Collection-Project" target="_blank" rel="noopener">GitHub Repository</a>
-            <a href="/api/random" target="_blank">Random Wallpaper API</a>
-            <a href="/api/wallpapers" target="_blank">Wallpapers JSON API</a>
-        </div>
-        <p>Curated with ❤️ by <a href="https://github.com/SumanCH8514" target="_blank" rel="noopener">SumanCH8514</a> &bull; Distributed under MIT License</p>
+      <div class="footer-links">
+        <a
+          href="https://github.com/SumanCH8514/Wallpaper-Collection-Project"
+          target="_blank"
+          rel="noopener"
+          >GitHub Repository</a
+        >
+        <a href="/api/random" target="_blank">Random Wallpaper API</a>
+        <a href="/api/wallpapers" target="_blank">Wallpapers JSON API</a>
+      </div>
+      <p>
+        Curated with ❤️ by
+        <a href="https://github.com/SumanCH8514" target="_blank" rel="noopener"
+          >SumanCH8514</a
+        >
+        &bull; Distributed under MIT License
+      </p>
     </footer>
 
     <!-- GLightbox & Client Application Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
     <script src="/js/app.js"></script>
-</body>
+  </body>
 </html>

@@ -131,6 +131,7 @@ GET https://wallpapers.sumanonline.com/api/wallpapers?q=forest&limit=10&page=1
 ```
 
 ### 📱 Terminal / CLI Example
+
 ```bash
 # Download a fresh random wallpaper directly
 curl -sL "https://wallpapers.sumanonline.com/api/random" -o wallpaper.jpg
