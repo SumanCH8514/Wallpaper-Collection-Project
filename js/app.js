@@ -1,491 +1,504 @@
-/**
- * Wallpaper Collection — Modern Application Controller
- * A SumanOnline Project
- */
+(function () {
+  'use strict';
 
-const CONFIG = {
-  proxyBaseUrl: '/api/images/',
-  rawBaseUrl: 'https://raw.githubusercontent.com/SumanCH8514/Wallpaper-Collection-Project/main/images/',
-  imgProxyPrefix: 'https://dc1imgproxy.fly.dev/x/rs:auto:480:270:1/plain/https%3A%2F%2Fraw.githubusercontent.com%2FSumanCH8514%2FWallpaper-Collection-Project%2Fmain%2Fimages%2F'
-};
+  const ITEMS_PER_PAGE = 40;
+  let allWallpapers = [];
+  let filteredWallpapers = [];
+  let currentPage = 1;
+  let currentCategory = 'all';
+  let currentViewMode = localStorage.getItem('wallpaper_view_mode') || (window.innerWidth <= 768 ? 'masonry' : 'grid');
+  let searchQuery = '';
+  let glightboxInstance = null;
 
-const PAGE_SIZE = 40;
-
-let allWallpapers = [];
-let filteredWallpapers = [];
-let currentPage = 1;
-let activeTag = 'all';
-let searchQuery = '';
-let isCompactView = false;
-let lightboxInstance = null;
-
-const galleryGrid = document.getElementById('galleryGrid');
-const paginationNav = document.getElementById('paginationNav');
-const searchInput = document.getElementById('searchInput');
-const searchClearBtn = document.getElementById('searchClearBtn');
-const categoryChipsContainer = document.getElementById('categoryChipsContainer');
-const statsStatusLabel = document.getElementById('statsStatusLabel');
-const gridToggleBtn = document.getElementById('gridToggleBtn');
-const gridDensityText = document.getElementById('gridDensityText');
-const backToTopFab = document.getElementById('backToTopFab');
-const toastStack = document.getElementById('toastStack');
-const randomNavBtn = document.getElementById('randomNavBtn');
-const apiDocsModal = document.getElementById('apiDocsModal');
-const openApiModalBtn = document.getElementById('openApiModalBtn');
-const closeApiModalBtn = document.getElementById('closeApiModalBtn');
-const footerApiDocsTrigger = document.getElementById('footerApiDocsTrigger');
-
-function showToast(message) {
-  if (!toastStack) return;
-  const toast = document.createElement('div');
-  toast.className = 'toast-item';
-  toast.innerHTML = `<svg class="toast-success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg><span>${message}</span>`;
-  toastStack.appendChild(toast);
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateY(12px)';
-    setTimeout(() => toast.remove(), 250);
-  }, 2600);
-}
-
-function copySnippet(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    showToast('URL copied to clipboard!');
-  }).catch(() => {
-    showToast('Copied: ' + text);
-  });
-}
-
-function copyLink(url, e) {
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
-  const fullUrl = window.location.origin + url;
-  navigator.clipboard.writeText(fullUrl).then(() => {
-    showToast('Proxy image URL copied!');
-  }).catch(() => {
-    showToast('Link copied!');
-  });
-}
-
-function openRandomWallpaper() {
-  const pool = filteredWallpapers.length > 0 ? filteredWallpapers : allWallpapers;
-  if (pool.length === 0) return;
-  const randomItem = pool[Math.floor(Math.random() * pool.length)];
-  const target = document.querySelector(`.glightbox[data-id="${randomItem.id}"]`);
-  if (target) {
-    target.click();
-  } else {
-    window.open('/api/random', '_blank');
-  }
-}
-
-function goToPage(pageNumber, shouldScroll) {
-  const totalPages = Math.ceil(filteredWallpapers.length / PAGE_SIZE) || 1;
-  currentPage = Math.max(1, Math.min(pageNumber, totalPages));
-
-  const url = new URL(window.location);
-  if (currentPage > 1) {
-    url.searchParams.set('page', currentPage);
-  } else {
-    url.searchParams.delete('page');
-  }
-  window.history.replaceState({}, '', url);
-
-  renderCurrentPage();
-
-  if (shouldScroll && galleryGrid) {
-    const headerOffset = 90;
-    const elementPosition = galleryGrid.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-    window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
-  }
-}
-
-function renderPagination(totalItems) {
-  if (!paginationNav) return;
-  paginationNav.innerHTML = '';
-  const totalPages = Math.ceil(totalItems / PAGE_SIZE);
-
-  if (totalPages <= 1) {
-    paginationNav.style.display = 'none';
-    return;
+  function inferCategory(filename) {
+    const fn = (filename || '').toLowerCase();
+    if (fn.includes('mountain') || fn.includes('alps') || fn.includes('peak') || fn.includes('cliff') || fn.includes('snow') || fn.includes('hill')) return 'mountains';
+    if (fn.includes('sunset') || fn.includes('sunrise') || fn.includes('dusk') || fn.includes('dawn') || fn.includes('golden') || fn.includes('evening') || fn.includes('sun')) return 'sunset';
+    if (fn.includes('landscape') || fn.includes('lake') || fn.includes('river') || fn.includes('ocean') || fn.includes('sea') || fn.includes('valley') || fn.includes('desert') || fn.includes('coast')) return 'landscape';
+    if (fn.includes('night') || fn.includes('moon') || fn.includes('star') || fn.includes('space') || fn.includes('planet') || fn.includes('galaxy') || fn.includes('lunar')) return 'night & moon';
+    if (fn.includes('forest') || fn.includes('tree') || fn.includes('woods') || fn.includes('pine') || fn.includes('jungle')) return 'forest';
+    if (fn.includes('abstract') || fn.includes('gradient') || fn.includes('pattern') || fn.includes('geometric') || fn.includes('vector')) return 'abstract';
+    return 'minimalist';
   }
 
-  paginationNav.style.display = 'flex';
-  const fragment = document.createDocumentFragment();
-
-  const prevBtn = document.createElement('button');
-  prevBtn.className = 'page-nav-btn';
-  prevBtn.innerHTML = '&larr; Prev';
-  prevBtn.disabled = currentPage <= 1;
-  prevBtn.title = 'Previous Page';
-  prevBtn.addEventListener('click', () => {
-    if (currentPage > 1) goToPage(currentPage - 1, true);
-  });
-  fragment.appendChild(prevBtn);
-
-  function createBtn(p) {
-    const btn = document.createElement('button');
-    btn.className = 'page-nav-btn ' + (p === currentPage ? 'active' : '');
-    btn.textContent = p;
-    btn.setAttribute('aria-label', 'Page ' + p);
-    btn.addEventListener('click', () => goToPage(p, true));
-    return btn;
+  function formatTitle(filename) {
+    let name = (filename || '').replace(/\.[^/.]+$/, '');
+    name = name.replace(/^(wallpapersden\.com_|wp\d+[-_]|wallpaperflare\.com_)/i, '');
+    name = name.replace(/[-_]+/g, ' ').trim();
+    return name.charAt(0).toUpperCase() + name.slice(1);
   }
 
-  function createDots() {
-    const span = document.createElement('span');
-    span.className = 'page-dots-ellipsis';
-    span.textContent = '...';
-    return span;
-  }
+  async function init() {
+    try {
+      let rawList = null;
+      if (window.__WALLPAPERS_CATALOG__ && Array.isArray(window.__WALLPAPERS_CATALOG__)) {
+        rawList = window.__WALLPAPERS_CATALOG__;
+      }
 
-  if (totalPages <= 7) {
-    for (let i = 1; i <= totalPages; i++) {
-      fragment.appendChild(createBtn(i));
+      if (!rawList) {
+        try {
+          const res = await fetch('/api/wallpapers');
+          if (res.ok) {
+            const json = await res.json();
+            rawList = Array.isArray(json) ? json : (json && json.data ? json.data : json.wallpapers);
+          }
+        } catch (_) {}
+      }
+
+      if (!rawList) {
+        try {
+          const res = await fetch('/data/wallpapers.json');
+          if (res.ok) rawList = await res.json();
+        } catch (_) {}
+      }
+
+      if (Array.isArray(rawList) && rawList.length > 0) {
+        allWallpapers = rawList.map((item) => {
+          const fn = item.filename || item.name || '';
+          const cat = inferCategory(fn);
+          return {
+            filename: fn,
+            title: item.title || formatTitle(fn),
+            category: cat,
+            url: `/api/images/${encodeURIComponent(fn)}`,
+            rawUrl: `https://raw.githubusercontent.com/SumanCH8514/Wallpaper-Collection-Project/main/images/${encodeURIComponent(fn)}`,
+            author: item.author || 'Curated Artist'
+          };
+        });
+      }
+
+      updateCategoryCounts();
+      setRandomHeroBackground();
+      applyViewMode(currentViewMode);
+      applyFilters(true);
+      initCategoryCarousel();
+      initBackToTop();
+      initEvents();
+    } catch (err) {
+      console.error('Error initializing wallpapers:', err);
     }
-  } else {
-    fragment.appendChild(createBtn(1));
-    if (currentPage > 3) fragment.appendChild(createDots());
+  }
 
-    const start = Math.max(2, currentPage - 1);
-    const end = Math.min(totalPages - 1, currentPage + 1);
-    for (let i = start; i <= end; i++) {
-      fragment.appendChild(createBtn(i));
+  function setRandomHeroBackground() {
+    const hero = document.querySelector('.hero-wrapper');
+    if (hero && allWallpapers.length > 0) {
+      const randomItem = allWallpapers[Math.floor(Math.random() * allWallpapers.length)];
+      hero.style.backgroundImage = `linear-gradient(90deg, #07101E 0%, rgba(7,16,30,0.96) 28%, rgba(7,16,30,0.65) 52%, rgba(7,16,30,0.20) 100%), url('${randomItem.url}')`;
+    }
+  }
+
+  function updateCategoryCounts() {
+    const counts = { all: allWallpapers.length };
+    allWallpapers.forEach(item => {
+      counts[item.category] = (counts[item.category] || 0) + 1;
+    });
+
+    const categoryPills = document.querySelectorAll('.category-pill-btn');
+    categoryPills.forEach(pill => {
+      const cat = pill.getAttribute('data-cat');
+      const badge = pill.querySelector('.pill-count-badge');
+      if (badge && counts[cat] !== undefined) {
+        badge.textContent = counts[cat];
+      }
+    });
+  }
+
+  function applyViewMode(mode) {
+    const validModes = ['grid', 'masonry', 'list'];
+    currentViewMode = validModes.includes(mode) ? mode : 'grid';
+    try {
+      localStorage.setItem('wallpaper_view_mode', currentViewMode);
+    } catch (_) {}
+
+    const gridEl = document.getElementById('wallpaper-grid');
+    if (gridEl) {
+      gridEl.classList.remove('view-grid', 'view-masonry', 'view-list');
+      gridEl.classList.add('view-' + currentViewMode);
     }
 
-    if (currentPage < totalPages - 2) fragment.appendChild(createDots());
-    fragment.appendChild(createBtn(totalPages));
+    const viewBtns = document.querySelectorAll('.view-btn');
+    viewBtns.forEach(btn => {
+      const btnMode = btn.getAttribute('data-view') || (btn.textContent.toLowerCase().includes('masonry') ? 'masonry' : (btn.textContent.toLowerCase().includes('list') ? 'list' : 'grid'));
+      if (btnMode === currentViewMode) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
   }
 
-  const nextBtn = document.createElement('button');
-  nextBtn.className = 'page-nav-btn';
-  nextBtn.innerHTML = 'Next &rarr;';
-  nextBtn.disabled = currentPage >= totalPages;
-  nextBtn.title = 'Next Page';
-  nextBtn.addEventListener('click', () => {
-    if (currentPage < totalPages) goToPage(currentPage + 1, true);
-  });
-  fragment.appendChild(nextBtn);
+  function applyFilters(resetPage = true) {
+    if (resetPage) currentPage = 1;
+    const q = searchQuery.trim().toLowerCase();
 
-  paginationNav.appendChild(fragment);
-}
+    filteredWallpapers = allWallpapers.filter(item => {
+      const matchCat = currentCategory === 'all' || item.category === currentCategory;
+      const matchQuery = !q || 
+        item.title.toLowerCase().includes(q) || 
+        item.filename.toLowerCase().includes(q) ||
+        item.category.toLowerCase().includes(q);
+      return matchCat && matchQuery;
+    });
 
-function renderCurrentPage() {
-  if (!galleryGrid) return;
-  galleryGrid.innerHTML = '';
-  const totalItems = filteredWallpapers.length;
-
-  if (totalItems === 0) {
-    galleryGrid.innerHTML = `<div class="empty-gallery-state"><div class="empty-icon-graphic">🔍</div><h3 class="empty-state-heading">No wallpapers found</h3><p class="empty-state-subtitle">No matching artworks found for "${searchQuery}". Try a different keyword or reset filters.</p><button class="btn btn-secondary" onclick="resetFilters()">Reset All Filters</button></div>`;
-    if (statsStatusLabel) statsStatusLabel.textContent = 'Showing 0 wallpapers';
-    if (paginationNav) paginationNav.style.display = 'none';
-    return;
+    renderGrid();
+    renderPagination();
+    updateResultsHeader();
   }
 
-  const totalPages = Math.ceil(totalItems / PAGE_SIZE);
-  if (currentPage > totalPages) currentPage = 1;
+  function renderGrid() {
+    const gridEl = document.getElementById('wallpaper-grid');
+    if (!gridEl) return;
 
-  const startIndex = (currentPage - 1) * PAGE_SIZE;
-  const endIndex = Math.min(startIndex + PAGE_SIZE, totalItems);
-  const items = filteredWallpapers.slice(startIndex, endIndex);
+    if (filteredWallpapers.length === 0) {
+      gridEl.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #71809A;">
+          <h3 style="color: #FFFFFF; font-size: 20px; margin-bottom: 8px;">No wallpapers found</h3>
+          <p>Try searching with another keyword or pick another category.</p>
+        </div>
+      `;
+      return;
+    }
 
-  const fragment = document.createDocumentFragment();
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = Math.min(start + ITEMS_PER_PAGE, filteredWallpapers.length);
+    const pageItems = filteredWallpapers.slice(start, end);
 
-  items.forEach((item) => {
-    const proxyUrl = CONFIG.proxyBaseUrl + encodeURIComponent(item.filename);
-    const rawUrl = CONFIG.rawBaseUrl + encodeURIComponent(item.filename);
-    const thumbUrl = CONFIG.imgProxyPrefix + encodeURIComponent(item.filename);
-    const primaryTag = item.tags && item.tags[0] ? item.tags[0] : 'minimalist';
-    const authorInitial = item.author ? item.author.charAt(0).toUpperCase() : 'W';
-
-    const card = document.createElement('div');
-    card.className = 'wallpaper-card';
-
-    card.innerHTML = `
-      <div class="card-media-wrapper">
-        <span class="card-badge-top-left">${primaryTag}</span>
-        <span class="card-badge-top-right">4K ${item.format.toUpperCase()}</span>
-        
+    gridEl.innerHTML = pageItems.map(item => `
+      <div class="wallpaper-card-item glightbox" data-gallery="wallpaper-gallery" data-href="${item.url}" data-type="image">
         <img 
-          src="${thumbUrl}" 
-          alt="${item.title}" 
-          title="${item.title}"
-          class="card-image img-skeleton"
+          class="card-thumb-img" 
+          src="${item.url}" 
+          alt="${escapeHtml(item.title)}" 
           loading="lazy"
           decoding="async"
-          onload="this.classList.remove('img-skeleton')"
-          onerror="this.src='${rawUrl}'"
         />
-
-        <div class="card-media-overlay">
-          <a href="${proxyUrl}" 
-             class="overlay-action-btn glightbox" 
-             data-id="${item.id}"
-             data-gallery="wallpaper-gallery"
-             data-alt="${item.title}"
-             data-description="${item.title} &bull; Artist: ${item.author} (${item.format.toUpperCase()})"
-             title="Full Screen Preview">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </a>
-          <button class="overlay-action-btn" onclick="copyLink('${proxyUrl}', event)" title="Copy Proxy URL">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          </button>
-          <a href="${proxyUrl}" download="${item.filename}" class="overlay-action-btn" target="_blank" rel="noopener" title="Download High-Res">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="card-info-footer">
-        <div class="card-title-group">
-          <div class="card-wallpaper-title" title="${item.title}">${item.title}</div>
-          <div class="card-artist-row">
-            <span class="artist-avatar-circle">${authorInitial}</span>
-            <span class="card-artist-name">${item.author}</span>
+        <div class="card-hover-mask">
+          <div class="card-mask-top">
+            <span class="badge-card-cat">${escapeHtml(item.category)}</span>
+            <div class="card-action-btns">
+              <button type="button" class="btn-card-icon btn-copy-link" data-url="${item.url}" title="Copy Proxy Link" aria-label="Copy Direct Proxy Link">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              </button>
+              <a href="${item.url}" download="${item.filename}" target="_blank" rel="noopener noreferrer" class="btn-card-icon btn-download-link" title="Download via Proxy" aria-label="Download Wallpaper">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </a>
+            </div>
+          </div>
+          <div class="card-mask-bottom">
+            <span class="card-art-title">${escapeHtml(item.title)}</span>
+            <span class="card-art-res">4K Ultra HD</span>
           </div>
         </div>
-        <div class="card-quick-actions">
-          <button class="card-icon-action" onclick="copyLink('${proxyUrl}', event)" title="Copy Proxy Link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          </button>
-          <a href="${proxyUrl}" download="${item.filename}" target="_blank" rel="noopener" class="card-icon-action" title="Download Image">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          </a>
-        </div>
       </div>
+    `).join('');
+
+    setupLightbox();
+
+    document.querySelectorAll('.btn-copy-link').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const path = btn.getAttribute('data-url') || '';
+        const fullUrl = path.startsWith('http') ? path : `${window.location.origin}${path}`;
+        if (navigator.clipboard && fullUrl) {
+          navigator.clipboard.writeText(fullUrl).then(() => {
+            showToast('Proxy link copied to clipboard!');
+          }).catch(() => {
+            showToast('Copied link: ' + fullUrl);
+          });
+        }
+      });
+    });
+
+    document.querySelectorAll('.btn-download-link').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
+  }
+
+  function setupLightbox() {
+    if (typeof GLightbox !== 'undefined') {
+      if (glightboxInstance) {
+        try {
+          glightboxInstance.destroy();
+        } catch (_) {}
+      }
+      glightboxInstance = GLightbox({
+        selector: '.glightbox',
+        loop: true,
+        touchNavigation: true,
+        zoomable: true
+      });
+    }
+  }
+
+  function renderPagination() {
+    const paginationContainerEl = document.getElementById('pagination-container');
+    if (!paginationContainerEl) return;
+
+    const totalPages = Math.ceil(filteredWallpapers.length / ITEMS_PER_PAGE);
+    if (totalPages <= 1) {
+      paginationContainerEl.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    html += `<button class="page-nav-btn" id="btn-prev" ${currentPage === 1 ? 'disabled' : ''}>&lt;</button>`;
+
+    const delta = 2;
+    const range = [];
+    for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
+      range.push(i);
+    }
+    if (currentPage - delta > 2) range.unshift('...');
+    if (currentPage + delta < totalPages - 1) range.push('...');
+    range.unshift(1);
+    if (totalPages > 1) range.push(totalPages);
+
+    range.forEach(p => {
+      if (p === '...') {
+        html += `<span class="page-ellipsis-dots">…</span>`;
+      } else {
+        html += `<button class="page-nav-btn ${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`;
+      }
+    });
+
+    html += `<button class="page-nav-btn" id="btn-next" ${currentPage === totalPages ? 'disabled' : ''}>&gt;</button>`;
+
+    const start = (currentPage - 1) * ITEMS_PER_PAGE + 1;
+    const end = Math.min(currentPage * ITEMS_PER_PAGE, filteredWallpapers.length);
+
+    paginationContainerEl.innerHTML = `
+      <div class="pagination-pages-list">${html}</div>
+      <div class="pagination-footer-text">Showing ${start}–${end} of ${filteredWallpapers.length} Wallpapers (Page ${currentPage} of ${totalPages})</div>
     `;
 
-    fragment.appendChild(card);
-  });
-
-  galleryGrid.appendChild(fragment);
-
-  if (statsStatusLabel) {
-    statsStatusLabel.innerHTML = `Showing <strong>${startIndex + 1}&ndash;${endIndex}</strong> of <strong>${totalItems}</strong> Wallpapers (Page ${currentPage} of ${totalPages})`;
-  }
-
-  renderPagination(totalItems);
-
-  if (lightboxInstance) {
-    lightboxInstance.destroy();
-  }
-  if (typeof GLightbox !== 'undefined') {
-    lightboxInstance = GLightbox({
-      selector: '.glightbox',
-      touchNavigation: true,
-      loop: true,
-      zoomable: true
-    });
-  }
-}
-
-function resetFilters() {
-  if (searchInput) {
-    searchInput.value = '';
-    if (searchClearBtn) searchClearBtn.style.display = 'none';
-  }
-  searchQuery = '';
-  activeTag = 'all';
-  document.querySelectorAll('.category-chip').forEach((b) => b.classList.remove('active'));
-  const allBtn = document.querySelector(`.category-chip[data-tag="all"]`);
-  if (allBtn) allBtn.classList.add('active');
-  applyFilters(true);
-}
-
-function applyFilters(resetPage) {
-  if (resetPage) currentPage = 1;
-
-  filteredWallpapers = allWallpapers.filter((item) => {
-    const matchesTag = activeTag === 'all' || item.tags.includes(activeTag);
-    const matchesSearch =
-      !searchQuery ||
-      item.title.toLowerCase().includes(searchQuery) ||
-      item.author.toLowerCase().includes(searchQuery) ||
-      item.filename.toLowerCase().includes(searchQuery) ||
-      item.tags.some((t) => t.toLowerCase().includes(searchQuery));
-    return matchesTag && matchesSearch;
-  });
-
-  goToPage(currentPage, false);
-}
-
-function setupCategoryChips() {
-  if (!categoryChipsContainer) return;
-  const categories = [
-    { id: 'all', label: 'All Wallpapers', icon: '🌐', count: allWallpapers.length },
-    { id: 'minimalist', label: 'Minimalist', icon: '🏔️', count: 194 },
-    { id: 'mountain', label: 'Mountains', icon: '⛰️', count: 38 },
-    { id: 'sunset', label: 'Sunset', icon: '🌅', count: 27 },
-    { id: 'landscape', label: 'Landscape', icon: '🌄', count: 23 },
-    { id: 'night', label: 'Night & Moon', icon: '🌙', count: 14 },
-    { id: 'forest', label: 'Forest', icon: '🌲', count: 14 },
-    { id: 'firewatch', label: 'Firewatch', icon: '🔥', count: 12 },
-    { id: 'city', label: 'City & Neon', icon: '🌆', count: 11 },
-    { id: 'lake', label: 'Lakes & Water', icon: '🌊', count: 7 },
-    { id: 'cyberpunk', label: 'Cyberpunk', icon: '⚡', count: 2 }
-  ];
-
-  categoryChipsContainer.innerHTML = '';
-  categories.forEach((cat) => {
-    const btn = document.createElement('button');
-    btn.className = 'category-chip ' + (cat.id === activeTag ? 'active' : '');
-    btn.dataset.tag = cat.id;
-    btn.innerHTML = `<span>${cat.icon} ${cat.label}</span><span class="category-chip-count">${cat.count}</span>`;
-
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.category-chip').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeTag = cat.id;
-      applyFilters(true);
+    paginationContainerEl.querySelectorAll('[data-page]').forEach(b => {
+      b.addEventListener('click', () => {
+        currentPage = parseInt(b.getAttribute('data-page'), 10);
+        renderGrid();
+        renderPagination();
+        updateResultsHeader();
+        const gridEl = document.getElementById('wallpaper-grid');
+        if (gridEl) gridEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     });
 
-    categoryChipsContainer.appendChild(btn);
-  });
-}
+    const prev = document.getElementById('btn-prev');
+    if (prev) {
+      prev.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderGrid();
+          renderPagination();
+          updateResultsHeader();
+          const gridEl = document.getElementById('wallpaper-grid');
+          if (gridEl) gridEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
 
-function toggleApiModal(open) {
-  if (!apiDocsModal) return;
-  if (open) {
-    apiDocsModal.classList.add('open');
-    apiDocsModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  } else {
-    apiDocsModal.classList.remove('open');
-    apiDocsModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-}
-
-async function initApp() {
-  if (window.EMBEDDED_WALLPAPERS && Array.isArray(window.EMBEDDED_WALLPAPERS)) {
-    allWallpapers = window.EMBEDDED_WALLPAPERS;
-  } else {
-    try {
-      const res = await fetch('/data/wallpapers.json');
-      if (res.ok) {
-        allWallpapers = await res.json();
-      }
-    } catch (err) {
-      console.warn('Falling back to /api/wallpapers', err);
-      try {
-        const apiRes = await fetch('/api/wallpapers?limit=400');
-        const json = await apiRes.json();
-        allWallpapers = json.data || [];
-      } catch (e) {
-        console.error('Failed to load wallpapers:', e);
-      }
+    const next = document.getElementById('btn-next');
+    if (next) {
+      next.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderGrid();
+          renderPagination();
+          updateResultsHeader();
+          const gridEl = document.getElementById('wallpaper-grid');
+          if (gridEl) gridEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     }
   }
 
-  filteredWallpapers = [...allWallpapers];
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const initialPage = parseInt(urlParams.get('page') || '1', 10);
-  if (!isNaN(initialPage) && initialPage > 1) {
-    currentPage = initialPage;
+  function updateResultsHeader() {
+    const countEl = document.getElementById('results-count');
+    const totalPages = Math.ceil(filteredWallpapers.length / ITEMS_PER_PAGE) || 1;
+    const start = filteredWallpapers.length === 0 ? 0 : (currentPage - 1) * ITEMS_PER_PAGE + 1;
+    const end = Math.min(currentPage * ITEMS_PER_PAGE, filteredWallpapers.length);
+    if (countEl) {
+      countEl.innerHTML = `Showing <span class="results-count-bold">${start}–${end}</span> of <span class="results-count-bold">${filteredWallpapers.length}</span> Wallpapers (Page ${currentPage} of ${totalPages})`;
+    }
   }
 
-  setupCategoryChips();
-  applyFilters(false);
-
-  if (searchInput) {
-    let debounceTimer;
-    searchInput.addEventListener('input', (e) => {
-      clearTimeout(debounceTimer);
-      const val = e.target.value.trim();
-      if (searchClearBtn) searchClearBtn.style.display = val ? 'flex' : 'none';
-      debounceTimer = setTimeout(() => {
-        searchQuery = val.toLowerCase();
-        applyFilters(true);
-      }, 140);
-    });
+  function showToast(msg) {
+    const toastEl = document.getElementById('toast-msg');
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    setTimeout(() => toastEl.classList.remove('show'), 2500);
   }
 
-  if (searchClearBtn) {
-    searchClearBtn.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
-      searchQuery = '';
-      searchClearBtn.style.display = 'none';
-      applyFilters(true);
-      if (searchInput) searchInput.focus();
-    });
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  if (gridToggleBtn && galleryGrid) {
-    gridToggleBtn.addEventListener('click', () => {
-      isCompactView = !isCompactView;
-      if (isCompactView) {
-        galleryGrid.classList.add('compact-view');
-        if (gridDensityText) gridDensityText.textContent = 'Compact Grid';
-        gridToggleBtn.classList.add('active');
+
+  function initCategoryCarousel() {
+    const track = document.getElementById('cat-scroll-track');
+    const prevBtn = document.getElementById('cat-scroll-prev');
+    const nextBtn = document.getElementById('cat-scroll-next');
+    if (!track || !prevBtn || !nextBtn) return;
+
+    function updateArrowStates() {
+      const scrollLeft = Math.ceil(track.scrollLeft);
+      const maxScroll = track.scrollWidth - track.clientWidth;
+
+      if (maxScroll <= 5) {
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+        prevBtn.classList.add('is-disabled');
+        nextBtn.classList.add('is-disabled');
+        return;
+      }
+
+      if (scrollLeft <= 5) {
+        prevBtn.disabled = true;
+        prevBtn.classList.add('is-disabled');
       } else {
-        galleryGrid.classList.remove('compact-view');
-        if (gridDensityText) gridDensityText.textContent = 'Comfort Grid';
-        gridToggleBtn.classList.remove('active');
+        prevBtn.disabled = false;
+        prevBtn.classList.remove('is-disabled');
       }
-    });
-  }
 
-  if (randomNavBtn) {
-    randomNavBtn.addEventListener('click', openRandomWallpaper);
-  }
-
-  if (openApiModalBtn) openApiModalBtn.addEventListener('click', () => toggleApiModal(true));
-  if (footerApiDocsTrigger) footerApiDocsTrigger.addEventListener('click', () => toggleApiModal(true));
-  if (closeApiModalBtn) closeApiModalBtn.addEventListener('click', () => toggleApiModal(false));
-  if (apiDocsModal) {
-    apiDocsModal.addEventListener('click', (e) => {
-      if (e.target === apiDocsModal) toggleApiModal(false);
-    });
-  }
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (apiDocsModal && apiDocsModal.classList.contains('open')) {
-        toggleApiModal(false);
-      } else if (searchInput && document.activeElement === searchInput) {
-        searchInput.value = '';
-        searchQuery = '';
-        if (searchClearBtn) searchClearBtn.style.display = 'none';
-        applyFilters(true);
-        searchInput.blur();
+      if (scrollLeft >= maxScroll - 5) {
+        nextBtn.disabled = true;
+        nextBtn.classList.add('is-disabled');
+      } else {
+        nextBtn.disabled = false;
+        nextBtn.classList.remove('is-disabled');
       }
-    } else if (e.key === '/' && document.activeElement !== searchInput && (!apiDocsModal || !apiDocsModal.classList.contains('open'))) {
-      e.preventDefault();
-      if (searchInput) {
-        searchInput.focus();
-        searchInput.select();
-      }
-    } else if ((e.key === 'r' || e.key === 'R') && document.activeElement !== searchInput && (!apiDocsModal || !apiDocsModal.classList.contains('open'))) {
-      openRandomWallpaper();
-    } else if (e.key === 'ArrowRight' && document.activeElement !== searchInput && (!apiDocsModal || !apiDocsModal.classList.contains('open'))) {
-      const totalPages = Math.ceil(filteredWallpapers.length / PAGE_SIZE) || 1;
-      if (currentPage < totalPages) goToPage(currentPage + 1, true);
-    } else if (e.key === 'ArrowLeft' && document.activeElement !== searchInput && (!apiDocsModal || !apiDocsModal.classList.contains('open'))) {
-      if (currentPage > 1) goToPage(currentPage - 1, true);
     }
-  });
 
-  if (backToTopFab) {
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', updateArrowStates, { passive: true });
+    window.addEventListener('resize', updateArrowStates);
+
+    updateArrowStates();
+    setTimeout(updateArrowStates, 100);
+    setTimeout(updateArrowStates, 400);
+  }
+
+
+  function initBackToTop() {
+    const btn = document.getElementById('btn-floating-top');
+    if (!btn) return;
+
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
-        backToTopFab.classList.add('visible');
+      if (window.scrollY > 350) {
+        btn.classList.add('show');
       } else {
-        backToTopFab.classList.remove('visible');
+        btn.classList.remove('show');
       }
     }, { passive: true });
 
-    backToTopFab.addEventListener('click', () => {
+    btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
-}
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  initApp();
-}
+  function initEvents() {
+    const searchInputEl = document.getElementById('search-input');
+    const categoryPills = document.querySelectorAll('.category-pill-btn');
+    const viewBtns = document.querySelectorAll('.view-btn');
+    const randomBtn = document.getElementById('btn-random-wall');
+    const apiDocsBtn = document.getElementById('btn-api-docs');
+    const apiModal = document.getElementById('api-modal');
+    const modalCloseBtn = document.getElementById('btn-close-modal');
+
+    // Search Input
+    let timeout = null;
+    if (searchInputEl) {
+      searchInputEl.addEventListener('input', (e) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          searchQuery = e.target.value;
+          applyFilters(true);
+        }, 150);
+      });
+    }
+
+    // Category Tabs
+    categoryPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        categoryPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentCategory = pill.getAttribute('data-cat');
+        applyFilters(true);
+      });
+    });
+
+    // View Switcher Buttons (Comfort Grid, Masonry, List)
+    viewBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetBtn = btn.closest('.view-btn');
+        if (!targetBtn) return;
+        const mode = targetBtn.getAttribute('data-view') || (targetBtn.textContent.toLowerCase().includes('masonry') ? 'masonry' : (targetBtn.textContent.toLowerCase().includes('list') ? 'list' : 'grid'));
+        applyViewMode(mode);
+        showToast(`Switched view to ${targetBtn.textContent.trim()}`);
+      });
+    });
+
+    // Random Wallpaper
+    if (randomBtn) {
+      randomBtn.addEventListener('click', () => {
+        const cards = Array.from(document.querySelectorAll('.wallpaper-card-item.glightbox'));
+        if (cards.length > 0) {
+          const randomCard = cards[Math.floor(Math.random() * cards.length)];
+          const title = randomCard.getAttribute('data-title') || 'Wallpaper';
+          randomCard.click();
+          showToast('Viewing random wallpaper: ' + title);
+        } else if (allWallpapers.length > 0) {
+          const randomItem = allWallpapers[Math.floor(Math.random() * allWallpapers.length)];
+          window.open(randomItem.url, '_blank');
+          showToast('Viewing random wallpaper: ' + randomItem.title);
+        }
+      });
+    }
+
+    // Modal Events
+    if (apiDocsBtn && apiModal) {
+      apiDocsBtn.addEventListener('click', () => apiModal.classList.add('active'));
+    }
+    if (modalCloseBtn && apiModal) {
+      modalCloseBtn.addEventListener('click', () => apiModal.classList.remove('active'));
+    }
+    if (apiModal) {
+      apiModal.addEventListener('click', (e) => {
+        if (e.target === apiModal) apiModal.classList.remove('active');
+      });
+    }
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && searchInputEl && document.activeElement !== searchInputEl) {
+        e.preventDefault();
+        searchInputEl.focus();
+      }
+      if ((e.key === 'r' || e.key === 'R') && searchInputEl && document.activeElement !== searchInputEl) {
+        e.preventDefault();
+        if (randomBtn) randomBtn.click();
+      }
+      if (e.key === 'Escape' && apiModal && apiModal.classList.contains('active')) {
+        apiModal.classList.remove('active');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
