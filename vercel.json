@@ -1,8 +1,11 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/images/:file*", "destination": "/api/images/:file*" },
-    { "source": "/random", "destination": "/api/random" },
-    { "source": "/wallpapers", "destination": "/api/wallpapers" }
+    { "source": "/api/images/:file*", "destination": "/api/image?file=:file*" },
+    { "source": "/images/:file*", "destination": "/api/image?file=:file*" },
+    { "source": "/api/random", "destination": "/api/random.js" },
+    { "source": "/random", "destination": "/api/random.js" },
+    { "source": "/api/wallpapers", "destination": "/api/wallpapers.js" },
+    { "source": "/wallpapers", "destination": "/api/wallpapers.js" }
   ]
 }

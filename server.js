@@ -8,7 +8,7 @@ const path = require("path");
 const zlib = require("zlib");
 const randomHandler = require("./api/random");
 const wallpapersHandler = require("./api/wallpapers");
-const imagesHandler = require("./api/images/[file]");
+const imagesHandler = require("./api/image");
 
 const PORT = parseInt(process.env.PORT || "8000", 10);
 const HOST = process.env.HOST || "0.0.0.0";
