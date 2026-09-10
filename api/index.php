@@ -56,8 +56,10 @@ function displayImage($url, $userAgent, $redirect)
     exit($contents);
 }
 
+$REPO = "DenverCoder1/minimalistic-wallpaper-collection";
 $REPO = getenv('GITHUB_REPO') ?: "DenverCoder1/minimalistic-wallpaper-collection";
 
+$BRANCH_NAME = "main";
 $BRANCH_NAME = getenv('GITHUB_BRANCH') ?: "main";
 
 $IMAGES_DIRECTORY = "images";
@@ -75,6 +77,8 @@ $redirect = isset($_GET['redirect']) ? $_GET['redirect'] === "1" : false;
 
 // if the current URL is in the form "/images/...", show the image
 if (preg_match("/\/images\/(.*)$/", $_SERVER['REQUEST_URI'], $matches)) {
+    $image_path = $BASE_URL . $matches[1];
+    displayImage($image_path, $REPO, $redirect);
     $local_file = __DIR__ . "/../images/" . urldecode($matches[1]);
     if (file_exists($local_file)) {
         displayImage($local_file, $REPO, false);
@@ -85,6 +89,7 @@ if (preg_match("/\/images\/(.*)$/", $_SERVER['REQUEST_URI'], $matches)) {
 }
 
 // fetch the list of images from GitHub
+$images = json_decode(curlGetContents($GITHUB_API_URL, $REPO), true);
 $api_response = curlGetContents($GITHUB_API_URL, $REPO);
 $images = json_decode($api_response, true);
 
@@ -108,6 +113,7 @@ if (!is_array($images) || isset($images['message'])) {
 }
 
 // if the random query string parameter is set, pick a random image
+if (isset($_GET['random'])) {
 if (isset($_GET['random']) && !empty($images)) {
     // get the image url
     $random_image_path = $images[array_rand($images)]["download_url"];

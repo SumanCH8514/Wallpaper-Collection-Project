@@ -4,7 +4,7 @@
 
 [![Wallpapers Count](https://img.shields.io/badge/wallpapers-300%2B-blue?style=for-the-badge&logo=google-photos&logoColor=white)](images/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/SumanCH8514/Minimalistic-Wallpaper-Collection?style=for-the-badge&color=gold)](https://github.com/SumanCH8514/Minimalistic-Wallpaper-Collection/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/SumanCH8514/Wallpaper-Collection-Project?style=for-the-badge&color=gold)](https://github.com/SumanCH8514/Wallpaper-Collection-Project/stargazers)
 [![Deployment](https://img.shields.io/badge/deployed_on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
 
 ---
@@ -80,8 +80,8 @@ Ensure you have the following installed locally:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/SumanCH8514/Minimalistic-Wallpaper-Collection.git
-   cd Minimalistic-Wallpaper-Collection
+   git clone https://github.com/SumanCH8514/Wallpaper-Collection-Project.git
+   cd Wallpaper-Collection-Project
    ```
 
 2. **Run locally using PHP built-in server:**
@@ -176,7 +176,7 @@ This project is distributed under the **MIT License**. Wallpapers remain copyrig
 **SumanCH8514**
 
 - GitHub: [@SumanCH8514](https://github.com/SumanCH8514)
-- Repository: [Minimalistic-Wallpaper-Collection](https://github.com/SumanCH8514/Minimalistic-Wallpaper-Collection)
+- Repository: [Wallpaper-Collection-Project](https://github.com/SumanCH8514/Wallpaper-Collection-Project)
 
 ---
 
