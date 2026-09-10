@@ -504,7 +504,9 @@ body {
 }
 .category-pill-btn.active {
   background: rgba(59, 130, 246, 0.18);
-  border-color: rgba(91, 140, 255, 0.45); color: #93BBFF; box-shadow: 0 2px 12px rgba(75, 140, 255, 0.15);
+  border-color: rgba(91, 140, 255, 0.45);
+  color: #93bbff;
+  box-shadow: 0 2px 12px rgba(75, 140, 255, 0.15);
 }
 .pill-count-badge {
   background: rgba(0, 0, 0, 0.28);
@@ -514,7 +516,10 @@ body {
   font-weight: 700;
   color: inherit;
 }
-.category-pill-btn.active .pill-count-badge { background: rgba(91, 140, 255, 0.2); color: #93BBFF; }
+.category-pill-btn.active .pill-count-badge {
+  background: rgba(91, 140, 255, 0.2);
+  color: #93bbff;
+}
 
 .category-nav-arrow {
   width: 52px;
@@ -604,8 +609,10 @@ body {
   border-color: var(--border-hover);
 }
 .view-btn.active {
-  background: rgba(59, 130, 246, 0.18); border-color: rgba(91, 140, 255, 0.45);
-  color: #93BBFF; box-shadow: 0 2px 12px rgba(75, 140, 255, 0.15);
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(91, 140, 255, 0.45);
+  color: #93bbff;
+  box-shadow: 0 2px 12px rgba(75, 140, 255, 0.15);
 }
 
 /* ==========================================================================
@@ -1099,27 +1106,44 @@ body {
   line-height: 1.6;
 }
 .footer-heading {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #fff;
-  margin-bottom: 16px;
+  letter-spacing: 0.14em;
+  color: #93BBFF;
+  margin-bottom: 20px;
+  padding-left: 12px;
+  border-left: 3px solid rgba(91, 140, 255, 0.5);
 }
 .footer-links-col {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 }
 .footer-link-a {
   font-size: 14px;
-  color: #a9b7ce;
+  color: #A9B7CE;
   text-decoration: none;
-  transition: color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: all var(--transition-fast);
+}
+.footer-link-a svg {
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity var(--transition-fast);
 }
 .footer-link-a:hover {
-  color: #5b8cff;
+  color: #fff;
+  background: rgba(91, 140, 255, 0.08);
+}
+.footer-link-a:hover svg {
+  opacity: 1;
+  color: #5B8CFF;
 }
 .footer-bottom-row {
   padding-top: 24px;
