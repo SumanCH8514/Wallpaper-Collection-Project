@@ -29,8 +29,8 @@
 
 | Component                | Technology                    | Badge                                                                                                          |
 | :----------------------- | :---------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| **Backend & API**        | PHP 8.x                       | ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)                     |
-| **Hosting & Platform**   | Vercel Serverless             | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)            |
+| **Backend & API**        | Node.js / Serverless JS       | ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)       |
+| **Hosting & Platform**   | Vercel (Edge CDN + Functions) | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)            |
 | **Image Proxy & Cache**  | Fly.io / imgproxy             | ![Fly.io](https://img.shields.io/badge/Fly.io-24185B?style=flat-square&logo=flydotio&logoColor=white)          |
 | **Frontend Lightbox**    | GLightbox                     | ![JavaScript](https://img.shields.io/badge/GLightbox-F7DF1E?style=flat-square&logo=javascript&logoColor=black) |
 | **Styling & Typography** | CSS3 & Google Fonts (Poppins) | ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)                  |
@@ -49,17 +49,19 @@
 ## 📁 Project Structure
 
 ```plaintext
-minimalistic-wallpaper-collection/
+wallpaper-collection-project/
 ├── .github/
 │   ├── scripts/             # Automation and maintenance scripts
 │   └── workflows/           # CI/CD and automated validation actions
 ├── api/
-│   └── index.php            # Core API routing, image handling & web gallery
+│   ├── image_list.json      # Indexed list of 337+ wallpapers
+│   └── random.js            # Serverless Node.js Random Wallpaper API endpoint
 ├── images/                  # Stored high-resolution wallpapers
-├── .gitignore
-├── .vercelignore
-├── Procfile                 # Process file for Heroku/alternative PaaS
-├── vercel.json              # Vercel serverless functions & routing config
+├── index.html               # High-performance Edge CDN Gallery UI
+├── package.json             # Project metadata & npm scripts
+├── server.js                # Zero-dependency local development server
+├── Procfile                 # Process configuration for PaaS
+├── vercel.json              # Vercel routing & Edge configuration
 └── README.md
 ```
 
@@ -72,10 +74,10 @@ minimalistic-wallpaper-collection/
 Ensure you have the following installed locally:
 
 - [Git](https://git-scm.com/)
-- [PHP 8.0+](https://www.php.net/downloads) (with `cURL` extension enabled)
-- _(Optional)_ [Vercel CLI](https://vercel.com/cli) for serverless local testing
+- [Node.js 18+](https://nodejs.org/)
+- _(Optional)_ [Vercel CLI](https://vercel.com/cli)
 
-### Installation
+### Installation & Local Run
 
 1. **Clone the repository:**
 
@@ -84,19 +86,14 @@ Ensure you have the following installed locally:
    cd Wallpaper-Collection-Project
    ```
 
-2. **Run locally using PHP built-in server:**
+2. **Run locally using Node.js:**
 
    ```bash
-   php -S localhost:8000 api/index.php
+   npm start
    ```
+   *(or `node server.js`)*
 
-3. **Or run locally via Vercel CLI:**
-
-   ```bash
-   vercel dev
-   ```
-
-4. Open your browser and navigate to `http://localhost:8000`.
+3. Open your browser and navigate to `http://localhost:8000`.
 
 ---
 
