@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimalistic Wallpaper Collection — Curated Minimal & Nature Wallpapers</title>
+    <title>Wallpaper Collection — A SumanOnline Project</title>
     
     <!-- SEO & Metadata -->
-    <meta name="description" content="A curated gallery of 300+ clean, high-resolution minimalistic, flat art, and digital nature wallpapers with a lightweight random wallpaper API.">
-    <meta name="keywords" content="wallpapers, minimalistic, minimalist wallpaper, nature backgrounds, 4k wallpapers, desktop backgrounds, random wallpaper api">
+    <meta name="description" content="A SumanOnline Project: Curated gallery of 300+ clean, high-resolution minimalistic, flat art, and digital nature wallpapers with a lightweight random wallpaper API.">
+    <meta name="keywords" content="wallpaper collection, sumanonline, minimalistic wallpapers, nature backgrounds, 4k wallpapers, desktop backgrounds, random wallpaper api">
     <meta name="author" content="SumanCH8514">
     <meta name="theme-color" content="#0f1117">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Minimalistic Wallpaper Collection">
-    <meta property="og:description" content="Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
+    <meta property="og:title" content="Wallpaper Collection — A SumanOnline Project">
+    <meta property="og:description" content="A SumanOnline Project: Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
     <meta property="og:image" content="https://user-images.githubusercontent.com/20955511/186479660-475532e8-427d-4df1-a19d-7f94090805b1.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Minimalistic Wallpaper Collection">
-    <meta name="twitter:description" content="Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
+    <meta name="twitter:title" content="Wallpaper Collection — A SumanOnline Project">
+    <meta name="twitter:description" content="A SumanOnline Project: Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
 
     <!-- Google Fonts & Official GLightbox CSS from NPM CDN -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,15 +92,34 @@ body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-weight: 600;
-  font-size: 1.1rem;
+  gap: 0.75rem;
   color: var(--text-primary);
   text-decoration: none;
 }
 
 .brand-icon {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+}
+
+.brand-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.brand-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.brand-tagline {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #60a5fa;
+  letter-spacing: 0.02em;
 }
 
 .nav-actions {
@@ -532,7 +551,10 @@ body {
     <header class="navbar">
         <a href="/" class="brand">
             <span class="brand-icon">🖼️</span>
-            <span>Minimal Wallpapers</span>
+            <div class="brand-details">
+                <span class="brand-name">Wallpaper Collection</span>
+                <span class="brand-tagline">A SumanOnline Project</span>
+            </div>
         </a>
         <div class="nav-actions">
             <button id="randomBtn" class="btn btn-primary" title="Press 'R' for Random Wallpaper">
@@ -557,8 +579,8 @@ body {
 
     <!-- Hero Header -->
     <section class="hero">
-        <h1 class="hero-title">Minimalistic Wallpaper Collection</h1>
-        <p class="hero-subtitle">Handpicked catalog of flat art, vector landscapes, and aesthetic digital nature wallpapers.</p>
+        <h1 class="hero-title">Wallpaper Collection</h1>
+        <p class="hero-subtitle">A SumanOnline Project &bull; Handpicked catalog of flat art, vector landscapes, and aesthetic digital nature wallpapers.</p>
     </section>
 
     <!-- Search and Filters Container -->
@@ -602,7 +624,7 @@ body {
             <a href="/api/random" target="_blank">Random Wallpaper API</a>
             <a href="/api/wallpapers" target="_blank">Wallpapers JSON API</a>
         </div>
-        <p>Curated with ❤️ by <a href="https://github.com/SumanCH8514" target="_blank" rel="noopener">SumanCH8514</a> &bull; Distributed under MIT License</p>
+        <p>A SumanOnline Project &bull; Curated with ❤️ by <a href="https://github.com/SumanCH8514" target="_blank" rel="noopener">SumanCH8514</a> &bull; Distributed under MIT License</p>
     </footer>
 
     <!-- Official GLightbox JS from NPM CDN -->
@@ -773,9 +795,10 @@ body {
                 lightboxInstance.on('slide_after_load', function(slide) {
                     const img = slide.slide.querySelector('img');
                     if (img && img.naturalWidth && img.naturalHeight) {
-                        const desc = slide.slide.querySelector('.gslide-desc');
-                        if (desc) {
-                            desc.innerText = slide.slideConfig.description + ' (' + img.naturalWidth + ' × ' + img.naturalHeight + ')';
+                        const desc = slide.slideConfig.description;
+                        const descElem = slide.slide.querySelector('.gslide-desc');
+                        if (descElem) {
+                            descElem.innerText = desc + ' (' + img.naturalWidth + ' × ' + img.naturalHeight + ')';
                         }
                     }
                 });

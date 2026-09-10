@@ -1,17 +1,17 @@
-# 🖼️ Minimalistic Wallpaper Collection
+# 🖼️ Wallpaper Collection
 
-> A curated gallery of clean, high-resolution minimalistic and digital nature wallpapers with a lightweight random wallpaper API.
+> **A SumanOnline Project** — A curated gallery of clean, high-resolution minimalistic and digital nature wallpapers with a lightweight random wallpaper API.
 
 [![Wallpapers Count](https://img.shields.io/badge/wallpapers-300%2B-blue?style=for-the-badge&logo=google-photos&logoColor=white)](images/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/SumanCH8514/Wallpaper-Collection-Project?style=for-the-badge&color=gold)](https://github.com/SumanCH8514/Wallpaper-Collection-Project/stargazers)
-[![Deployment](https://img.shields.io/badge/deployed_on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
+[![Deployment](https://img.shields.io/badge/deployed_on-Vercel-black?style=for-the-badge&logo=vercel)](https://wallpapers.sumanonline.com)
 
 ---
 
 ## 📖 Overview
 
-**Minimalistic Wallpaper Collection** is an open-source, handpicked catalog of flat art, vector landscapes, and colorful digital nature backgrounds. Built with a responsive web gallery and a lightweight serverless PHP API, it allows users to effortlessly browse, preview in full resolution, or dynamically fetch random wallpapers for automated device setups.
+**Wallpaper Collection** (A SumanOnline Project) is an open-source, handpicked catalog of flat art, vector landscapes, and colorful digital nature backgrounds. Built with a responsive Edge CDN web gallery and a lightweight serverless Node.js API, it allows users to effortlessly browse, preview in full resolution, or dynamically fetch random wallpapers for automated device setups.
 
 ---
 
