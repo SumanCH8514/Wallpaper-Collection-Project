@@ -3,7 +3,7 @@
  * Endpoint: /api/random
  */
 
-const wallpapers = require("./wallpapers.json");
+const wallpapers = require("./_data/wallpapers.json");
 
 module.exports = (req, res) => {
   // Set CORS headers
