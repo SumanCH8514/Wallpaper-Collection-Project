@@ -1,8 +1,7 @@
 {
-    "functions": {
-        "api/index.php": {
-            "runtime": "vercel-php@0.9.0"
-        }
-    },
-    "routes": [{ "src": "/(.*)", "dest": "/api/index.php" }]
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/api/random", "destination": "/api/random.js" },
+    { "source": "/random", "destination": "/api/random.js" }
+  ]
 }
