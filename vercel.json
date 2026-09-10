@@ -1,7 +1,31 @@
 {
   "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    },
+    {
+      "source": "/(css|js|data)/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/api/random", "destination": "/api/random.js" },
-    { "source": "/random", "destination": "/api/random.js" }
+    { "source": "/random", "destination": "/api/random.js" },
+    { "source": "/api/wallpapers", "destination": "/api/wallpapers.js" },
+    { "source": "/wallpapers", "destination": "/api/wallpapers.js" },
+    { "source": "/data/:path*", "destination": "/public/data/:path*" },
+    { "source": "/css/:path*", "destination": "/public/css/:path*" },
+    { "source": "/js/:path*", "destination": "/public/js/:path*" },
+    { "source": "/(.*)", "destination": "/public/index.html" }
   ]
 }

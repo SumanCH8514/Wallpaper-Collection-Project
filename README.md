@@ -91,46 +91,49 @@ Ensure you have the following installed locally:
    ```bash
    npm start
    ```
-   *(or `node server.js`)*
+
+   _(or `node server.js`)_
 
 3. Open your browser and navigate to `http://localhost:8000`.
 
 ---
 
-## 🔌 API Usage
+## 🔌 API Documentation
 
-The integrated API allows you to fetch wallpapers programmatically:
+The serverless API allows you to fetch wallpapers, filter by categories, and query the catalog programmatically:
 
-### 1. Get a Random Wallpaper
+### 1. Random Wallpaper API (`/api/random`)
 
-Returns an image directly if under 4.5MB, or redirects to the high-res source:
+- **Direct Image Redirect (`302 Found`):**
+  ```http
+  GET https://wallpapers.sumanonline.com/api/random
+  ```
+- **Filter by Category / Tag:**
+  ```http
+  GET https://wallpapers.sumanonline.com/api/random?tag=mountain
+  GET https://wallpapers.sumanonline.com/api/random?tag=cyberpunk
+  ```
+- **Filter by Search Keyword:**
+  ```http
+  GET https://wallpapers.sumanonline.com/api/random?q=sunset
+  ```
+- **Get JSON Metadata Response:**
+  ```http
+  GET https://wallpapers.sumanonline.com/api/random?json=true
+  ```
+
+### 2. Wallpapers Catalog API (`/api/wallpapers`)
+
+Query the entire collection with pagination and keyword filtering:
 
 ```http
-GET https://<your-domain>/?random
+GET https://wallpapers.sumanonline.com/api/wallpapers?q=forest&limit=10&page=1
 ```
 
-### 2. Bypass Client Caching
-
-Append a timestamp or index parameter when requesting consecutive random images:
-
-```http
-GET https://<your-domain>/?random=1
-GET https://<your-domain>/?random=2
-```
-
-### 3. Force Direct Image Redirect
-
-To skip inline proxying and receive a direct redirect (`302`) to the GitHub raw source:
-
-```http
-GET https://<your-domain>/?random&redirect=1
-```
-
-### 📱 Automation Example (cURL / Wallpaper Setters)
-
+### 📱 Terminal / CLI Example
 ```bash
-# Download a fresh random wallpaper to your machine
-curl -sL "https://<your-domain>/?random" -o daily_wallpaper.jpg
+# Download a fresh random wallpaper directly
+curl -sL "https://wallpapers.sumanonline.com/api/random" -o wallpaper.jpg
 ```
 
 ---

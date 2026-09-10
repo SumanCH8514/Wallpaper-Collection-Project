@@ -1,11 +1,12 @@
 {
   "name": "wallpaper-collection-project",
   "version": "1.0.0",
-  "description": "Minimalistic & Nature Wallpaper Collection with Random API",
+  "description": "Curated Minimalistic & Nature Wallpaper Collection with Serverless API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "test": "node -e \"const w = require('./public/data/wallpapers.json'); console.log('✓ Validated ' + w.length + ' wallpapers successfully');\""
   },
   "keywords": [
     "wallpapers",
@@ -13,8 +14,12 @@
     "gallery",
     "api",
     "javascript",
-    "vercel"
+    "vercel",
+    "node"
   ],
   "author": "SumanCH8514",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
