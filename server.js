@@ -8,6 +8,7 @@ const path = require("path");
 const zlib = require("zlib");
 const randomHandler = require("./api/random");
 const wallpapersHandler = require("./api/wallpapers");
+const imagesHandler = require("./api/images");
 
 const PORT = parseInt(process.env.PORT || "8000", 10);
 const HOST = process.env.HOST || "0.0.0.0";
@@ -97,6 +98,10 @@ const server = http.createServer((req, res) => {
     parsedUrl.searchParams.has("random")
   ) {
     return randomHandler(req, res);
+  }
+
+  if (pathname.startsWith("/api/images")) {
+    return imagesHandler(req, res);
   }
 
   if (pathname === "/api/wallpapers" || pathname === "/wallpapers") {

@@ -653,7 +653,7 @@ body {
 
         <div class="stats-bar">
             <span id="statsCount">Loading collection...</span>
-            <span>API: <code>/api/random</code></span>
+            <span>Proxy API: <code>/api/images/[name]</code></span>
         </div>
     </section>
 
@@ -694,6 +694,9 @@ body {
         const CONFIG = {
             repo: 'SumanCH8514/Wallpaper-Collection-Project',
             branch: 'main',
+            get proxyBaseUrl() {
+                return '/api/images/';
+            },
             get rawBaseUrl() {
                 return 'https://raw.githubusercontent.com/' + this.repo + '/' + this.branch + '/images/';
             },
@@ -733,8 +736,9 @@ body {
 
         function copyLink(url, e) {
             if (e) e.stopPropagation();
-            navigator.clipboard.writeText(url).then(function() {
-                showToast('Direct image link copied to clipboard!');
+            const absoluteUrl = new URL(url, window.location.origin).href;
+            navigator.clipboard.writeText(absoluteUrl).then(function() {
+                showToast('Proxy image link copied to clipboard!');
             }).catch(function() {
                 showToast('Failed to copy link', '✕');
             });
@@ -875,7 +879,8 @@ body {
             const fragment = document.createDocumentFragment();
 
             items.forEach(function(item) {
-                const fullUrl = CONFIG.rawBaseUrl + encodeURIComponent(item.filename);
+                const proxyUrl = CONFIG.proxyBaseUrl + encodeURIComponent(item.filename);
+                const rawUrl = CONFIG.rawBaseUrl + encodeURIComponent(item.filename);
                 const thumbUrl = CONFIG.imgProxyPrefix + encodeURIComponent(item.filename);
 
                 const card = document.createElement('div');
@@ -885,7 +890,7 @@ body {
                 cardMedia.className = 'card-media';
 
                 const link = document.createElement('a');
-                link.href = fullUrl;
+                link.href = proxyUrl;
                 link.className = 'glightbox';
                 link.setAttribute('data-id', item.id);
                 link.setAttribute('data-gallery', 'wallpaper-gallery');
@@ -900,7 +905,7 @@ body {
                 img.title = item.title;
                 img.className = 'img-skeleton';
                 img.onload = function() { this.classList.remove('img-skeleton'); };
-                img.onerror = function() { this.src = fullUrl; };
+                img.onerror = function() { this.src = rawUrl; };
 
                 link.appendChild(img);
                 cardMedia.appendChild(link);
@@ -930,12 +935,12 @@ body {
 
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'icon-btn copy-btn';
-                copyBtn.title = 'Copy Raw Link';
+                copyBtn.title = 'Copy Proxy Link';
                 copyBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
-                copyBtn.addEventListener('click', function(e) { copyLink(fullUrl, e); });
+                copyBtn.addEventListener('click', function(e) { copyLink(proxyUrl, e); });
 
                 const downloadLink = document.createElement('a');
-                downloadLink.href = fullUrl;
+                downloadLink.href = proxyUrl;
                 downloadLink.download = item.filename;
                 downloadLink.className = 'icon-btn';
                 downloadLink.title = 'Download Image';
