@@ -1110,7 +1110,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #93BBFF;
+  color: #93bbff;
   margin-bottom: 20px;
   padding-left: 12px;
   border-left: 3px solid rgba(91, 140, 255, 0.5);
@@ -1123,7 +1123,7 @@ body {
 }
 .footer-link-a {
   font-size: 14px;
-  color: #A9B7CE;
+  color: #a9b7ce;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -1143,7 +1143,7 @@ body {
 }
 .footer-link-a:hover svg {
   opacity: 1;
-  color: #5B8CFF;
+  color: #5b8cff;
 }
 .footer-bottom-row {
   padding-top: 24px;
@@ -1337,6 +1337,26 @@ body {
   box-shadow:
     0 25px 60px rgba(0, 0, 0, 0.85),
     0 0 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Watermark Overlay on Lightbox Images */
+.gslide-image {
+  position: relative !important;
+}
+.gslide-image::after {
+  content: 'SumanOnline.Com';
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  z-index: 10;
+  pointer-events: none;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.35);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  user-select: none;
 }
 
 .gprev,
