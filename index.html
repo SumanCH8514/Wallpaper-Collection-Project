@@ -6,595 +6,1285 @@
     <title>Wallpaper Collection — A SumanOnline Project</title>
     
     <!-- SEO & Metadata -->
-    <meta name="description" content="A SumanOnline Project: Curated gallery of 300+ clean, high-resolution minimalistic, flat art, and digital nature wallpapers with a lightweight random wallpaper API.">
-    <meta name="keywords" content="wallpaper collection, sumanonline, minimalistic wallpapers, nature backgrounds, 4k wallpapers, desktop backgrounds, random wallpaper api">
+    <meta name="description" content="A SumanOnline Project: Curated gallery of 337+ high-resolution 4K & minimalistic digital art wallpapers with fast Edge-cached proxy delivery.">
+    <meta name="keywords" content="wallpaper collection, sumanonline, minimalistic wallpapers, 4k wallpapers, desktop backgrounds, nature wallpapers, random wallpaper api">
     <meta name="author" content="SumanCH8514">
-    <meta name="theme-color" content="#0f1117">
+    <meta name="theme-color" content="#090d16">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Wallpaper Collection">
     <meta property="og:title" content="Wallpaper Collection — A SumanOnline Project">
-    <meta property="og:description" content="A SumanOnline Project: Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
+    <meta property="og:description" content="Handpicked catalog of 337+ high-resolution 4K & minimalistic digital art wallpapers with Edge API.">
     <meta property="og:image" content="https://user-images.githubusercontent.com/20955511/186479660-475532e8-427d-4df1-a19d-7f94090805b1.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Wallpaper Collection — A SumanOnline Project">
-    <meta name="twitter:description" content="A SumanOnline Project: Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
+    <meta name="twitter:description" content="Handpicked catalog of 337+ high-resolution 4K & minimalistic digital art wallpapers.">
 
-    <!-- Google Fonts & Official GLightbox CSS from NPM CDN -->
+    <!-- Preconnect & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- GLightbox Stylesheet from NPM CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
-
+    
+    <!-- Design System Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css">
     <style>
+﻿/* ==========================================================================
+   Wallpaper Collection — Design System & Theme
+   A SumanOnline Project
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
 :root {
-  --bg-primary: #0f1117;
-  --bg-secondary: #161b26;
-  --bg-card: #1c2333;
-  --bg-glass: rgba(22, 27, 38, 0.75);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-focus: #3b82f6;
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
-  --accent-glow: rgba(59, 130, 246, 0.25);
+  /* Color Palette */
+  --bg-base: #090d16;
+  --bg-surface: #0f1523;
+  --bg-card: #141b2d;
+  --bg-card-hover: #1a233a;
+  --bg-glass: rgba(15, 21, 35, 0.78);
+  --bg-glass-card: rgba(20, 27, 45, 0.65);
+  
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-focus: #6366f1;
+  --border-glow: rgba(99, 102, 241, 0.35);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-accent: #818cf8;
+
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-light: rgba(99, 102, 241, 0.12);
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #4f46e5 0%, #0284c7 100%);
+
+  --badge-bg: rgba(255, 255, 255, 0.06);
+  --badge-border: rgba(255, 255, 255, 0.1);
+
+  /* Elevation & Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 20px 40px -12px rgba(0, 0, 0, 0.65);
+  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.25);
+
+  /* Radius */
   --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
-  --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.6);
-  --transition-fast: 0.15s ease;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-* {
+/* Reset & Global */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-base);
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 80%, rgba(56, 189, 248, 0.08), transparent 60%);
+  background-attachment: fixed;
   color: var(--text-primary);
-  font-family:
-    "Poppins",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
   line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Header & Hero */
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ==========================================================================
+   Navigation Bar
+   ========================================================================== */
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   background: var(--bg-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-color);
-  padding: 0.75rem 1.5rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 1.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: border-color var(--transition-fast);
 }
 
-.brand {
+.brand-container {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  color: var(--text-primary);
+  gap: 0.9rem;
   text-decoration: none;
+  color: inherit;
 }
 
-.brand-icon {
-  font-size: 1.6rem;
+.brand-logo-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px var(--border-glow);
+  flex-shrink: 0;
+  transition: transform var(--transition-bounce);
 }
 
-.brand-details {
+.brand-container:hover .brand-logo-wrap {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.brand-logo-icon {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+}
+
+.brand-text {
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
-.brand-name {
-  font-weight: 600;
-  font-size: 1.1rem;
-  line-height: 1.2;
+.brand-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-.brand-tagline {
+.brand-subtitle-badge {
   font-size: 0.72rem;
-  font-weight: 400;
-  color: #60a5fa;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  color: #38bdf8;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
+/* Button Component */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.55rem 1.1rem;
-  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-md);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
   text-decoration: none;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-smooth);
   border: 1px solid transparent;
+  white-space: nowrap;
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-gradient);
   color: #fff;
-  box-shadow: 0 2px 10px var(--accent-glow);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
+  background: var(--accent-gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
 }
 
 .btn-secondary {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   color: var(--text-primary);
-  border-color: var(--border-color);
+  border: 1px solid var(--border-subtle);
 }
 
 .btn-secondary:hover {
-  background: #252e42;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--bg-card);
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
 }
 
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+  background: var(--badge-bg);
+}
+
+.kbd-badge {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
 .hero {
-  padding: 3rem 1.5rem 1.5rem;
+  padding: 3.5rem 1.5rem 2rem;
   text-align: center;
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
 }
 
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent-light);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: var(--text-accent);
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.hero-pill-dot {
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+}
+
 .hero-title {
-  font-size: clamp(1.8rem, 4vw, 2.75rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #ffffff 40%, #9ca3af 100%);
+  font-size: clamp(2.1rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.hero-title-gradient {
+  background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 70%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.hero-subtitle {
+.hero-description {
   color: var(--text-secondary);
-  font-size: 1rem;
-  max-width: 600px;
-  margin: 0 auto 2rem;
+  font-size: clamp(0.95rem, 2vw, 1.125rem);
+  max-width: 680px;
+  margin: 0 auto 1.75rem;
+  line-height: 1.6;
 }
 
-/* Search & Filters Controls */
-.controls-container {
-  max-width: 900px;
-  margin: 0 auto 2rem;
+.hero-features-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.hero-feature-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.hero-feature-item svg {
+  color: #38bdf8;
+}
+
+/* ==========================================================================
+   Search & Filter Controls
+   ========================================================================== */
+.controls-wrapper {
+  max-width: 1200px;
+  margin: 0 auto 2.25rem;
   padding: 0 1.5rem;
   width: 100%;
 }
 
-.search-box {
+.search-container {
   position: relative;
   margin-bottom: 1.25rem;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.search-input {
+.search-input-field {
   width: 100%;
-  padding: 0.85rem 1rem 0.85rem 2.8rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  padding: 0.95rem 3.5rem 0.95rem 3rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   color: var(--text-primary);
-  font-size: 0.95rem;
+  font-size: 0.975rem;
   font-family: inherit;
+  box-shadow: var(--shadow-sm);
   transition: all var(--transition-fast);
 }
 
-.search-input:focus {
+.search-input-field:focus {
   outline: none;
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px var(--accent-glow);
   background: var(--bg-card);
+  box-shadow: 0 0 0 4px var(--border-glow), var(--shadow-md);
 }
 
-.search-icon {
+.search-input-field::placeholder {
+  color: var(--text-muted);
+}
+
+.search-prefix-icon {
   position: absolute;
-  left: 1rem;
+  left: 1.1rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
   pointer-events: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 
-.search-badge {
+.search-suffix-wrapper {
   position: absolute;
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.tags-scroll {
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-clear-btn:hover {
+  color: var(--text-primary);
+}
+
+.search-shortcut-hint {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+/* Category Filter Chips Bar */
+.category-filter-bar {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
+  padding: 0.35rem 0.25rem 0.75rem;
   scrollbar-width: thin;
+  mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
 }
 
-.tags-scroll::-webkit-scrollbar {
-  height: 4px;
-}
-
-.tags-scroll::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 4px;
-}
-
-.tag-btn {
-  padding: 0.35rem 0.85rem;
-  border-radius: 20px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  font-size: 0.825rem;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   white-space: nowrap;
   transition: all var(--transition-fast);
+  user-select: none;
 }
 
-.tag-btn:hover {
+.category-chip:hover {
   color: var(--text-primary);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--border-medium);
+  background: var(--bg-card);
+  transform: translateY(-1px);
 }
 
-.tag-btn.active {
+.category-chip.active {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
-  box-shadow: 0 2px 8px var(--accent-glow);
+  box-shadow: 0 4px 12px var(--border-glow);
 }
 
-.stats-bar {
+.category-chip-count {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.05rem 0.35rem;
+  border-radius: var(--radius-full);
+}
+
+/* Controls Bar / Status */
+.controls-meta-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--text-muted);
   font-size: 0.85rem;
   margin-top: 1rem;
+  padding: 0 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-/* Gallery Grid */
-.gallery-container {
-  max-width: 1440px;
-  width: 95%;
+.meta-status-text {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.meta-view-options {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.grid-toggle-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.grid-toggle-btn:hover, .grid-toggle-btn.active {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* ==========================================================================
+   Gallery Grid & Cards
+   ========================================================================== */
+.gallery-section {
+  max-width: 1520px;
+  width: 94%;
   margin: 0 auto;
   flex: 1;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 1.25rem;
-  padding-bottom: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  transition: all var(--transition-smooth);
 }
 
+.gallery-grid.compact-view {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.15rem;
+}
+
+/* Wallpaper Card */
 .wallpaper-card {
   background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  box-shadow: var(--shadow-card);
-  transition:
-    transform var(--transition-smooth),
-    box-shadow var(--transition-smooth),
-    border-color var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
   content-visibility: auto;
-  contain-intrinsic-size: 290px 200px;
+  contain-intrinsic-size: 320px 240px;
+  display: flex;
+  flex-direction: column;
 }
 
 .wallpaper-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(99, 102, 241, 0.4);
 }
 
-.card-media {
+.card-media-wrapper {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: #11151f;
+  background: #0d121d;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.card-media img {
+.card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition:
-    transform 0.4s ease,
-    opacity 0.3s ease;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
 }
 
-.wallpaper-card:hover .card-media img {
-  transform: scale(1.04);
+.wallpaper-card:hover .card-image {
+  transform: scale(1.05);
 }
 
+/* Shimmer Loading Skeleton */
 .img-skeleton {
-  background: linear-gradient(90deg, #161b26 0%, #252e42 50%, #161b26 100%);
+  background: linear-gradient(90deg, #111827 0%, #1f293d 50%, #111827 100%);
   background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+  animation: skeletonPulse 1.6s infinite ease-in-out;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+@keyframes skeletonPulse {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-.card-info {
-  padding: 0.85rem 1rem;
+/* Badges on Card Media */
+.card-badge-top-left {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  background: rgba(9, 13, 22, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  text-transform: capitalize;
+  pointer-events: none;
+}
+
+.card-badge-top-right {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  background: rgba(9, 13, 22, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #38bdf8;
+  font-family: 'JetBrains Mono', monospace;
+  pointer-events: none;
+}
+
+/* Card Hover Action Overlay */
+.card-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9, 13, 22, 0.85) 0%, rgba(9, 13, 22, 0.2) 60%, transparent 100%);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: opacity var(--transition-smooth);
+  z-index: 3;
+}
+
+.wallpaper-card:hover .card-media-overlay {
+  opacity: 1;
+}
+
+.overlay-action-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--transition-bounce), background var(--transition-fast);
+}
+
+.overlay-action-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.12);
+  box-shadow: 0 4px 14px var(--border-glow);
+}
+
+/* Card Info Details */
+.card-info-footer {
+  padding: 0.95rem 1.15rem;
+  background: var(--bg-card);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--bg-card);
+  border-top: 1px solid var(--border-subtle);
 }
 
-.card-text {
+.card-title-group {
   overflow: hidden;
   text-align: left;
+  flex: 1;
+  margin-right: 0.75rem;
 }
 
-.card-title {
-  font-size: 0.85rem;
-  font-weight: 500;
+.card-wallpaper-title {
+  font-size: 0.925rem;
+  font-weight: 600;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.card-artist-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
+}
+
+.artist-avatar-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.card-artist-name {
+  font-size: 0.78rem;
+  color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.card-author {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-.card-actions {
+.card-quick-actions {
   display: flex;
   gap: 0.4rem;
+  flex-shrink: 0;
 }
 
-.icon-btn {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+.card-icon-action {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
-  padding: 0.4rem;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast);
+  text-decoration: none;
 }
 
-.icon-btn:hover {
+.card-icon-action:hover {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* Empty Results State */
+.empty-gallery-state {
+  text-align: center;
+  padding: 5rem 1.5rem;
+  grid-column: 1 / -1;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.empty-icon-graphic {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.empty-state-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   Pagination Controls
+   ========================================================================== */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 3rem 0 4rem;
+  flex-wrap: wrap;
+}
+
+.page-nav-btn {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.page-nav-btn:hover:not(:disabled) {
+  background: var(--bg-card-hover);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.page-nav-btn.active {
+  background: var(--accent-gradient);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px var(--border-glow);
+}
+
+.page-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.page-dots-ellipsis {
+  color: var(--text-muted);
+  padding: 0 0.4rem;
+  font-size: 1rem;
+  user-select: none;
+}
+
+/* ==========================================================================
+   Rich Professional Footer (3-Column Modern Architecture)
+   ========================================================================== */
+.site-footer {
+  background: #070a11;
+  border-top: 1px solid var(--border-subtle);
+  padding: 4.5rem 1.5rem 2rem;
+  margin-top: auto;
+  position: relative;
+}
+
+.footer-inner-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3.5rem;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.footer-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.footer-brand-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 440px;
+}
+
+.footer-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #4ade80;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.footer-status-dot {
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.footer-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.footer-col-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.footer-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.footer-nav-links a:hover {
+  color: #38bdf8;
+  transform: translateX(3px);
+}
+
+.footer-endpoint-pill {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: #818cf8;
+}
+
+.footer-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom-bar a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.footer-bottom-bar a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Interactive API Reference Modal
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 13, 0.8);
+  backdrop-filter: blur(16px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-smooth);
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 680px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.95) translateY(10px);
+  transition: transform var(--transition-bounce);
+}
+
+.modal-backdrop.open .modal-content-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-header-row {
+  padding: 1.5rem 1.75rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-close-btn {
+  background: var(--badge-bg);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  color: #fff;
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.modal-body-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.api-endpoint-box {
+  background: var(--bg-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.api-endpoint-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+
+.api-code-snippet {
+  background: #05070c;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  overflow-x: auto;
+}
+
+.code-copy-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.code-copy-btn:hover {
   color: #fff;
   background: var(--accent);
   border-color: var(--accent);
 }
 
-/* Empty / No Results State */
-.empty-state {
-  text-align: center;
-  padding: 4rem 1rem;
-  color: var(--text-muted);
-  grid-column: 1 / -1;
-}
-
-.empty-state-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-/* Footer */
-.footer {
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-color);
-  padding: 2.5rem 1.5rem;
-  text-align: center;
-  margin-top: auto;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.footer-links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.footer-links a:hover {
-  color: var(--accent);
-}
-
-/* Toast Notifications */
-.toast-container {
+/* ==========================================================================
+   Toast Notifications & Back to Top
+   ========================================================================== */
+.toast-stack {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.65rem;
+  pointer-events: none;
 }
 
-.toast {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+.toast-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
   color: var(--text-primary);
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-hover);
+  padding: 0.85rem 1.35rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
   font-size: 0.875rem;
-  animation: slideUp 0.25s ease forwards;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
+  animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: auto;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Back to Top */
-.back-to-top {
+.toast-success-icon {
+  color: #22c55e;
+  width: 18px;
+  height: 18px;
+}
+
+.back-to-top-fab {
   position: fixed;
   bottom: 2rem;
   left: 2rem;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
   color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-md);
   opacity: 0;
   pointer-events: none;
   transition: all var(--transition-smooth);
-  z-index: 90;
+  z-index: 990;
 }
 
-.back-to-top.visible {
+.back-to-top-fab.visible {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Pagination Controls */
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 2.5rem 0 3.5rem;
-  flex-wrap: wrap;
-}
-
-.page-btn {
-  min-width: 40px;
-  height: 40px;
-  padding: 0 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-sm);
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  font-family: inherit;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.page-btn:hover:not(:disabled) {
-  background: #252e42;
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--text-primary);
-  transform: translateY(-1px);
-}
-
-.page-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  box-shadow: 0 2px 10px var(--accent-glow);
-}
-
-.page-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.page-ellipsis {
-  color: var(--text-muted);
-  padding: 0 0.35rem;
-  font-size: 0.9rem;
-  user-select: none;
-}
-
-.back-to-top:hover {
+.back-to-top-fab:hover {
   background: var(--accent);
   border-color: var(--accent);
   transform: translateY(-3px);
+  box-shadow: 0 6px 20px var(--border-glow);
 }
 
-@media (max-width: 640px) {
-  .hero {
-    padding: 2rem 1rem 1rem;
+/* ==========================================================================
+   Responsive Breakpoints & Mobile Friendly Optimizations
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .footer-grid-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
   }
+  .footer-brand-col {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+  .brand-title {
+    font-size: 1rem;
+  }
+  .hero {
+    padding: 2.5rem 1rem 1.5rem;
+  }
+  .hero-features-row {
+    gap: 0.75rem;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.15rem;
+  }
+  .footer-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-bottom-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  .toast-stack {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+  .back-to-top-fab {
+    bottom: 1.25rem;
+    left: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
   .gallery-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  .navbar {
-    padding: 0.75rem 1rem;
+  .hero-title {
+    font-size: 1.85rem;
+  }
+  .search-input-field {
+    padding: 0.85rem 2.8rem 0.85rem 2.6rem;
+    font-size: 0.9rem;
+  }
+  .search-shortcut-hint {
+    display: none;
+  }
+  .nav-actions .btn span {
+    display: none;
+  }
+  .nav-actions .btn {
+    padding: 0.55rem;
   }
 }
 
@@ -602,26 +1292,40 @@ body {
 </head>
 <body>
 
-    <!-- Sticky Navigation Bar -->
+    <!-- Top Navigation Bar -->
     <header class="navbar">
-        <a href="/" class="brand">
-            <span class="brand-icon">🖼️</span>
-            <div class="brand-details">
-                <span class="brand-name">Wallpaper Collection</span>
-                <span class="brand-tagline">A SumanOnline Project</span>
+        <a href="/" class="brand-container" aria-label="Wallpaper Collection Homepage">
+            <div class="brand-logo-wrap">
+                <svg class="brand-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-title">Wallpaper Collection</span>
+                <span class="brand-subtitle-badge">A SumanOnline Project</span>
             </div>
         </a>
+        
         <div class="nav-actions">
-            <button id="randomBtn" class="btn btn-primary" title="Press 'R' for Random Wallpaper">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 8h.01"></path>
-                    <path d="M8 8h.01"></path>
-                    <path d="M8 16h.01"></path>
-                    <path d="M16 16h.01"></path>
-                    <path d="M12 12h.01"></path>
+            <button id="randomNavBtn" class="btn btn-primary" title="Press 'R' for Random Wallpaper">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 3 21 3 21 8"></polyline>
+                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                    <polyline points="21 16 21 21 16 21"></polyline>
+                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                    <line x1="4" y1="4" x2="9" y2="9"></line>
                 </svg>
-                <span>Random (R)</span>
+                <span>Random Wallpaper</span>
+                <span class="kbd-badge">R</span>
+            </button>
+            <button id="openApiModalBtn" class="btn btn-secondary" title="Developer API Reference">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>API Docs</span>
             </button>
             <a href="https://github.com/SumanCH8514/Wallpaper-Collection-Project" target="_blank" rel="noopener" class="btn btn-secondary" title="View Source on GitHub">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -634,452 +1338,241 @@ body {
 
     <!-- Hero Header -->
     <section class="hero">
-        <h1 class="hero-title">Wallpaper Collection</h1>
-        <p class="hero-subtitle">A SumanOnline Project &bull; Handpicked catalog of flat art, vector landscapes, and aesthetic digital nature wallpapers.</p>
+        <div class="hero-pill-badge">
+            <span class="hero-pill-dot"></span>
+            <span>337 Curated Artworks &bull; SumanOnline Edge CDN</span>
+        </div>
+        <h1 class="hero-title">
+            Curated <span class="hero-title-gradient">Minimalist & Digital</span> Wallpapers
+        </h1>
+        <p class="hero-description">
+            A handpicked gallery of high-resolution 4K and Ultra-Wide minimalist landscapes, vector art, and aesthetic nature backgrounds. Fast, free, and open-source.
+        </p>
+        <div class="hero-features-row">
+            <div class="hero-feature-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>40 Pics / Page</span>
+            </div>
+            <div class="hero-feature-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Permanent Edge Proxy</span>
+            </div>
+            <div class="hero-feature-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Full-Screen Lightbox</span>
+            </div>
+            <div class="hero-feature-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Keyboard Navigation</span>
+            </div>
+        </div>
     </section>
 
-    <!-- Search and Filters Container -->
-    <section class="controls-container">
-        <div class="search-box">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <!-- Controls, Search & Filter Bar -->
+    <section class="controls-wrapper">
+        <div class="search-container">
+            <svg class="search-prefix-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search wallpapers by title, artist, or tag... (Press '/' to focus)" autocomplete="off">
-            <span class="search-badge" id="searchBadge">/</span>
+            <input type="text" id="searchInput" class="search-input-field" placeholder="Search wallpapers by title, artist, or tags... (Press '/' to focus)" autocomplete="off" spellcheck="false">
+            <div class="search-suffix-wrapper">
+                <button id="searchClearBtn" class="search-clear-btn" title="Clear Search">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+                <span class="search-shortcut-hint">/</span>
+            </div>
         </div>
 
-        <div class="tags-scroll" id="tagsContainer"></div>
+        <!-- Tag Categories Scroll -->
+        <div class="category-filter-bar" id="categoryChipsContainer"></div>
 
-        <div class="stats-bar">
-            <span id="statsCount">Loading collection...</span>
-            <span>Proxy API: <code>/api/images/[name]</code></span>
+        <!-- Controls Metadata Bar -->
+        <div class="controls-meta-bar">
+            <span id="statsStatusLabel" class="meta-status-text">Loading collection...</span>
+            <div class="meta-view-options">
+                <button id="gridToggleBtn" class="grid-toggle-btn" title="Toggle Grid Density">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span id="gridDensityText">Comfort Grid</span>
+                </button>
+            </div>
         </div>
     </section>
 
-    <!-- Gallery Grid Container -->
-    <main class="gallery-container" id="gallerySection">
+    <!-- Main Wallpaper Gallery -->
+    <main class="gallery-section" id="gallerySection">
         <div class="gallery-grid" id="galleryGrid"></div>
         
-        <!-- Robust Pagination Controls -->
-        <nav class="pagination-container" id="paginationContainer" aria-label="Wallpaper Gallery Pagination"></nav>
+        <!-- Pagination Component (40 items per page) -->
+        <nav class="pagination-container" id="paginationNav" aria-label="Wallpaper pagination"></nav>
     </main>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" title="Back to Top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <!-- Floating Back To Top -->
+    <button id="backToTopFab" class="back-to-top-fab" title="Back to Top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
     </button>
 
-    <!-- Toast Notifications -->
-    <div id="toastContainer" class="toast-container"></div>
+    <!-- Toast Notification Container -->
+    <div id="toastStack" class="toast-stack"></div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://github.com/SumanCH8514/Wallpaper-Collection-Project" target="_blank" rel="noopener">GitHub Repository</a>
-            <a href="/api/random" target="_blank">Random Wallpaper API</a>
-            <a href="/api/wallpapers" target="_blank">Wallpapers JSON API</a>
+    <!-- Rich 3-Column Professional Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner-container">
+            <div class="footer-grid-layout">
+                <!-- Col 1: Brand & Status -->
+                <div class="footer-brand-col">
+                    <a href="/" class="footer-brand-header">
+                        <div class="brand-logo-wrap" style="width: 34px; height: 34px;">
+                            <svg class="brand-logo-icon" style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                        <span class="footer-brand-name">Wallpaper Collection</span>
+                    </a>
+                    <p class="footer-brand-desc">
+                        A curated digital art repository featuring 337 hand-selected minimalist, landscape, and vector wallpapers for high-DPI displays.
+                    </p>
+                    <div class="footer-status-pill">
+                        <span class="footer-status-dot"></span>
+                        <span>SumanOnline Edge CDN &bull; 100% Operational</span>
+                    </div>
+                </div>
+
+                <!-- Col 2: API & Endpoints -->
+                <div class="footer-nav-col">
+                    <div class="footer-col-title">Developer & APIs</div>
+                    <ul class="footer-nav-links">
+                        <li>
+                            <a href="/api/random" target="_blank">
+                                <span>Random Wallpaper API</span>
+                                <span class="footer-endpoint-pill">/api/random</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/api/wallpapers" target="_blank">
+                                <span>Catalog JSON API</span>
+                                <span class="footer-endpoint-pill">/api/wallpapers</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/api/images/afreen-red-sunset-horizon.png" target="_blank">
+                                <span>Image Proxy Stream</span>
+                                <span class="footer-endpoint-pill">/api/images/:file</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="footerApiDocsTrigger">
+                                <span>API Documentation & Examples</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Project & Community -->
+                <div class="footer-nav-col">
+                    <div class="footer-col-title">Project & License</div>
+                    <ul class="footer-nav-links">
+                        <li>
+                            <a href="https://github.com/SumanCH8514/Wallpaper-Collection-Project" target="_blank" rel="noopener">
+                                <span>GitHub Repository</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/SumanCH8514" target="_blank" rel="noopener">
+                                <span>Curated by SumanCH8514</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/SumanCH8514/Wallpaper-Collection-Project/blob/main/LICENSE" target="_blank" rel="noopener">
+                                <span>MIT Open Source License</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/SumanCH8514/Wallpaper-Collection-Project/issues" target="_blank" rel="noopener">
+                                <span>Report an Issue / Suggest Art</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="footer-bottom-bar">
+                <div>
+                    &copy; 2026 <strong>SumanOnline</strong> &bull; Crafted with precision by <a href="https://github.com/SumanCH8514" target="_blank" rel="noopener">SumanCH8514</a>.
+                </div>
+                <div>
+                    Powered by Modern JavaScript, Node.js & Vercel Global Edge Network.
+                </div>
+            </div>
         </div>
-        <p>A SumanOnline Project &bull; Curated with ❤️ by <a href="https://github.com/SumanCH8514" target="_blank" rel="noopener">SumanCH8514</a> &bull; Distributed under MIT License</p>
     </footer>
+
+    <!-- Interactive API Documentation Modal -->
+    <div id="apiDocsModal" class="modal-backdrop" aria-hidden="true" role="dialog">
+        <div class="modal-content-card">
+            <div class="modal-header-row">
+                <div class="modal-header-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    <span>Developer API Documentation</span>
+                </div>
+                <button id="closeApiModalBtn" class="modal-close-btn" title="Close Modal">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body-content">
+                <!-- 1. Random API -->
+                <div class="api-endpoint-box">
+                    <div class="api-endpoint-label">1. Random Wallpaper API</div>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        Fetches a random high-resolution wallpaper. Redirects directly to the image or returns structured JSON metadata.
+                    </p>
+                    <div class="api-code-snippet">
+                        <code>GET https://wallpapers.sumanonline.com/api/random?json=true</code>
+                        <button class="code-copy-btn" onclick="copySnippet('https://wallpapers.sumanonline.com/api/random?json=true')">Copy</button>
+                    </div>
+                </div>
+
+                <!-- 2. Image Proxy -->
+                <div class="api-endpoint-box">
+                    <div class="api-endpoint-label">2. Edge-Cached Image Proxy</div>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        Stream any wallpaper with permanent 1-year browser and Edge CDN cache headers.
+                    </p>
+                    <div class="api-code-snippet">
+                        <code>GET https://wallpapers.sumanonline.com/api/images/:filename</code>
+                        <button class="code-copy-btn" onclick="copySnippet('https://wallpapers.sumanonline.com/api/images/afreen-red-sunset-horizon.png')">Copy</button>
+                    </div>
+                </div>
+
+                <!-- 3. Catalog API -->
+                <div class="api-endpoint-box">
+                    <div class="api-endpoint-label">3. Paginated Catalog API</div>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        Query the full collection of 337 wallpapers with tag filtering, search queries, and pagination.
+                    </p>
+                    <div class="api-code-snippet">
+                        <code>GET https://wallpapers.sumanonline.com/api/wallpapers?tag=mountain&limit=40</code>
+                        <button class="code-copy-btn" onclick="copySnippet('https://wallpapers.sumanonline.com/api/wallpapers?tag=mountain&limit=40')">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded Data for Zero-Latency First Paint -->
+    <script>
+        window.EMBEDDED_WALLPAPERS = [{"id": 1, "filename": "acoolrocket-dalle2-hokusai-non-prompt-landscape.png", "title": "Dalle2 Hokusai Non Prompt Landscape", "author": "Acoolrocket", "tags": ["landscape"], "format": "png"}, {"id": 2, "filename": "afreen-red-sunset-horizon.png", "title": "Red Sunset Horizon", "author": "Afreen", "tags": ["sunset"], "format": "png"}, {"id": 3, "filename": "alejagalesa-another-world.jpg", "title": "Another World", "author": "Alejagalesa", "tags": ["minimalist"], "format": "jpg"}, {"id": 4, "filename": "alejagalesa-calm-day.jpg", "title": "Calm Day", "author": "Alejagalesa", "tags": ["minimalist"], "format": "jpg"}, {"id": 5, "filename": "alejagalesa-camp.jpg", "title": "Camp", "author": "Alejagalesa", "tags": ["minimalist"], "format": "jpg"}, {"id": 6, "filename": "alejagalesa-horse-in-the-sunset.jpg", "title": "Horse In The Sunset", "author": "Alejagalesa", "tags": ["sunset"], "format": "jpg"}, {"id": 7, "filename": "alejagalesa-modern-buildings.jpg", "title": "Modern Buildings", "author": "Alejagalesa", "tags": ["minimalist"], "format": "jpg"}, {"id": 8, "filename": "alejagalesa-mount-fuji.jpg", "title": "Mount Fuji", "author": "Alejagalesa", "tags": ["minimalist"], "format": "jpg"}, {"id": 9, "filename": "alejagalesa-multivist-landscape.jpg", "title": "Multivist Landscape", "author": "Alejagalesa", "tags": ["landscape"], "format": "jpg"}, {"id": 10, "filename": "alejagalesa-pink-landscape.jpg", "title": "Pink Landscape", "author": "Alejagalesa", "tags": ["landscape"], "format": "jpg"}, {"id": 11, "filename": "alejagalesa-purple-bear.jpg", "title": "Purple Bear", "author": "Alejagalesa", "tags": ["minimalist"], "format": "jpg"}, {"id": 12, "filename": "alejagalesa-starry-nigh.jpg", "title": "Starry Nigh", "author": "Alejagalesa", "tags": ["minimalist"], "format": "jpg"}, {"id": 13, "filename": "alejagalesa-the-beach-neighborhood.jpg", "title": "The Beach Neighborhood", "author": "Alejagalesa", "tags": ["minimalist"], "format": "jpg"}, {"id": 14, "filename": "alejagalesa-the-city.jpg", "title": "The City", "author": "Alejagalesa", "tags": ["city"], "format": "jpg"}, {"id": 15, "filename": "alena-aenami-7pm.png", "title": "Aenami 7pm", "author": "Alena", "tags": ["minimalist"], "format": "png"}, {"id": 16, "filename": "alena-aenami-any-minute-now.jpg", "title": "Aenami Any Minute Now", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 17, "filename": "alena-aenami-around-us.jpg", "title": "Aenami Around Us", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 18, "filename": "alena-aenami-autumn-in-budapest.png", "title": "Aenami Autumn In Budapest", "author": "Alena", "tags": ["minimalist"], "format": "png"}, {"id": 19, "filename": "alena-aenami-away.jpg", "title": "Aenami Away", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 20, "filename": "alena-aenami-blue-hour.jpg", "title": "Aenami Blue Hour", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 21, "filename": "alena-aenami-castle-in-the-sky.jpg", "title": "Aenami Castle In The Sky", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 22, "filename": "alena-aenami-clouds.jpg", "title": "Aenami Clouds", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 23, "filename": "alena-aenami-dawn.jpg", "title": "Aenami Dawn", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 24, "filename": "alena-aenami-eclipse.jpg", "title": "Aenami Eclipse", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 25, "filename": "alena-aenami-escape.jpg", "title": "Aenami Escape", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 26, "filename": "alena-aenami-far-from-tomorrow.jpg", "title": "Aenami Far From Tomorrow", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 27, "filename": "alena-aenami-horizon.png", "title": "Aenami Horizon", "author": "Alena", "tags": ["minimalist"], "format": "png"}, {"id": 28, "filename": "alena-aenami-in-search-of-peace.png", "title": "Aenami In Search Of Peace", "author": "Alena", "tags": ["minimalist"], "format": "png"}, {"id": 29, "filename": "alena-aenami-lights.jpg", "title": "Aenami Lights", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 30, "filename": "alena-aenami-lost-in-between.jpg", "title": "Aenami Lost In Between", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 31, "filename": "alena-aenami-out-of-time.png", "title": "Aenami Out Of Time", "author": "Alena", "tags": ["minimalist"], "format": "png"}, {"id": 32, "filename": "alena-aenami-sky-mirror.jpg", "title": "Aenami Sky Mirror", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 33, "filename": "alena-aenami-stardust.jpg", "title": "Aenami Stardust", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 34, "filename": "alena-aenami-stars-and-you.png", "title": "Aenami Stars And You", "author": "Alena", "tags": ["minimalist"], "format": "png"}, {"id": 35, "filename": "alena-aenami-the-witcher.jpg", "title": "Aenami The Witcher", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 36, "filename": "alena-aenami-timeless.jpg", "title": "Aenami Timeless", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 37, "filename": "alena-aenami-wait.jpg", "title": "Aenami Wait", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 38, "filename": "alena-aenami-wings.jpg", "title": "Aenami Wings", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 39, "filename": "alena-aenami-you.jpg", "title": "Aenami You", "author": "Alena", "tags": ["minimalist"], "format": "jpg"}, {"id": 40, "filename": "altos-odyssey-balloon-over-blue-mountains.jpg", "title": "Odyssey Balloon Over Blue Mountains", "author": "Altos", "tags": ["mountain"], "format": "jpg"}, {"id": 41, "filename": "altos-odyssey-blue-hills-balloon.jpg", "title": "Odyssey Blue Hills Balloon", "author": "Altos", "tags": ["minimalist"], "format": "jpg"}, {"id": 42, "filename": "altos-odyssey-chasm-jump.jpg", "title": "Odyssey Chasm Jump", "author": "Altos", "tags": ["minimalist"], "format": "jpg"}, {"id": 43, "filename": "altos-odyssey-palm-kicker.jpg", "title": "Odyssey Palm Kicker", "author": "Altos", "tags": ["minimalist"], "format": "jpg"}, {"id": 44, "filename": "altos-odyssey-purple-mountain-castle.jpg", "title": "Odyssey Purple Mountain Castle", "author": "Altos", "tags": ["mountain"], "format": "jpg"}, {"id": 45, "filename": "alx-colorful-clouds.png", "title": "Colorful Clouds", "author": "Alx", "tags": ["minimalist"], "format": "png"}, {"id": 46, "filename": "alx-sunset-over-palm-trees.png", "title": "Sunset Over Palm Trees", "author": "Alx", "tags": ["sunset"], "format": "png"}, {"id": 47, "filename": "among-trees-campsite.jpg", "title": "Trees Campsite", "author": "Among", "tags": ["minimalist"], "format": "jpg"}, {"id": 48, "filename": "among-trees-dadaws-night-is-coming.jpg", "title": "Trees Dadaws Night Is Coming", "author": "Among", "tags": ["night"], "format": "jpg"}, {"id": 49, "filename": "among-trees-dadaws-small-cliffs.jpg", "title": "Trees Dadaws Small Cliffs", "author": "Among", "tags": ["minimalist"], "format": "jpg"}, {"id": 50, "filename": "andrew-maleski-ghostly-gate.jpg", "title": "Maleski Ghostly Gate", "author": "Andrew", "tags": ["minimalist"], "format": "jpg"}, {"id": 51, "filename": "arcipello-scorched-earth.jpg", "title": "Scorched Earth", "author": "Arcipello", "tags": ["minimalist"], "format": "jpg"}, {"id": 52, "filename": "arcipello-what-once-was.jpg", "title": "What Once Was", "author": "Arcipello", "tags": ["minimalist"], "format": "jpg"}, {"id": 53, "filename": "arseniy-chebynkin-tokyo-street-night.jpg", "title": "Chebynkin Tokyo Street Night", "author": "Arseniy", "tags": ["night"], "format": "jpg"}, {"id": 54, "filename": "artwithflo-empire-state-building.png", "title": "Empire State Building", "author": "Artwithflo", "tags": ["minimalist"], "format": "png"}, {"id": 55, "filename": "baajjii-vector-desert.jpg", "title": "Vector Desert", "author": "Baajjii", "tags": ["desert"], "format": "jpg"}, {"id": 56, "filename": "bastien-grivet-the-guy-and-the-id-checking-bot.jpg", "title": "Grivet The Guy And The Id Checking Bot", "author": "Bastien", "tags": ["minimalist"], "format": "jpg"}, {"id": 57, "filename": "bisbiswas-a-summer-evening.png", "title": "A Summer Evening", "author": "Bisbiswas", "tags": ["minimalist"], "format": "png"}, {"id": 58, "filename": "bisbiswas-burning-clouds.png", "title": "Burning Clouds", "author": "Bisbiswas", "tags": ["minimalist"], "format": "png"}, {"id": 59, "filename": "bisbiswas-gathering.jpg", "title": "Gathering", "author": "Bisbiswas", "tags": ["minimalist"], "format": "jpg"}, {"id": 60, "filename": "bisbiswas-lit-up-sky.jpg", "title": "Lit Up Sky", "author": "Bisbiswas", "tags": ["minimalist"], "format": "jpg"}, {"id": 61, "filename": "bisbiswas-verdant-moonlight-no-people-edit.jpg", "title": "Verdant Moonlight No People Edit", "author": "Bisbiswas", "tags": ["moon"], "format": "jpg"}, {"id": 62, "filename": "blackwolfshadow1-wolf-of-the-night.jpg", "title": "Wolf Of The Night", "author": "Blackwolfshadow1", "tags": ["night"], "format": "jpg"}, {"id": 63, "filename": "by-kvacm-gorod-zakat-liudi-siluty-budushchee.jpg", "title": "Kvacm Gorod Zakat Liudi Siluty Budushchee", "author": "By", "tags": ["minimalist"], "format": "jpg"}, {"id": 64, "filename": "byrotek-calm-meadow.jpg", "title": "Calm Meadow", "author": "Byrotek", "tags": ["minimalist"], "format": "jpg"}, {"id": 65, "filename": "byrotek-mountain-view.png", "title": "Mountain View", "author": "Byrotek", "tags": ["mountain"], "format": "png"}, {"id": 66, "filename": "byrotek-north-capital.png", "title": "North Capital", "author": "Byrotek", "tags": ["minimalist"], "format": "png"}, {"id": 67, "filename": "byrotek-sundown-landscape.png", "title": "Sundown Landscape", "author": "Byrotek", "tags": ["landscape"], "format": "png"}, {"id": 68, "filename": "chilledcow-kupla-kingdom-in-blue.jpg", "title": "Kupla Kingdom In Blue", "author": "Chilledcow", "tags": ["minimalist"], "format": "jpg"}, {"id": 69, "filename": "chrisostrowski-the-esteemed-palace-light.jpg", "title": "The Esteemed Palace Light", "author": "Chrisostrowski", "tags": ["minimalist"], "format": "jpg"}, {"id": 70, "filename": "chrisostrowski-the-esteemed-palace.jpg", "title": "The Esteemed Palace", "author": "Chrisostrowski", "tags": ["minimalist"], "format": "jpg"}, {"id": 71, "filename": "ciorano-the-sacred-creature.jpg", "title": "The Sacred Creature", "author": "Ciorano", "tags": ["minimalist"], "format": "jpg"}, {"id": 72, "filename": "colormate-monogatari.jpg", "title": "Monogatari", "author": "Colormate", "tags": ["minimalist"], "format": "jpg"}, {"id": 73, "filename": "craig-nacroix-mountains.jpg", "title": "Nacroix Mountains", "author": "Craig", "tags": ["mountain"], "format": "jpg"}, {"id": 74, "filename": "dalle2-minimalistic-colorful-flat-mountain-landscape.png", "title": "Minimalistic Colorful Flat Mountain Landscape", "author": "Dalle2", "tags": ["landscape", "mountain", "minimal"], "format": "png"}, {"id": 75, "filename": "dangiuz-leopoldo-d-angelo-westofthesun.png", "title": "Leopoldo D Angelo Westofthesun", "author": "Dangiuz", "tags": ["minimalist"], "format": "png"}, {"id": 76, "filename": "daniel-ignacio-the-deer-spirit.jpg", "title": "Ignacio The Deer Spirit", "author": "Daniel", "tags": ["deer"], "format": "jpg"}, {"id": 77, "filename": "darkkal44-come-with-me-surfaces.png", "title": "Come With Me Surfaces", "author": "Darkkal44", "tags": ["minimalist"], "format": "png"}, {"id": 78, "filename": "dataxiii-upscaled-vector-landscape.jpg", "title": "Upscaled Vector Landscape", "author": "Dataxiii", "tags": ["landscape"], "format": "jpg"}, {"id": 79, "filename": "denis-istomin-chicco3.jpg", "title": "Istomin Chicco3", "author": "Denis", "tags": ["minimalist"], "format": "jpg"}, {"id": 80, "filename": "denis-istomin-listen-to-your-heart.jpg", "title": "Istomin Listen To Your Heart", "author": "Denis", "tags": ["minimalist"], "format": "jpg"}, {"id": 81, "filename": "denis-istomin-midnight-gazing.png", "title": "Istomin Midnight Gazing", "author": "Denis", "tags": ["night"], "format": "png"}, {"id": 82, "filename": "dpcdpc11-exodus.png", "title": "Exodus", "author": "Dpcdpc11", "tags": ["minimalist"], "format": "png"}, {"id": 83, "filename": "dpcdpc11-isolation.png", "title": "Isolation", "author": "Dpcdpc11", "tags": ["minimalist"], "format": "png"}, {"id": 84, "filename": "dpcdpc11-summer-on-the-lake.png", "title": "Summer On The Lake", "author": "Dpcdpc11", "tags": ["lake"], "format": "png"}, {"id": 85, "filename": "drawingsandstuff-lonely-tree.png", "title": "Lonely Tree", "author": "Drawingsandstuff", "tags": ["minimalist"], "format": "png"}, {"id": 86, "filename": "dropside-the-valley-ultrawide-gradient-landscape.png", "title": "The Valley Ultrawide Gradient Landscape", "author": "Dropside", "tags": ["landscape"], "format": "png"}, {"id": 87, "filename": "edward11mk-deer-in-forest.jpg", "title": "Deer In Forest", "author": "Edward11mk", "tags": ["forest", "deer"], "format": "jpg"}, {"id": 88, "filename": "edward11mk-tents-in-nature.jpg", "title": "Tents In Nature", "author": "Edward11mk", "tags": ["nature"], "format": "jpg"}, {"id": 89, "filename": "Electronic_Sample_96-calm-night.png", "title": "Sample 96 Calm Night", "author": "Electronic", "tags": ["night"], "format": "png"}, {"id": 90, "filename": "ellysiumn-flaming-kingdom.jpg", "title": "Flaming Kingdom", "author": "Ellysiumn", "tags": ["minimalist"], "format": "jpg"}, {"id": 91, "filename": "era7-asian-spirit.jpg", "title": "Asian Spirit", "author": "Era7", "tags": ["minimalist"], "format": "jpg"}, {"id": 92, "filename": "era7-city-of-the-amethyst-nights.jpg", "title": "City Of The Amethyst Nights", "author": "Era7", "tags": ["city", "night"], "format": "jpg"}, {"id": 93, "filename": "eric-elwell-tropical-environment.jpg", "title": "Elwell Tropical Environment", "author": "Eric", "tags": ["minimalist"], "format": "jpg"}, {"id": 94, "filename": "exitmothership-sunset-scene.jpg", "title": "Sunset Scene", "author": "Exitmothership", "tags": ["sunset"], "format": "jpg"}, {"id": 95, "filename": "f-tam-mountain-wilderness.png", "title": "Tam Mountain Wilderness", "author": "F", "tags": ["mountain"], "format": "png"}, {"id": 96, "filename": "faithhal-boat-and-mountains.jpg", "title": "Boat And Mountains", "author": "Faithhal", "tags": ["mountain"], "format": "jpg"}, {"id": 97, "filename": "farjana5240-bridge-forest.jpg", "title": "Bridge Forest", "author": "Farjana5240", "tags": ["forest"], "format": "jpg"}, {"id": 98, "filename": "ferdinand-ladera-rice-terraces.jpg", "title": "Ladera Rice Terraces", "author": "Ferdinand", "tags": ["minimalist"], "format": "jpg"}, {"id": 99, "filename": "forangeillustrations-ashenvale.png", "title": "Ashenvale", "author": "Forangeillustrations", "tags": ["minimalist"], "format": "png"}, {"id": 100, "filename": "frank-sun-twelve-suns.jpg", "title": "Sun Twelve Suns", "author": "Frank", "tags": ["minimalist"], "format": "jpg"}, {"id": 101, "filename": "gamesdas-fantasy-collection-3.jpg", "title": "Fantasy Collection 3", "author": "Gamesdas", "tags": ["minimalist"], "format": "jpg"}, {"id": 102, "filename": "gavrl-snowy-forest.jpg", "title": "Snowy Forest", "author": "Gavrl", "tags": ["forest"], "format": "jpg"}, {"id": 103, "filename": "gavryl-broken-structures.jpg", "title": "Broken Structures", "author": "Gavryl", "tags": ["minimalist"], "format": "jpg"}, {"id": 104, "filename": "gavryl-by-your-side.jpg", "title": "By Your Side", "author": "Gavryl", "tags": ["minimalist"], "format": "jpg"}, {"id": 105, "filename": "gavryl-cozy-night.jpg", "title": "Cozy Night", "author": "Gavryl", "tags": ["night"], "format": "jpg"}, {"id": 106, "filename": "gloomilygray-journey.jpg", "title": "Journey", "author": "Gloomilygray", "tags": ["minimalist"], "format": "jpg"}, {"id": 107, "filename": "gustavo-arteaga-ancient-tree-shrine.png", "title": "Arteaga Ancient Tree Shrine", "author": "Gustavo", "tags": ["minimalist"], "format": "png"}, {"id": 108, "filename": "gustavo-arteaga-monolith-on-giants-causeway.jpg", "title": "Arteaga Monolith On Giants Causeway", "author": "Gustavo", "tags": ["minimalist"], "format": "jpg"}, {"id": 109, "filename": "gustavo-arteaga-reload.jpg", "title": "Arteaga Reload", "author": "Gustavo", "tags": ["minimalist"], "format": "jpg"}, {"id": 110, "filename": "gustavo-arteaga-revenge.jpg", "title": "Arteaga Revenge", "author": "Gustavo", "tags": ["minimalist"], "format": "jpg"}, {"id": 111, "filename": "gydw1n-whisper-of-the-heart.jpg", "title": "Whisper Of The Heart", "author": "Gydw1n", "tags": ["minimalist"], "format": "jpg"}, {"id": 112, "filename": "haneron-landscape-mountain-home.jpg", "title": "Landscape Mountain Home", "author": "Haneron", "tags": ["landscape", "mountain"], "format": "jpg"}, {"id": 113, "filename": "hangmoon-alexander-komarov-white-blue-red-clouds.jpg", "title": "Alexander Komarov White Blue Red Clouds", "author": "Hangmoon", "tags": ["moon"], "format": "jpg"}, {"id": 114, "filename": "hangmoon-city.jpg", "title": "City", "author": "Hangmoon", "tags": ["moon", "city"], "format": "jpg"}, {"id": 115, "filename": "hangmoon-white-blue-red-clouds.jpg", "title": "White Blue Red Clouds", "author": "Hangmoon", "tags": ["moon"], "format": "jpg"}, {"id": 116, "filename": "higgsas-outrun.jpg", "title": "Outrun", "author": "Higgsas", "tags": ["minimalist"], "format": "jpg"}, {"id": 117, "filename": "howard-chen-mao-mao-forest-campsite.jpg", "title": "Chen Mao Mao Forest Campsite", "author": "Howard", "tags": ["forest"], "format": "jpg"}, {"id": 118, "filename": "hugobarretcastan-house-in-forest.jpg", "title": "House In Forest", "author": "Hugobarretcastan", "tags": ["forest"], "format": "jpg"}, {"id": 119, "filename": "icondesire-train-cross.png", "title": "Train Cross", "author": "Icondesire", "tags": ["minimalist"], "format": "png"}, {"id": 120, "filename": "incognit0ergosum-stable-diffusion-ultimate-city-autumn-meadow.jpg", "title": "Stable Diffusion Ultimate City Autumn Meadow", "author": "Incognit0ergosum", "tags": ["city"], "format": "jpg"}, {"id": 121, "filename": "itsmatt-japanese-painting-remade.jpg", "title": "Japanese Painting Remade", "author": "Itsmatt", "tags": ["minimalist"], "format": "jpg"}, {"id": 122, "filename": "itspatra-trailer-in-yosemite.png", "title": "Trailer In Yosemite", "author": "Itspatra", "tags": ["minimalist"], "format": "png"}, {"id": 123, "filename": "jaynit-samurai-bridge.jpg", "title": "Samurai Bridge", "author": "Jaynit", "tags": ["minimalist"], "format": "jpg"}, {"id": 124, "filename": "jay_v_jackson-between-the-twin-cities-recolored.jpg", "title": "V Jackson Between The Twin Cities Recolored", "author": "Jay", "tags": ["minimalist"], "format": "jpg"}, {"id": 125, "filename": "jeff-ostberg-cozy-autumn-rain.jpg", "title": "Ostberg Cozy Autumn Rain", "author": "Jeff", "tags": ["minimalist"], "format": "jpg"}, {"id": 126, "filename": "joeyjazz-a-simple-scene.jpg", "title": "A Simple Scene", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 127, "filename": "joeyjazz-antares.png", "title": "Antares", "author": "Joeyjazz", "tags": ["minimalist"], "format": "png"}, {"id": 128, "filename": "joeyjazz-behind-the-blister.jpg", "title": "Behind The Blister", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 129, "filename": "joeyjazz-dreams-in-pastel.jpg", "title": "Dreams In Pastel", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 130, "filename": "joeyjazz-just-a-tree-and-a-breeze.jpg", "title": "Just A Tree And A Breeze", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 131, "filename": "joeyjazz-place-out-of-place.png", "title": "Place Out Of Place", "author": "Joeyjazz", "tags": ["minimalist"], "format": "png"}, {"id": 132, "filename": "joeyjazz-sp-fields-of-bronze.jpg", "title": "Sp Fields Of Bronze", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 133, "filename": "joeyjazz-sp-highrise.jpg", "title": "Sp Highrise", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 134, "filename": "joeyjazz-timeless.jpg", "title": "Timeless", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 135, "filename": "joeyjazz-under-the-strange-horizon.jpg", "title": "Under The Strange Horizon", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 136, "filename": "joeyjazz-water-air-and-some-magic.jpg", "title": "Water Air And Some Magic", "author": "Joeyjazz", "tags": ["minimalist"], "format": "jpg"}, {"id": 137, "filename": "joeyjazz-where-day-and-night-meet.jpg", "title": "Where Day And Night Meet", "author": "Joeyjazz", "tags": ["night"], "format": "jpg"}, {"id": 138, "filename": "jonadinges-getaway.png", "title": "Getaway", "author": "Jonadinges", "tags": ["minimalist"], "format": "png"}, {"id": 139, "filename": "josef-barton-the-last-one.jpg", "title": "Barton The Last One", "author": "Josef", "tags": ["minimalist"], "format": "jpg"}, {"id": 140, "filename": "josegoncalo-beasts.jpg", "title": "Beasts", "author": "Josegoncalo", "tags": ["minimalist"], "format": "jpg"}, {"id": 141, "filename": "junhyuk-lim-acoolrocket-tree-of-life-edit.png", "title": "Lim Acoolrocket Tree Of Life Edit", "author": "Junhyuk", "tags": ["minimalist"], "format": "png"}, {"id": 142, "filename": "jurrig-hutan-owl-forest-night.jpg", "title": "Hutan Owl Forest Night", "author": "Jurrig", "tags": ["forest", "night"], "format": "jpg"}, {"id": 143, "filename": "kak8gm-louis-coyle-inspired-lakeside-aurora.jpg", "title": "Louis Coyle Inspired Lakeside Aurora", "author": "Kak8gm", "tags": ["lake"], "format": "jpg"}, {"id": 144, "filename": "kevin-gnutzmans-singularity.jpg", "title": "Gnutzmans Singularity", "author": "Kevin", "tags": ["minimalist"], "format": "jpg"}, {"id": 145, "filename": "kuldarleement-stellar-collision.jpg", "title": "Stellar Collision", "author": "Kuldarleement", "tags": ["minimalist"], "format": "jpg"}, {"id": 146, "filename": "kvacm-africa-feeling.png", "title": "Africa Feeling", "author": "Kvacm", "tags": ["minimalist"], "format": "png"}, {"id": 147, "filename": "kvacm-amythest-kingdom.jpg", "title": "Amythest Kingdom", "author": "Kvacm", "tags": ["minimalist"], "format": "jpg"}, {"id": 148, "filename": "kvacm-early-evening.jpg", "title": "Early Evening", "author": "Kvacm", "tags": ["minimalist"], "format": "jpg"}, {"id": 149, "filename": "kvacm-falling-sun.png", "title": "Falling Sun", "author": "Kvacm", "tags": ["minimalist"], "format": "png"}, {"id": 150, "filename": "kvacm-magenta-bay.png", "title": "Magenta Bay", "author": "Kvacm", "tags": ["minimalist"], "format": "png"}, {"id": 151, "filename": "kvacm-misty-mountains.jpg", "title": "Misty Mountains", "author": "Kvacm", "tags": ["mountain"], "format": "jpg"}, {"id": 152, "filename": "kvacm-night-patrol.jpg", "title": "Night Patrol", "author": "Kvacm", "tags": ["night"], "format": "jpg"}, {"id": 153, "filename": "kvacm-pinky-purple.jpg", "title": "Pinky Purple", "author": "Kvacm", "tags": ["minimalist"], "format": "jpg"}, {"id": 154, "filename": "kvacm-sunlight.png", "title": "Sunlight", "author": "Kvacm", "tags": ["minimalist"], "format": "png"}, {"id": 155, "filename": "kvacm-synth-waterfall.png", "title": "Synth Waterfall", "author": "Kvacm", "tags": ["minimalist"], "format": "png"}, {"id": 156, "filename": "kvacm-synthwave-view.jpg", "title": "Synthwave View", "author": "Kvacm", "tags": ["minimalist"], "format": "jpg"}, {"id": 157, "filename": "kvacm-torii-city.jpg", "title": "Torii City", "author": "Kvacm", "tags": ["city"], "format": "jpg"}, {"id": 158, "filename": "lee_zudarts-study.jpg", "title": "Zudarts Study", "author": "Lee", "tags": ["minimalist"], "format": "jpg"}, {"id": 159, "filename": "lofi-coffee.jpg", "title": "Coffee", "author": "Lofi", "tags": ["minimalist"], "format": "jpg"}, {"id": 160, "filename": "louis-coyle-inspired-lakeside.png", "title": "Coyle Inspired Lakeside", "author": "Louis", "tags": ["lake"], "format": "png"}, {"id": 161, "filename": "louis-coyle-sunrise.jpg", "title": "Coyle Sunrise", "author": "Louis", "tags": ["minimalist"], "format": "jpg"}, {"id": 162, "filename": "mark-kirkpatrick-mk-landscape-05.jpg", "title": "Kirkpatrick Mk Landscape 05", "author": "Mark", "tags": ["landscape"], "format": "jpg"}, {"id": 163, "filename": "masterteacher-red-sky-background.jpg", "title": "Red Sky Background", "author": "Masterteacher", "tags": ["minimalist"], "format": "jpg"}, {"id": 164, "filename": "matt-carlson-spring-mountain.png", "title": "Carlson Spring Mountain", "author": "Matt", "tags": ["mountain"], "format": "png"}, {"id": 165, "filename": "michal-lisowski-entergalactic.png", "title": "Lisowski Entergalactic", "author": "Michal", "tags": ["minimalist"], "format": "png"}, {"id": 166, "filename": "mitchrandom-alpine-sunset.png", "title": "Alpine Sunset", "author": "Mitchrandom", "tags": ["sunset"], "format": "png"}, {"id": 167, "filename": "mklgustafsson-among-trees-deer.jpg", "title": "Among Trees Deer", "author": "Mklgustafsson", "tags": ["deer"], "format": "jpg"}, {"id": 168, "filename": "mklgustafsson-among-trees-forest.png", "title": "Among Trees Forest", "author": "Mklgustafsson", "tags": ["forest"], "format": "png"}, {"id": 169, "filename": "mklgustafsson-among-trees-fox.jpg", "title": "Among Trees Fox", "author": "Mklgustafsson", "tags": ["minimalist"], "format": "jpg"}, {"id": 170, "filename": "mklgustafsson-among-trees-river-side.jpg", "title": "Among Trees River Side", "author": "Mklgustafsson", "tags": ["minimalist"], "format": "jpg"}, {"id": 171, "filename": "mklgustafsson-small-memory.png", "title": "Small Memory", "author": "Mklgustafsson", "tags": ["minimalist"], "format": "png"}, {"id": 172, "filename": "mklgustafsson-the-girl-and-the-bear.png", "title": "The Girl And The Bear", "author": "Mklgustafsson", "tags": ["minimalist"], "format": "png"}, {"id": 173, "filename": "moewanders-summers-end.jpg", "title": "Summers End", "author": "Moewanders", "tags": ["minimalist"], "format": "jpg"}, {"id": 174, "filename": "moewanders-the-frontier.jpg", "title": "The Frontier", "author": "Moewanders", "tags": ["minimalist"], "format": "jpg"}, {"id": 175, "filename": "mofghfgfgh-moon-mountain.png", "title": "Moon Mountain", "author": "Mofghfgfgh", "tags": ["mountain", "moon"], "format": "png"}, {"id": 176, "filename": "mofghfgfgh-ocean-sunset.png", "title": "Ocean Sunset", "author": "Mofghfgfgh", "tags": ["sunset"], "format": "png"}, {"id": 177, "filename": "mrwhoseboss-dalle2-edit-alone-but-awesome.jpg", "title": "Dalle2 Edit Alone But Awesome", "author": "Mrwhoseboss", "tags": ["minimalist"], "format": "jpg"}, {"id": 178, "filename": "muhammad-nafay-deer-and-the-fireflies.jpg", "title": "Nafay Deer And The Fireflies", "author": "Muhammad", "tags": ["deer"], "format": "jpg"}, {"id": 179, "filename": "muhammad-nafay-the-new-light.jpg", "title": "Nafay The New Light", "author": "Muhammad", "tags": ["minimalist"], "format": "jpg"}, {"id": 180, "filename": "muhammad_nafay-couple-cityscape.png", "title": "Nafay Couple Cityscape", "author": "Muhammad", "tags": ["city"], "format": "png"}, {"id": 181, "filename": "muriLLu-Anime-Scenery-Sunset.jpg", "title": "Anime Scenery Sunset", "author": "MuriLLu", "tags": ["sunset", "anime"], "format": "jpg"}, {"id": 182, "filename": "muriLLu-Japan-Neo-Wallpaper.png", "title": "Japan Neo Wallpaper", "author": "MuriLLu", "tags": ["minimalist"], "format": "png"}, {"id": 183, "filename": "ncoll36-forest-mountain.jpg", "title": "Forest Mountain", "author": "Ncoll36", "tags": ["mountain", "forest"], "format": "jpg"}, {"id": 184, "filename": "neonoverdrive-pastel_sunset_by.png", "title": "Pastel Sunset By", "author": "Neonoverdrive", "tags": ["sunset"], "format": "png"}, {"id": 185, "filename": "neonoverdrive-vaporwave-off-kanagawa.jpg", "title": "Vaporwave Off Kanagawa", "author": "Neonoverdrive", "tags": ["minimalist"], "format": "jpg"}, {"id": 186, "filename": "neonoverdrive-vast-neon-cityscape.jpg", "title": "Vast Neon Cityscape", "author": "Neonoverdrive", "tags": ["city"], "format": "jpg"}, {"id": 187, "filename": "normieboy96-cherry-blossom.jpg", "title": "Cherry Blossom", "author": "Normieboy96", "tags": ["minimalist"], "format": "jpg"}, {"id": 188, "filename": "ogarart-bitter-coast.jpg", "title": "Bitter Coast", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 189, "filename": "ogarart-blue-lighthouse-2019-01-13.jpg", "title": "Blue Lighthouse 2019 01 13", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 190, "filename": "ogarart-bridge.jpg", "title": "Bridge", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 191, "filename": "ogarart-cactus-2019-01-20.jpg", "title": "Cactus 2019 01 20", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 192, "filename": "OGARart-eagle-mountain-sunset-minimalist.jpg", "title": "Eagle Mountain Sunset Minimalist", "author": "OGARart", "tags": ["mountain", "sunset", "minimal"], "format": "jpg"}, {"id": 193, "filename": "ogarart-forest-mountains-2019-01-17.jpg", "title": "Forest Mountains 2019 01 17", "author": "Ogarart", "tags": ["mountain", "forest"], "format": "jpg"}, {"id": 194, "filename": "ogarart-forest-sunset-2019-01-25.png", "title": "Forest Sunset 2019 01 25", "author": "Ogarart", "tags": ["sunset", "forest"], "format": "png"}, {"id": 195, "filename": "ogarart-forest-trees.jpg", "title": "Forest Trees", "author": "Ogarart", "tags": ["forest"], "format": "jpg"}, {"id": 196, "filename": "ogarart-fortress.jpg", "title": "Fortress", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 197, "filename": "ogarart-frozen.jpg", "title": "Frozen", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 198, "filename": "ogarart-lone-wanderer.jpg", "title": "Lone Wanderer", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 199, "filename": "ogarart-mountains-ice.jpg", "title": "Mountains Ice", "author": "Ogarart", "tags": ["mountain"], "format": "jpg"}, {"id": 200, "filename": "ogarart-orange-sky-red-rocks-2019-03-04.jpg", "title": "Orange Sky Red Rocks 2019 03 04", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 201, "filename": "ogarart-purple-mountains-2019-01-29.jpg", "title": "Purple Mountains 2019 01 29", "author": "Ogarart", "tags": ["mountain"], "format": "jpg"}, {"id": 202, "filename": "ogarart-purple-trees-2019-02-11.jpg", "title": "Purple Trees 2019 02 11", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 203, "filename": "ogarart-purple-trees-and-deer-2019-01-15.jpg", "title": "Purple Trees And Deer 2019 01 15", "author": "Ogarart", "tags": ["deer"], "format": "jpg"}, {"id": 204, "filename": "ogarart-purple-trees-under-stars-2019-01-27.jpg", "title": "Purple Trees Under Stars 2019 01 27", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 205, "filename": "ogarart-red-cave.jpg", "title": "Red Cave", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 206, "filename": "ogarart-red-mountains-lake-2019-10-06.jpg", "title": "Red Mountains Lake 2019 10 06", "author": "Ogarart", "tags": ["mountain", "lake"], "format": "jpg"}, {"id": 207, "filename": "ogarart-red-mountains.jpg", "title": "Red Mountains", "author": "Ogarart", "tags": ["mountain"], "format": "jpg"}, {"id": 208, "filename": "ogarart-savannah.jpg", "title": "Savannah", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 209, "filename": "ogarart-sunset-2.jpg", "title": "Sunset 2", "author": "Ogarart", "tags": ["sunset"], "format": "jpg"}, {"id": 210, "filename": "ogarart-wolf-and-blue-trees-2019-01-22.jpg", "title": "Wolf And Blue Trees 2019 01 22", "author": "Ogarart", "tags": ["minimalist"], "format": "jpg"}, {"id": 211, "filename": "olly-moss-boris001-firewatch.jpg", "title": "Moss Boris001 Firewatch", "author": "Olly", "tags": ["firewatch"], "format": "jpg"}, {"id": 212, "filename": "olly-moss-dadaws-firewatch-bright-moon.jpg", "title": "Moss Dadaws Firewatch Bright Moon", "author": "Olly", "tags": ["moon", "firewatch"], "format": "jpg"}, {"id": 213, "filename": "olly-moss-dadaws-firewatch-cliff.jpg", "title": "Moss Dadaws Firewatch Cliff", "author": "Olly", "tags": ["firewatch"], "format": "jpg"}, {"id": 214, "filename": "olly-moss-firewatch-blue-forest.png", "title": "Moss Firewatch Blue Forest", "author": "Olly", "tags": ["forest", "firewatch"], "format": "png"}, {"id": 215, "filename": "olly-moss-firewatch-green.png", "title": "Moss Firewatch Green", "author": "Olly", "tags": ["firewatch"], "format": "png"}, {"id": 216, "filename": "olly-moss-firewatch-night.jpg", "title": "Moss Firewatch Night", "author": "Olly", "tags": ["night", "firewatch"], "format": "jpg"}, {"id": 217, "filename": "olly-moss-firewatch-purple.jpg", "title": "Moss Firewatch Purple", "author": "Olly", "tags": ["firewatch"], "format": "jpg"}, {"id": 218, "filename": "olly-moss-firewatch-red.jpg", "title": "Moss Firewatch Red", "author": "Olly", "tags": ["firewatch"], "format": "jpg"}, {"id": 219, "filename": "olly-moss-firewatch-river.png", "title": "Moss Firewatch River", "author": "Olly", "tags": ["firewatch"], "format": "png"}, {"id": 220, "filename": "olly-moss-firewatch-stag.jpg", "title": "Moss Firewatch Stag", "author": "Olly", "tags": ["firewatch"], "format": "jpg"}, {"id": 221, "filename": "olly-moss-firewatch-yellow.jpg", "title": "Moss Firewatch Yellow", "author": "Olly", "tags": ["firewatch"], "format": "jpg"}, {"id": 222, "filename": "olly-moss-sunset-mountains-firewatch.jpg", "title": "Moss Sunset Mountains Firewatch", "author": "Olly", "tags": ["mountain", "sunset", "firewatch"], "format": "jpg"}, {"id": 223, "filename": "P82En-cherry-blossom-mountain-range.jpg", "title": "Cherry Blossom Mountain Range", "author": "P82En", "tags": ["mountain"], "format": "jpg"}, {"id": 224, "filename": "paralloid-reaching-the-stars-over-mountain.jpg", "title": "Reaching The Stars Over Mountain", "author": "Paralloid", "tags": ["mountain"], "format": "jpg"}, {"id": 225, "filename": "partenoxenese-blue-faro.jpg", "title": "Blue Faro", "author": "Partenoxenese", "tags": ["minimalist"], "format": "jpg"}, {"id": 226, "filename": "phantomghostx-mountains.jpg", "title": "Mountains", "author": "Phantomghostx", "tags": ["mountain"], "format": "jpg"}, {"id": 227, "filename": "quentinmarsollier-unexplored.png", "title": "Unexplored", "author": "Quentinmarsollier", "tags": ["minimalist"], "format": "png"}, {"id": 228, "filename": "raven2cz-sunset-river-among-trees.png", "title": "Sunset River Among Trees", "author": "Raven2cz", "tags": ["sunset"], "format": "png"}, {"id": 229, "filename": "redditislikefb-astral-summit.png", "title": "Astral Summit", "author": "Redditislikefb", "tags": ["minimalist"], "format": "png"}, {"id": 230, "filename": "refiend-carmine-rock.jpg", "title": "Carmine Rock", "author": "Refiend", "tags": ["minimalist"], "format": "jpg"}, {"id": 231, "filename": "rhads-survivors.png", "title": "Survivors", "author": "Rhads", "tags": ["minimalist"], "format": "png"}, {"id": 232, "filename": "richarddorran-city-of-life.jpg", "title": "City Of Life", "author": "Richarddorran", "tags": ["city"], "format": "jpg"}, {"id": 233, "filename": "ricodz-lost.jpg", "title": "Lost", "author": "Ricodz", "tags": ["minimalist"], "format": "jpg"}, {"id": 234, "filename": "rmradev-alien-moon.jpg", "title": "Alien Moon", "author": "Rmradev", "tags": ["moon"], "format": "jpg"}, {"id": 235, "filename": "rmradev-colorful-landscape.png", "title": "Colorful Landscape", "author": "Rmradev", "tags": ["landscape"], "format": "png"}, {"id": 236, "filename": "rmradev-colorful-mountains.jpg", "title": "Colorful Mountains", "author": "Rmradev", "tags": ["mountain"], "format": "jpg"}, {"id": 237, "filename": "rmradev-evening-forest.png", "title": "Evening Forest", "author": "Rmradev", "tags": ["forest"], "format": "png"}, {"id": 238, "filename": "rmradev-moon-sunset-landscape.png", "title": "Moon Sunset Landscape", "author": "Rmradev", "tags": ["landscape", "sunset", "moon"], "format": "png"}, {"id": 239, "filename": "rmradev-mountain-retreat.jpg", "title": "Mountain Retreat", "author": "Rmradev", "tags": ["mountain"], "format": "jpg"}, {"id": 240, "filename": "rmradev-mountains.jpg", "title": "Mountains", "author": "Rmradev", "tags": ["mountain"], "format": "jpg"}, {"id": 241, "filename": "rmradev-peaceful-lake.png", "title": "Peaceful Lake", "author": "Rmradev", "tags": ["lake"], "format": "png"}, {"id": 242, "filename": "rmradev-sunset-landscape.jpg", "title": "Sunset Landscape", "author": "Rmradev", "tags": ["landscape", "sunset"], "format": "jpg"}, {"id": 243, "filename": "rmradev-tranquility.png", "title": "Tranquility", "author": "Rmradev", "tags": ["minimalist"], "format": "png"}, {"id": 244, "filename": "rmradev-vampire-castle.jpg", "title": "Vampire Castle", "author": "Rmradev", "tags": ["minimalist"], "format": "jpg"}, {"id": 245, "filename": "roboturtle_-purple-sky.jpg", "title": "Purple Sky", "author": "Roboturtle", "tags": ["minimalist"], "format": "jpg"}, {"id": 246, "filename": "romain-trystram-Neon-Alleyway.jpg", "title": "Trystram Neon Alleyway", "author": "Romain", "tags": ["minimalist"], "format": "jpg"}, {"id": 247, "filename": "romen-deva-awakening.jpg", "title": "Deva Awakening", "author": "Romen", "tags": ["minimalist"], "format": "jpg"}, {"id": 248, "filename": "rook-rip-mt-fuji.png", "title": "Rip Mt Fuji", "author": "Rook", "tags": ["minimalist"], "format": "png"}, {"id": 249, "filename": "ryky-sky-wave.png", "title": "Sky Wave", "author": "Ryky", "tags": ["minimalist"], "format": "png"}, {"id": 250, "filename": "ryky-the-rest.png", "title": "The Rest", "author": "Ryky", "tags": ["minimalist"], "format": "png"}, {"id": 251, "filename": "sabbathbl00dysabbath-desert-synthwave-ai-landscape.png", "title": "Desert Synthwave Ai Landscape", "author": "Sabbathbl00dysabbath", "tags": ["landscape", "desert"], "format": "png"}, {"id": 252, "filename": "saisho-moonlit-night-wedding.jpg", "title": "Moonlit Night Wedding", "author": "Saisho", "tags": ["moon", "night"], "format": "jpg"}, {"id": 253, "filename": "salman-illustrator-japanese-landscape.png", "title": "Illustrator Japanese Landscape", "author": "Salman", "tags": ["landscape"], "format": "png"}, {"id": 254, "filename": "samantha-lee-purple-deer.png", "title": "Lee Purple Deer", "author": "Samantha", "tags": ["deer"], "format": "png"}, {"id": 255, "filename": "sandace11-dusk.jpg", "title": "Dusk", "author": "Sandace11", "tags": ["minimalist"], "format": "jpg"}, {"id": 256, "filename": "significancefit6753-samurai-evening-jonah-edit.jpg", "title": "Samurai Evening Jonah Edit", "author": "Significancefit6753", "tags": ["minimalist"], "format": "jpg"}, {"id": 257, "filename": "skavrx-mountain.png", "title": "Mountain", "author": "Skavrx", "tags": ["mountain"], "format": "png"}, {"id": 258, "filename": "stable-diffusion-wavymulder-cyberpunk-sunset.png", "title": "Diffusion Wavymulder Cyberpunk Sunset", "author": "Stable", "tags": ["sunset", "cyberpunk"], "format": "png"}, {"id": 259, "filename": "strigonian-far-north.png", "title": "Far North", "author": "Strigonian", "tags": ["minimalist"], "format": "png"}, {"id": 260, "filename": "surendra-rajawat-butterflies.png", "title": "Rajawat Butterflies", "author": "Surendra", "tags": ["minimalist"], "format": "png"}, {"id": 261, "filename": "surendra-rajawat-island-in-the-sky.jpg", "title": "Rajawat Island In The Sky", "author": "Surendra", "tags": ["minimalist"], "format": "jpg"}, {"id": 262, "filename": "surendra-rajawat-natures-beauty.png", "title": "Rajawat Natures Beauty", "author": "Surendra", "tags": ["nature"], "format": "png"}, {"id": 263, "filename": "surendra-rajawat-the-magic-unfolds.png", "title": "Rajawat The Magic Unfolds", "author": "Surendra", "tags": ["minimalist"], "format": "png"}, {"id": 264, "filename": "tacosauceninja-blossoms.jpg", "title": "Blossoms", "author": "Tacosauceninja", "tags": ["minimalist"], "format": "jpg"}, {"id": 265, "filename": "tacosauceninja-i-cant-stop-what-you-began.png", "title": "I Cant Stop What You Began", "author": "Tacosauceninja", "tags": ["minimalist"], "format": "png"}, {"id": 266, "filename": "tacosauceninja-remembering.jpg", "title": "Remembering", "author": "Tacosauceninja", "tags": ["minimalist"], "format": "jpg"}, {"id": 267, "filename": "tacosauceninja-rooftop.jpg", "title": "Rooftop", "author": "Tacosauceninja", "tags": ["minimalist"], "format": "jpg"}, {"id": 268, "filename": "tacosauceninja-shadows-die-twice.png", "title": "Shadows Die Twice", "author": "Tacosauceninja", "tags": ["minimalist"], "format": "png"}, {"id": 269, "filename": "tanvdesign-fantasy-landscape.png", "title": "Fantasy Landscape", "author": "Tanvdesign", "tags": ["landscape"], "format": "png"}, {"id": 270, "filename": "tanvdesign-wolf.jpg", "title": "Wolf", "author": "Tanvdesign", "tags": ["minimalist"], "format": "jpg"}, {"id": 271, "filename": "the-gate-to-serenity-danisogen.png", "title": "Gate To Serenity Danisogen", "author": "The", "tags": ["minimalist"], "format": "png"}, {"id": 272, "filename": "thedigitalrob-separated-by-fate.jpg", "title": "Separated By Fate", "author": "Thedigitalrob", "tags": ["minimalist"], "format": "jpg"}, {"id": 273, "filename": "thomasshifflett31-beautiful-city-sunset.jpg", "title": "Beautiful City Sunset", "author": "Thomasshifflett31", "tags": ["sunset", "city"], "format": "jpg"}, {"id": 274, "filename": "tienphat-night-landscape.jpg", "title": "Night Landscape", "author": "Tienphat", "tags": ["landscape", "night"], "format": "jpg"}, {"id": 275, "filename": "tongxinfen-extraterrestrial.jpg", "title": "Extraterrestrial", "author": "Tongxinfen", "tags": ["minimalist"], "format": "jpg"}, {"id": 276, "filename": "totalcoconut-midjourney-landscape-wallpaper.jpg", "title": "Midjourney Landscape Wallpaper", "author": "Totalcoconut", "tags": ["landscape"], "format": "jpg"}, {"id": 277, "filename": "tyler-smith-blue-lagoon-port.jpg", "title": "Smith Blue Lagoon Port", "author": "Tyler", "tags": ["minimalist"], "format": "jpg"}, {"id": 278, "filename": "tyler-smith-redwoods-wolf.jpg", "title": "Smith Redwoods Wolf", "author": "Tyler", "tags": ["minimalist"], "format": "jpg"}, {"id": 279, "filename": "uagami-cherry-blossoms.jpg", "title": "Cherry Blossoms", "author": "Uagami", "tags": ["minimalist"], "format": "jpg"}, {"id": 280, "filename": "unknown-anime-sunset.jpg", "title": "Anime Sunset", "author": "Unknown", "tags": ["sunset", "anime"], "format": "jpg"}, {"id": 281, "filename": "unknown-bird-landing-on-water.jpg", "title": "Bird Landing On Water", "author": "Unknown", "tags": ["minimalist"], "format": "jpg"}, {"id": 282, "filename": "unknown-blue-moon-planets-over-lake-trees.jpg", "title": "Blue Moon Planets Over Lake Trees", "author": "Unknown", "tags": ["moon", "lake"], "format": "jpg"}, {"id": 283, "filename": "unknown-couple-on-red-mountains.jpg", "title": "Couple On Red Mountains", "author": "Unknown", "tags": ["mountain"], "format": "jpg"}, {"id": 284, "filename": "unknown-cyberpunk-city.jpg", "title": "Cyberpunk City", "author": "Unknown", "tags": ["cyberpunk", "city"], "format": "jpg"}, {"id": 285, "filename": "unknown-dark-mojave-desert.jpg", "title": "Dark Mojave Desert", "author": "Unknown", "tags": ["desert"], "format": "jpg"}, {"id": 286, "filename": "unknown-deer-in-the-light.jpg", "title": "Deer In The Light", "author": "Unknown", "tags": ["deer"], "format": "jpg"}, {"id": 287, "filename": "unknown-downtown-minneapolis.jpg", "title": "Downtown Minneapolis", "author": "Unknown", "tags": ["minimalist"], "format": "jpg"}, {"id": 288, "filename": "unknown-elephants-green-mountain.jpg", "title": "Elephants Green Mountain", "author": "Unknown", "tags": ["mountain"], "format": "jpg"}, {"id": 289, "filename": "unknown-green-mountains-and-hills.jpg", "title": "Green Mountains And Hills", "author": "Unknown", "tags": ["mountain"], "format": "jpg"}, {"id": 290, "filename": "unknown-ice-mountain-trees.png", "title": "Ice Mountain Trees", "author": "Unknown", "tags": ["mountain"], "format": "png"}, {"id": 291, "filename": "unknown-minimalist-desert-landscape.jpg", "title": "Minimalist Desert Landscape", "author": "Unknown", "tags": ["landscape", "desert", "minimal"], "format": "jpg"}, {"id": 292, "filename": "unknown-mountain-birds.png", "title": "Mountain Birds", "author": "Unknown", "tags": ["mountain"], "format": "png"}, {"id": 293, "filename": "unknown-multicolor-rocket-launch.jpg", "title": "Multicolor Rocket Launch", "author": "Unknown", "tags": ["minimalist"], "format": "jpg"}, {"id": 294, "filename": "unknown-orange-sunset-over-blue-hills.jpg", "title": "Orange Sunset Over Blue Hills", "author": "Unknown", "tags": ["sunset"], "format": "jpg"}, {"id": 295, "filename": "unknown-pink-mountains.png", "title": "Pink Mountains", "author": "Unknown", "tags": ["mountain"], "format": "png"}, {"id": 296, "filename": "unknown-pink-rocky-cliffs-and-water.jpg", "title": "Pink Rocky Cliffs And Water", "author": "Unknown", "tags": ["minimalist"], "format": "jpg"}, {"id": 297, "filename": "unknown-pink-sunset-mountain-trees.png", "title": "Pink Sunset Mountain Trees", "author": "Unknown", "tags": ["mountain", "sunset"], "format": "png"}, {"id": 298, "filename": "unknown-purple-lake.jpg", "title": "Purple Lake", "author": "Unknown", "tags": ["lake"], "format": "jpg"}, {"id": 299, "filename": "unknown-purple-mountain-landscape-with-ship.jpg", "title": "Purple Mountain Landscape With Ship", "author": "Unknown", "tags": ["landscape", "mountain"], "format": "jpg"}, {"id": 300, "filename": "unknown-samurai-forest.jpg", "title": "Samurai Forest", "author": "Unknown", "tags": ["forest"], "format": "jpg"}, {"id": 301, "filename": "unknown-snowy-landscape.jpg", "title": "Snowy Landscape", "author": "Unknown", "tags": ["landscape"], "format": "jpg"}, {"id": 302, "filename": "unknown-sunset-behind-island-palm-trees.jpg", "title": "Sunset Behind Island Palm Trees", "author": "Unknown", "tags": ["sunset"], "format": "jpg"}, {"id": 303, "filename": "unknown-sunset-fishing.jpg", "title": "Sunset Fishing", "author": "Unknown", "tags": ["sunset"], "format": "jpg"}, {"id": 304, "filename": "unknown-whale-tail-at-sunset.jpg", "title": "Whale Tail At Sunset", "author": "Unknown", "tags": ["sunset"], "format": "jpg"}, {"id": 305, "filename": "unkown-purple-mountains.png", "title": "Purple Mountains", "author": "Unkown", "tags": ["mountain"], "format": "png"}, {"id": 306, "filename": "unreal-midjourney-a-stunning-sunset.jpg", "title": "Midjourney A Stunning Sunset", "author": "Unreal", "tags": ["sunset"], "format": "jpg"}, {"id": 307, "filename": "vorgbardo-ancient-oriental-temple.jpg", "title": "Ancient Oriental Temple", "author": "Vorgbardo", "tags": ["minimalist"], "format": "jpg"}, {"id": 308, "filename": "VorgBardo-midjourney-1960s-sci-fi-planet.jpg", "title": "Midjourney 1960s Sci Fi Planet", "author": "VorgBardo", "tags": ["minimalist"], "format": "jpg"}, {"id": 309, "filename": "voyager-bequem-almost-spring-prev-2.jpg", "title": "Bequem Almost Spring Prev 2", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 310, "filename": "voyager-board-man-moonlit-nights-f.jpg", "title": "Board Man Moonlit Nights F", "author": "Voyager", "tags": ["moon", "night"], "format": "jpg"}, {"id": 311, "filename": "voyager-camino-de-kazul-arte.jpg", "title": "Camino De Kazul Arte", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 312, "filename": "voyager-cloud-break-day-drifting.png", "title": "Cloud Break Day Drifting", "author": "Voyager", "tags": ["minimalist"], "format": "png"}, {"id": 313, "filename": "voyager-coldbrew-backyard-gardens.jpg", "title": "Coldbrew Backyard Gardens", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 314, "filename": "voyager-cosmonkey-leaves.jpg", "title": "Cosmonkey Leaves", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 315, "filename": "voyager-lofi-exposure.jpg", "title": "Lofi Exposure", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 316, "filename": "voyager-nogymx-marauders.jpg", "title": "Nogymx Marauders", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 317, "filename": "voyager-otaam-tonion-lush-space.jpg", "title": "Otaam Tonion Lush Space", "author": "Voyager", "tags": ["space"], "format": "jpg"}, {"id": 318, "filename": "voyager-quilla-teaser-traders.jpg", "title": "Quilla Teaser Traders", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 319, "filename": "voyager-sai-t-inownlove-overseas.jpg", "title": "Sai T Inownlove Overseas", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 320, "filename": "voyager-samurai-bebop-acoolrocket-edit.png", "title": "Samurai Bebop Acoolrocket Edit", "author": "Voyager", "tags": ["minimalist"], "format": "png"}, {"id": 321, "filename": "voyager-simber-tibeauthetraveler-eternal-sunshine.jpg", "title": "Simber Tibeauthetraveler Eternal Sunshine", "author": "Voyager", "tags": ["minimalist"], "format": "jpg"}, {"id": 322, "filename": "wallpapersden-purple-artistic-landscape.png", "title": "Purple Artistic Landscape", "author": "Wallpapersden", "tags": ["landscape"], "format": "png"}, {"id": 323, "filename": "wallpapersden.com_cool-red-mountains-4k.jpg", "title": "Cool Red Mountains 4k", "author": "Wallpapersden.Com", "tags": ["mountain"], "format": "jpg"}, {"id": 324, "filename": "wallpapersden.com_landscape-moon-digital-evening.jpg", "title": "Landscape Moon Digital Evening", "author": "Wallpapersden.Com", "tags": ["landscape", "moon"], "format": "jpg"}, {"id": 325, "filename": "wallpapersden.com_minimal-reflection-sunset.jpg", "title": "Minimal Reflection Sunset", "author": "Wallpapersden.Com", "tags": ["sunset", "minimal"], "format": "jpg"}, {"id": 326, "filename": "wallpapersden.com_nature-sunset-simple-minimal-illustration.jpg", "title": "Nature Sunset Simple Minimal Illustration", "author": "Wallpapersden.Com", "tags": ["nature", "sunset", "minimal"], "format": "jpg"}, {"id": 327, "filename": "wallpapersden.com_pyramid-minimal-landscape.jpg", "title": "Pyramid Minimal Landscape", "author": "Wallpapersden.Com", "tags": ["landscape", "minimal"], "format": "jpg"}, {"id": 328, "filename": "wheazzy-birds-mountain.jpg", "title": "Birds Mountain", "author": "Wheazzy", "tags": ["mountain"], "format": "jpg"}, {"id": 329, "filename": "wheazzy-blue-mountains.jpg", "title": "Blue Mountains", "author": "Wheazzy", "tags": ["mountain"], "format": "jpg"}, {"id": 330, "filename": "wp5102649-neon-retro-city-ps4-wallpapers.png", "title": "Neon Retro City Ps4 Wallpapers", "author": "Wp5102649", "tags": ["city", "retro"], "format": "png"}, {"id": 331, "filename": "wp5998347-retro-4k-wallpapers.jpg", "title": "Retro 4k Wallpapers", "author": "Wp5998347", "tags": ["retro"], "format": "jpg"}, {"id": 332, "filename": "wp6504516-monument-valley-sunset-ultra-hd-wallpapers.jpg", "title": "Monument Valley Sunset Ultra Hd Wallpapers", "author": "Wp6504516", "tags": ["sunset"], "format": "jpg"}, {"id": 333, "filename": "yefedlger-eolyn.jpg", "title": "Eolyn", "author": "Yefedlger", "tags": ["minimalist"], "format": "jpg"}, {"id": 334, "filename": "zakoriart-commission-piece-for-game.jpg", "title": "Commission Piece For Game", "author": "Zakoriart", "tags": ["minimalist"], "format": "jpg"}, {"id": 335, "filename": "zakoriart-flow.jpg", "title": "Flow", "author": "Zakoriart", "tags": ["minimalist"], "format": "jpg"}, {"id": 336, "filename": "zakoriart-if-silence-could-be-heard.jpg", "title": "If Silence Could Be Heard", "author": "Zakoriart", "tags": ["minimalist"], "format": "jpg"}, {"id": 337, "filename": "zeoluwang-journey.jpg", "title": "Journey", "author": "Zeoluwang", "tags": ["minimalist"], "format": "jpg"}];
+    </script>
 
     <!-- Official GLightbox JS from NPM CDN -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
-    <script>
-        const allWallpapers = [{"id":1,"filename":"acoolrocket-dalle2-hokusai-non-prompt-landscape.png","title":"Dalle2 Hokusai Non Prompt Landscape","author":"Acoolrocket","tags":["landscape"],"format":"png"},{"id":2,"filename":"afreen-red-sunset-horizon.png","title":"Red Sunset Horizon","author":"Afreen","tags":["sunset"],"format":"png"},{"id":3,"filename":"alejagalesa-another-world.jpg","title":"Another World","author":"Alejagalesa","tags":["minimalist"],"format":"jpg"},{"id":4,"filename":"alejagalesa-calm-day.jpg","title":"Calm Day","author":"Alejagalesa","tags":["minimalist"],"format":"jpg"},{"id":5,"filename":"alejagalesa-camp.jpg","title":"Camp","author":"Alejagalesa","tags":["minimalist"],"format":"jpg"},{"id":6,"filename":"alejagalesa-horse-in-the-sunset.jpg","title":"Horse In The Sunset","author":"Alejagalesa","tags":["sunset"],"format":"jpg"},{"id":7,"filename":"alejagalesa-modern-buildings.jpg","title":"Modern Buildings","author":"Alejagalesa","tags":["minimalist"],"format":"jpg"},{"id":8,"filename":"alejagalesa-mount-fuji.jpg","title":"Mount Fuji","author":"Alejagalesa","tags":["minimalist"],"format":"jpg"},{"id":9,"filename":"alejagalesa-multivist-landscape.jpg","title":"Multivist Landscape","author":"Alejagalesa","tags":["landscape"],"format":"jpg"},{"id":10,"filename":"alejagalesa-pink-landscape.jpg","title":"Pink Landscape","author":"Alejagalesa","tags":["landscape"],"format":"jpg"},{"id":11,"filename":"alejagalesa-purple-bear.jpg","title":"Purple Bear","author":"Alejagalesa","tags":["minimalist"],"format":"jpg"},{"id":12,"filename":"alejagalesa-starry-nigh.jpg","title":"Starry Nigh","author":"Alejagalesa","tags":["minimalist"],"format":"jpg"},{"id":13,"filename":"alejagalesa-the-beach-neighborhood.jpg","title":"The Beach Neighborhood","author":"Alejagalesa","tags":["minimalist"],"format":"jpg"},{"id":14,"filename":"alejagalesa-the-city.jpg","title":"The City","author":"Alejagalesa","tags":["city"],"format":"jpg"},{"id":15,"filename":"alena-aenami-7pm.png","title":"Aenami 7pm","author":"Alena","tags":["minimalist"],"format":"png"},{"id":16,"filename":"alena-aenami-any-minute-now.jpg","title":"Aenami Any Minute Now","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":17,"filename":"alena-aenami-around-us.jpg","title":"Aenami Around Us","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":18,"filename":"alena-aenami-autumn-in-budapest.png","title":"Aenami Autumn In Budapest","author":"Alena","tags":["minimalist"],"format":"png"},{"id":19,"filename":"alena-aenami-away.jpg","title":"Aenami Away","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":20,"filename":"alena-aenami-blue-hour.jpg","title":"Aenami Blue Hour","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":21,"filename":"alena-aenami-castle-in-the-sky.jpg","title":"Aenami Castle In The Sky","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":22,"filename":"alena-aenami-clouds.jpg","title":"Aenami Clouds","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":23,"filename":"alena-aenami-dawn.jpg","title":"Aenami Dawn","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":24,"filename":"alena-aenami-eclipse.jpg","title":"Aenami Eclipse","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":25,"filename":"alena-aenami-escape.jpg","title":"Aenami Escape","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":26,"filename":"alena-aenami-far-from-tomorrow.jpg","title":"Aenami Far From Tomorrow","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":27,"filename":"alena-aenami-horizon.png","title":"Aenami Horizon","author":"Alena","tags":["minimalist"],"format":"png"},{"id":28,"filename":"alena-aenami-in-search-of-peace.png","title":"Aenami In Search Of Peace","author":"Alena","tags":["minimalist"],"format":"png"},{"id":29,"filename":"alena-aenami-lights.jpg","title":"Aenami Lights","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":30,"filename":"alena-aenami-lost-in-between.jpg","title":"Aenami Lost In Between","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":31,"filename":"alena-aenami-out-of-time.png","title":"Aenami Out Of Time","author":"Alena","tags":["minimalist"],"format":"png"},{"id":32,"filename":"alena-aenami-sky-mirror.jpg","title":"Aenami Sky Mirror","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":33,"filename":"alena-aenami-stardust.jpg","title":"Aenami Stardust","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":34,"filename":"alena-aenami-stars-and-you.png","title":"Aenami Stars And You","author":"Alena","tags":["minimalist"],"format":"png"},{"id":35,"filename":"alena-aenami-the-witcher.jpg","title":"Aenami The Witcher","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":36,"filename":"alena-aenami-timeless.jpg","title":"Aenami Timeless","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":37,"filename":"alena-aenami-wait.jpg","title":"Aenami Wait","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":38,"filename":"alena-aenami-wings.jpg","title":"Aenami Wings","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":39,"filename":"alena-aenami-you.jpg","title":"Aenami You","author":"Alena","tags":["minimalist"],"format":"jpg"},{"id":40,"filename":"altos-odyssey-balloon-over-blue-mountains.jpg","title":"Odyssey Balloon Over Blue Mountains","author":"Altos","tags":["mountain"],"format":"jpg"},{"id":41,"filename":"altos-odyssey-blue-hills-balloon.jpg","title":"Odyssey Blue Hills Balloon","author":"Altos","tags":["minimalist"],"format":"jpg"},{"id":42,"filename":"altos-odyssey-chasm-jump.jpg","title":"Odyssey Chasm Jump","author":"Altos","tags":["minimalist"],"format":"jpg"},{"id":43,"filename":"altos-odyssey-palm-kicker.jpg","title":"Odyssey Palm Kicker","author":"Altos","tags":["minimalist"],"format":"jpg"},{"id":44,"filename":"altos-odyssey-purple-mountain-castle.jpg","title":"Odyssey Purple Mountain Castle","author":"Altos","tags":["mountain"],"format":"jpg"},{"id":45,"filename":"alx-colorful-clouds.png","title":"Colorful Clouds","author":"Alx","tags":["minimalist"],"format":"png"},{"id":46,"filename":"alx-sunset-over-palm-trees.png","title":"Sunset Over Palm Trees","author":"Alx","tags":["sunset"],"format":"png"},{"id":47,"filename":"among-trees-campsite.jpg","title":"Trees Campsite","author":"Among","tags":["minimalist"],"format":"jpg"},{"id":48,"filename":"among-trees-dadaws-night-is-coming.jpg","title":"Trees Dadaws Night Is Coming","author":"Among","tags":["night"],"format":"jpg"},{"id":49,"filename":"among-trees-dadaws-small-cliffs.jpg","title":"Trees Dadaws Small Cliffs","author":"Among","tags":["minimalist"],"format":"jpg"},{"id":50,"filename":"andrew-maleski-ghostly-gate.jpg","title":"Maleski Ghostly Gate","author":"Andrew","tags":["minimalist"],"format":"jpg"},{"id":51,"filename":"arcipello-scorched-earth.jpg","title":"Scorched Earth","author":"Arcipello","tags":["minimalist"],"format":"jpg"},{"id":52,"filename":"arcipello-what-once-was.jpg","title":"What Once Was","author":"Arcipello","tags":["minimalist"],"format":"jpg"},{"id":53,"filename":"arseniy-chebynkin-tokyo-street-night.jpg","title":"Chebynkin Tokyo Street Night","author":"Arseniy","tags":["night"],"format":"jpg"},{"id":54,"filename":"artwithflo-empire-state-building.png","title":"Empire State Building","author":"Artwithflo","tags":["minimalist"],"format":"png"},{"id":55,"filename":"baajjii-vector-desert.jpg","title":"Vector Desert","author":"Baajjii","tags":["desert"],"format":"jpg"},{"id":56,"filename":"bastien-grivet-the-guy-and-the-id-checking-bot.jpg","title":"Grivet The Guy And The Id Checking Bot","author":"Bastien","tags":["minimalist"],"format":"jpg"},{"id":57,"filename":"bisbiswas-a-summer-evening.png","title":"A Summer Evening","author":"Bisbiswas","tags":["minimalist"],"format":"png"},{"id":58,"filename":"bisbiswas-burning-clouds.png","title":"Burning Clouds","author":"Bisbiswas","tags":["minimalist"],"format":"png"},{"id":59,"filename":"bisbiswas-gathering.jpg","title":"Gathering","author":"Bisbiswas","tags":["minimalist"],"format":"jpg"},{"id":60,"filename":"bisbiswas-lit-up-sky.jpg","title":"Lit Up Sky","author":"Bisbiswas","tags":["minimalist"],"format":"jpg"},{"id":61,"filename":"bisbiswas-verdant-moonlight-no-people-edit.jpg","title":"Verdant Moonlight No People Edit","author":"Bisbiswas","tags":["moon"],"format":"jpg"},{"id":62,"filename":"blackwolfshadow1-wolf-of-the-night.jpg","title":"Wolf Of The Night","author":"Blackwolfshadow1","tags":["night"],"format":"jpg"},{"id":63,"filename":"by-kvacm-gorod-zakat-liudi-siluty-budushchee.jpg","title":"Kvacm Gorod Zakat Liudi Siluty Budushchee","author":"By","tags":["minimalist"],"format":"jpg"},{"id":64,"filename":"byrotek-calm-meadow.jpg","title":"Calm Meadow","author":"Byrotek","tags":["minimalist"],"format":"jpg"},{"id":65,"filename":"byrotek-mountain-view.png","title":"Mountain View","author":"Byrotek","tags":["mountain"],"format":"png"},{"id":66,"filename":"byrotek-north-capital.png","title":"North Capital","author":"Byrotek","tags":["minimalist"],"format":"png"},{"id":67,"filename":"byrotek-sundown-landscape.png","title":"Sundown Landscape","author":"Byrotek","tags":["landscape"],"format":"png"},{"id":68,"filename":"chilledcow-kupla-kingdom-in-blue.jpg","title":"Kupla Kingdom In Blue","author":"Chilledcow","tags":["minimalist"],"format":"jpg"},{"id":69,"filename":"chrisostrowski-the-esteemed-palace-light.jpg","title":"The Esteemed Palace Light","author":"Chrisostrowski","tags":["minimalist"],"format":"jpg"},{"id":70,"filename":"chrisostrowski-the-esteemed-palace.jpg","title":"The Esteemed Palace","author":"Chrisostrowski","tags":["minimalist"],"format":"jpg"},{"id":71,"filename":"ciorano-the-sacred-creature.jpg","title":"The Sacred Creature","author":"Ciorano","tags":["minimalist"],"format":"jpg"},{"id":72,"filename":"colormate-monogatari.jpg","title":"Monogatari","author":"Colormate","tags":["minimalist"],"format":"jpg"},{"id":73,"filename":"craig-nacroix-mountains.jpg","title":"Nacroix Mountains","author":"Craig","tags":["mountain"],"format":"jpg"},{"id":74,"filename":"dalle2-minimalistic-colorful-flat-mountain-landscape.png","title":"Minimalistic Colorful Flat Mountain Landscape","author":"Dalle2","tags":["landscape","mountain","minimal"],"format":"png"},{"id":75,"filename":"dangiuz-leopoldo-d-angelo-westofthesun.png","title":"Leopoldo D Angelo Westofthesun","author":"Dangiuz","tags":["minimalist"],"format":"png"},{"id":76,"filename":"daniel-ignacio-the-deer-spirit.jpg","title":"Ignacio The Deer Spirit","author":"Daniel","tags":["deer"],"format":"jpg"},{"id":77,"filename":"darkkal44-come-with-me-surfaces.png","title":"Come With Me Surfaces","author":"Darkkal44","tags":["minimalist"],"format":"png"},{"id":78,"filename":"dataxiii-upscaled-vector-landscape.jpg","title":"Upscaled Vector Landscape","author":"Dataxiii","tags":["landscape"],"format":"jpg"},{"id":79,"filename":"denis-istomin-chicco3.jpg","title":"Istomin Chicco3","author":"Denis","tags":["minimalist"],"format":"jpg"},{"id":80,"filename":"denis-istomin-listen-to-your-heart.jpg","title":"Istomin Listen To Your Heart","author":"Denis","tags":["minimalist"],"format":"jpg"},{"id":81,"filename":"denis-istomin-midnight-gazing.png","title":"Istomin Midnight Gazing","author":"Denis","tags":["night"],"format":"png"},{"id":82,"filename":"dpcdpc11-exodus.png","title":"Exodus","author":"Dpcdpc11","tags":["minimalist"],"format":"png"},{"id":83,"filename":"dpcdpc11-isolation.png","title":"Isolation","author":"Dpcdpc11","tags":["minimalist"],"format":"png"},{"id":84,"filename":"dpcdpc11-summer-on-the-lake.png","title":"Summer On The Lake","author":"Dpcdpc11","tags":["lake"],"format":"png"},{"id":85,"filename":"drawingsandstuff-lonely-tree.png","title":"Lonely Tree","author":"Drawingsandstuff","tags":["minimalist"],"format":"png"},{"id":86,"filename":"dropside-the-valley-ultrawide-gradient-landscape.png","title":"The Valley Ultrawide Gradient Landscape","author":"Dropside","tags":["landscape"],"format":"png"},{"id":87,"filename":"edward11mk-deer-in-forest.jpg","title":"Deer In Forest","author":"Edward11mk","tags":["forest","deer"],"format":"jpg"},{"id":88,"filename":"edward11mk-tents-in-nature.jpg","title":"Tents In Nature","author":"Edward11mk","tags":["nature"],"format":"jpg"},{"id":89,"filename":"Electronic_Sample_96-calm-night.png","title":"Sample 96 Calm Night","author":"Electronic","tags":["night"],"format":"png"},{"id":90,"filename":"ellysiumn-flaming-kingdom.jpg","title":"Flaming Kingdom","author":"Ellysiumn","tags":["minimalist"],"format":"jpg"},{"id":91,"filename":"era7-asian-spirit.jpg","title":"Asian Spirit","author":"Era7","tags":["minimalist"],"format":"jpg"},{"id":92,"filename":"era7-city-of-the-amethyst-nights.jpg","title":"City Of The Amethyst Nights","author":"Era7","tags":["city","night"],"format":"jpg"},{"id":93,"filename":"eric-elwell-tropical-environment.jpg","title":"Elwell Tropical Environment","author":"Eric","tags":["minimalist"],"format":"jpg"},{"id":94,"filename":"exitmothership-sunset-scene.jpg","title":"Sunset Scene","author":"Exitmothership","tags":["sunset"],"format":"jpg"},{"id":95,"filename":"f-tam-mountain-wilderness.png","title":"Tam Mountain Wilderness","author":"F","tags":["mountain"],"format":"png"},{"id":96,"filename":"faithhal-boat-and-mountains.jpg","title":"Boat And Mountains","author":"Faithhal","tags":["mountain"],"format":"jpg"},{"id":97,"filename":"farjana5240-bridge-forest.jpg","title":"Bridge Forest","author":"Farjana5240","tags":["forest"],"format":"jpg"},{"id":98,"filename":"ferdinand-ladera-rice-terraces.jpg","title":"Ladera Rice Terraces","author":"Ferdinand","tags":["minimalist"],"format":"jpg"},{"id":99,"filename":"forangeillustrations-ashenvale.png","title":"Ashenvale","author":"Forangeillustrations","tags":["minimalist"],"format":"png"},{"id":100,"filename":"frank-sun-twelve-suns.jpg","title":"Sun Twelve Suns","author":"Frank","tags":["minimalist"],"format":"jpg"},{"id":101,"filename":"gamesdas-fantasy-collection-3.jpg","title":"Fantasy Collection 3","author":"Gamesdas","tags":["minimalist"],"format":"jpg"},{"id":102,"filename":"gavrl-snowy-forest.jpg","title":"Snowy Forest","author":"Gavrl","tags":["forest"],"format":"jpg"},{"id":103,"filename":"gavryl-broken-structures.jpg","title":"Broken Structures","author":"Gavryl","tags":["minimalist"],"format":"jpg"},{"id":104,"filename":"gavryl-by-your-side.jpg","title":"By Your Side","author":"Gavryl","tags":["minimalist"],"format":"jpg"},{"id":105,"filename":"gavryl-cozy-night.jpg","title":"Cozy Night","author":"Gavryl","tags":["night"],"format":"jpg"},{"id":106,"filename":"gloomilygray-journey.jpg","title":"Journey","author":"Gloomilygray","tags":["minimalist"],"format":"jpg"},{"id":107,"filename":"gustavo-arteaga-ancient-tree-shrine.png","title":"Arteaga Ancient Tree Shrine","author":"Gustavo","tags":["minimalist"],"format":"png"},{"id":108,"filename":"gustavo-arteaga-monolith-on-giants-causeway.jpg","title":"Arteaga Monolith On Giants Causeway","author":"Gustavo","tags":["minimalist"],"format":"jpg"},{"id":109,"filename":"gustavo-arteaga-reload.jpg","title":"Arteaga Reload","author":"Gustavo","tags":["minimalist"],"format":"jpg"},{"id":110,"filename":"gustavo-arteaga-revenge.jpg","title":"Arteaga Revenge","author":"Gustavo","tags":["minimalist"],"format":"jpg"},{"id":111,"filename":"gydw1n-whisper-of-the-heart.jpg","title":"Whisper Of The Heart","author":"Gydw1n","tags":["minimalist"],"format":"jpg"},{"id":112,"filename":"haneron-landscape-mountain-home.jpg","title":"Landscape Mountain Home","author":"Haneron","tags":["landscape","mountain"],"format":"jpg"},{"id":113,"filename":"hangmoon-alexander-komarov-white-blue-red-clouds.jpg","title":"Alexander Komarov White Blue Red Clouds","author":"Hangmoon","tags":["moon"],"format":"jpg"},{"id":114,"filename":"hangmoon-city.jpg","title":"City","author":"Hangmoon","tags":["moon","city"],"format":"jpg"},{"id":115,"filename":"hangmoon-white-blue-red-clouds.jpg","title":"White Blue Red Clouds","author":"Hangmoon","tags":["moon"],"format":"jpg"},{"id":116,"filename":"higgsas-outrun.jpg","title":"Outrun","author":"Higgsas","tags":["minimalist"],"format":"jpg"},{"id":117,"filename":"howard-chen-mao-mao-forest-campsite.jpg","title":"Chen Mao Mao Forest Campsite","author":"Howard","tags":["forest"],"format":"jpg"},{"id":118,"filename":"hugobarretcastan-house-in-forest.jpg","title":"House In Forest","author":"Hugobarretcastan","tags":["forest"],"format":"jpg"},{"id":119,"filename":"icondesire-train-cross.png","title":"Train Cross","author":"Icondesire","tags":["minimalist"],"format":"png"},{"id":120,"filename":"incognit0ergosum-stable-diffusion-ultimate-city-autumn-meadow.jpg","title":"Stable Diffusion Ultimate City Autumn Meadow","author":"Incognit0ergosum","tags":["city"],"format":"jpg"},{"id":121,"filename":"itsmatt-japanese-painting-remade.jpg","title":"Japanese Painting Remade","author":"Itsmatt","tags":["minimalist"],"format":"jpg"},{"id":122,"filename":"itspatra-trailer-in-yosemite.png","title":"Trailer In Yosemite","author":"Itspatra","tags":["minimalist"],"format":"png"},{"id":123,"filename":"jaynit-samurai-bridge.jpg","title":"Samurai Bridge","author":"Jaynit","tags":["minimalist"],"format":"jpg"},{"id":124,"filename":"jay_v_jackson-between-the-twin-cities-recolored.jpg","title":"V Jackson Between The Twin Cities Recolored","author":"Jay","tags":["minimalist"],"format":"jpg"},{"id":125,"filename":"jeff-ostberg-cozy-autumn-rain.jpg","title":"Ostberg Cozy Autumn Rain","author":"Jeff","tags":["minimalist"],"format":"jpg"},{"id":126,"filename":"joeyjazz-a-simple-scene.jpg","title":"A Simple Scene","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":127,"filename":"joeyjazz-antares.png","title":"Antares","author":"Joeyjazz","tags":["minimalist"],"format":"png"},{"id":128,"filename":"joeyjazz-behind-the-blister.jpg","title":"Behind The Blister","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":129,"filename":"joeyjazz-dreams-in-pastel.jpg","title":"Dreams In Pastel","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":130,"filename":"joeyjazz-just-a-tree-and-a-breeze.jpg","title":"Just A Tree And A Breeze","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":131,"filename":"joeyjazz-place-out-of-place.png","title":"Place Out Of Place","author":"Joeyjazz","tags":["minimalist"],"format":"png"},{"id":132,"filename":"joeyjazz-sp-fields-of-bronze.jpg","title":"Sp Fields Of Bronze","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":133,"filename":"joeyjazz-sp-highrise.jpg","title":"Sp Highrise","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":134,"filename":"joeyjazz-timeless.jpg","title":"Timeless","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":135,"filename":"joeyjazz-under-the-strange-horizon.jpg","title":"Under The Strange Horizon","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":136,"filename":"joeyjazz-water-air-and-some-magic.jpg","title":"Water Air And Some Magic","author":"Joeyjazz","tags":["minimalist"],"format":"jpg"},{"id":137,"filename":"joeyjazz-where-day-and-night-meet.jpg","title":"Where Day And Night Meet","author":"Joeyjazz","tags":["night"],"format":"jpg"},{"id":138,"filename":"jonadinges-getaway.png","title":"Getaway","author":"Jonadinges","tags":["minimalist"],"format":"png"},{"id":139,"filename":"josef-barton-the-last-one.jpg","title":"Barton The Last One","author":"Josef","tags":["minimalist"],"format":"jpg"},{"id":140,"filename":"josegoncalo-beasts.jpg","title":"Beasts","author":"Josegoncalo","tags":["minimalist"],"format":"jpg"},{"id":141,"filename":"junhyuk-lim-acoolrocket-tree-of-life-edit.png","title":"Lim Acoolrocket Tree Of Life Edit","author":"Junhyuk","tags":["minimalist"],"format":"png"},{"id":142,"filename":"jurrig-hutan-owl-forest-night.jpg","title":"Hutan Owl Forest Night","author":"Jurrig","tags":["forest","night"],"format":"jpg"},{"id":143,"filename":"kak8gm-louis-coyle-inspired-lakeside-aurora.jpg","title":"Louis Coyle Inspired Lakeside Aurora","author":"Kak8gm","tags":["lake"],"format":"jpg"},{"id":144,"filename":"kevin-gnutzmans-singularity.jpg","title":"Gnutzmans Singularity","author":"Kevin","tags":["minimalist"],"format":"jpg"},{"id":145,"filename":"kuldarleement-stellar-collision.jpg","title":"Stellar Collision","author":"Kuldarleement","tags":["minimalist"],"format":"jpg"},{"id":146,"filename":"kvacm-africa-feeling.png","title":"Africa Feeling","author":"Kvacm","tags":["minimalist"],"format":"png"},{"id":147,"filename":"kvacm-amythest-kingdom.jpg","title":"Amythest Kingdom","author":"Kvacm","tags":["minimalist"],"format":"jpg"},{"id":148,"filename":"kvacm-early-evening.jpg","title":"Early Evening","author":"Kvacm","tags":["minimalist"],"format":"jpg"},{"id":149,"filename":"kvacm-falling-sun.png","title":"Falling Sun","author":"Kvacm","tags":["minimalist"],"format":"png"},{"id":150,"filename":"kvacm-magenta-bay.png","title":"Magenta Bay","author":"Kvacm","tags":["minimalist"],"format":"png"},{"id":151,"filename":"kvacm-misty-mountains.jpg","title":"Misty Mountains","author":"Kvacm","tags":["mountain"],"format":"jpg"},{"id":152,"filename":"kvacm-night-patrol.jpg","title":"Night Patrol","author":"Kvacm","tags":["night"],"format":"jpg"},{"id":153,"filename":"kvacm-pinky-purple.jpg","title":"Pinky Purple","author":"Kvacm","tags":["minimalist"],"format":"jpg"},{"id":154,"filename":"kvacm-sunlight.png","title":"Sunlight","author":"Kvacm","tags":["minimalist"],"format":"png"},{"id":155,"filename":"kvacm-synth-waterfall.png","title":"Synth Waterfall","author":"Kvacm","tags":["minimalist"],"format":"png"},{"id":156,"filename":"kvacm-synthwave-view.jpg","title":"Synthwave View","author":"Kvacm","tags":["minimalist"],"format":"jpg"},{"id":157,"filename":"kvacm-torii-city.jpg","title":"Torii City","author":"Kvacm","tags":["city"],"format":"jpg"},{"id":158,"filename":"lee_zudarts-study.jpg","title":"Zudarts Study","author":"Lee","tags":["minimalist"],"format":"jpg"},{"id":159,"filename":"lofi-coffee.jpg","title":"Coffee","author":"Lofi","tags":["minimalist"],"format":"jpg"},{"id":160,"filename":"louis-coyle-inspired-lakeside.png","title":"Coyle Inspired Lakeside","author":"Louis","tags":["lake"],"format":"png"},{"id":161,"filename":"louis-coyle-sunrise.jpg","title":"Coyle Sunrise","author":"Louis","tags":["minimalist"],"format":"jpg"},{"id":162,"filename":"mark-kirkpatrick-mk-landscape-05.jpg","title":"Kirkpatrick Mk Landscape 05","author":"Mark","tags":["landscape"],"format":"jpg"},{"id":163,"filename":"masterteacher-red-sky-background.jpg","title":"Red Sky Background","author":"Masterteacher","tags":["minimalist"],"format":"jpg"},{"id":164,"filename":"matt-carlson-spring-mountain.png","title":"Carlson Spring Mountain","author":"Matt","tags":["mountain"],"format":"png"},{"id":165,"filename":"michal-lisowski-entergalactic.png","title":"Lisowski Entergalactic","author":"Michal","tags":["minimalist"],"format":"png"},{"id":166,"filename":"mitchrandom-alpine-sunset.png","title":"Alpine Sunset","author":"Mitchrandom","tags":["sunset"],"format":"png"},{"id":167,"filename":"mklgustafsson-among-trees-deer.jpg","title":"Among Trees Deer","author":"Mklgustafsson","tags":["deer"],"format":"jpg"},{"id":168,"filename":"mklgustafsson-among-trees-forest.png","title":"Among Trees Forest","author":"Mklgustafsson","tags":["forest"],"format":"png"},{"id":169,"filename":"mklgustafsson-among-trees-fox.jpg","title":"Among Trees Fox","author":"Mklgustafsson","tags":["minimalist"],"format":"jpg"},{"id":170,"filename":"mklgustafsson-among-trees-river-side.jpg","title":"Among Trees River Side","author":"Mklgustafsson","tags":["minimalist"],"format":"jpg"},{"id":171,"filename":"mklgustafsson-small-memory.png","title":"Small Memory","author":"Mklgustafsson","tags":["minimalist"],"format":"png"},{"id":172,"filename":"mklgustafsson-the-girl-and-the-bear.png","title":"The Girl And The Bear","author":"Mklgustafsson","tags":["minimalist"],"format":"png"},{"id":173,"filename":"moewanders-summers-end.jpg","title":"Summers End","author":"Moewanders","tags":["minimalist"],"format":"jpg"},{"id":174,"filename":"moewanders-the-frontier.jpg","title":"The Frontier","author":"Moewanders","tags":["minimalist"],"format":"jpg"},{"id":175,"filename":"mofghfgfgh-moon-mountain.png","title":"Moon Mountain","author":"Mofghfgfgh","tags":["mountain","moon"],"format":"png"},{"id":176,"filename":"mofghfgfgh-ocean-sunset.png","title":"Ocean Sunset","author":"Mofghfgfgh","tags":["sunset"],"format":"png"},{"id":177,"filename":"mrwhoseboss-dalle2-edit-alone-but-awesome.jpg","title":"Dalle2 Edit Alone But Awesome","author":"Mrwhoseboss","tags":["minimalist"],"format":"jpg"},{"id":178,"filename":"muhammad-nafay-deer-and-the-fireflies.jpg","title":"Nafay Deer And The Fireflies","author":"Muhammad","tags":["deer"],"format":"jpg"},{"id":179,"filename":"muhammad-nafay-the-new-light.jpg","title":"Nafay The New Light","author":"Muhammad","tags":["minimalist"],"format":"jpg"},{"id":180,"filename":"muhammad_nafay-couple-cityscape.png","title":"Nafay Couple Cityscape","author":"Muhammad","tags":["city"],"format":"png"},{"id":181,"filename":"muriLLu-Anime-Scenery-Sunset.jpg","title":"Anime Scenery Sunset","author":"MuriLLu","tags":["sunset","anime"],"format":"jpg"},{"id":182,"filename":"muriLLu-Japan-Neo-Wallpaper.png","title":"Japan Neo Wallpaper","author":"MuriLLu","tags":["minimalist"],"format":"png"},{"id":183,"filename":"ncoll36-forest-mountain.jpg","title":"Forest Mountain","author":"Ncoll36","tags":["mountain","forest"],"format":"jpg"},{"id":184,"filename":"neonoverdrive-pastel_sunset_by.png","title":"Pastel Sunset By","author":"Neonoverdrive","tags":["sunset"],"format":"png"},{"id":185,"filename":"neonoverdrive-vaporwave-off-kanagawa.jpg","title":"Vaporwave Off Kanagawa","author":"Neonoverdrive","tags":["minimalist"],"format":"jpg"},{"id":186,"filename":"neonoverdrive-vast-neon-cityscape.jpg","title":"Vast Neon Cityscape","author":"Neonoverdrive","tags":["city"],"format":"jpg"},{"id":187,"filename":"normieboy96-cherry-blossom.jpg","title":"Cherry Blossom","author":"Normieboy96","tags":["minimalist"],"format":"jpg"},{"id":188,"filename":"ogarart-bitter-coast.jpg","title":"Bitter Coast","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":189,"filename":"ogarart-blue-lighthouse-2019-01-13.jpg","title":"Blue Lighthouse 2019 01 13","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":190,"filename":"ogarart-bridge.jpg","title":"Bridge","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":191,"filename":"ogarart-cactus-2019-01-20.jpg","title":"Cactus 2019 01 20","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":192,"filename":"OGARart-eagle-mountain-sunset-minimalist.jpg","title":"Eagle Mountain Sunset Minimalist","author":"OGARart","tags":["mountain","sunset","minimal"],"format":"jpg"},{"id":193,"filename":"ogarart-forest-mountains-2019-01-17.jpg","title":"Forest Mountains 2019 01 17","author":"Ogarart","tags":["mountain","forest"],"format":"jpg"},{"id":194,"filename":"ogarart-forest-sunset-2019-01-25.png","title":"Forest Sunset 2019 01 25","author":"Ogarart","tags":["sunset","forest"],"format":"png"},{"id":195,"filename":"ogarart-forest-trees.jpg","title":"Forest Trees","author":"Ogarart","tags":["forest"],"format":"jpg"},{"id":196,"filename":"ogarart-fortress.jpg","title":"Fortress","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":197,"filename":"ogarart-frozen.jpg","title":"Frozen","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":198,"filename":"ogarart-lone-wanderer.jpg","title":"Lone Wanderer","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":199,"filename":"ogarart-mountains-ice.jpg","title":"Mountains Ice","author":"Ogarart","tags":["mountain"],"format":"jpg"},{"id":200,"filename":"ogarart-orange-sky-red-rocks-2019-03-04.jpg","title":"Orange Sky Red Rocks 2019 03 04","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":201,"filename":"ogarart-purple-mountains-2019-01-29.jpg","title":"Purple Mountains 2019 01 29","author":"Ogarart","tags":["mountain"],"format":"jpg"},{"id":202,"filename":"ogarart-purple-trees-2019-02-11.jpg","title":"Purple Trees 2019 02 11","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":203,"filename":"ogarart-purple-trees-and-deer-2019-01-15.jpg","title":"Purple Trees And Deer 2019 01 15","author":"Ogarart","tags":["deer"],"format":"jpg"},{"id":204,"filename":"ogarart-purple-trees-under-stars-2019-01-27.jpg","title":"Purple Trees Under Stars 2019 01 27","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":205,"filename":"ogarart-red-cave.jpg","title":"Red Cave","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":206,"filename":"ogarart-red-mountains-lake-2019-10-06.jpg","title":"Red Mountains Lake 2019 10 06","author":"Ogarart","tags":["mountain","lake"],"format":"jpg"},{"id":207,"filename":"ogarart-red-mountains.jpg","title":"Red Mountains","author":"Ogarart","tags":["mountain"],"format":"jpg"},{"id":208,"filename":"ogarart-savannah.jpg","title":"Savannah","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":209,"filename":"ogarart-sunset-2.jpg","title":"Sunset 2","author":"Ogarart","tags":["sunset"],"format":"jpg"},{"id":210,"filename":"ogarart-wolf-and-blue-trees-2019-01-22.jpg","title":"Wolf And Blue Trees 2019 01 22","author":"Ogarart","tags":["minimalist"],"format":"jpg"},{"id":211,"filename":"olly-moss-boris001-firewatch.jpg","title":"Moss Boris001 Firewatch","author":"Olly","tags":["firewatch"],"format":"jpg"},{"id":212,"filename":"olly-moss-dadaws-firewatch-bright-moon.jpg","title":"Moss Dadaws Firewatch Bright Moon","author":"Olly","tags":["moon","firewatch"],"format":"jpg"},{"id":213,"filename":"olly-moss-dadaws-firewatch-cliff.jpg","title":"Moss Dadaws Firewatch Cliff","author":"Olly","tags":["firewatch"],"format":"jpg"},{"id":214,"filename":"olly-moss-firewatch-blue-forest.png","title":"Moss Firewatch Blue Forest","author":"Olly","tags":["forest","firewatch"],"format":"png"},{"id":215,"filename":"olly-moss-firewatch-green.png","title":"Moss Firewatch Green","author":"Olly","tags":["firewatch"],"format":"png"},{"id":216,"filename":"olly-moss-firewatch-night.jpg","title":"Moss Firewatch Night","author":"Olly","tags":["night","firewatch"],"format":"jpg"},{"id":217,"filename":"olly-moss-firewatch-purple.jpg","title":"Moss Firewatch Purple","author":"Olly","tags":["firewatch"],"format":"jpg"},{"id":218,"filename":"olly-moss-firewatch-red.jpg","title":"Moss Firewatch Red","author":"Olly","tags":["firewatch"],"format":"jpg"},{"id":219,"filename":"olly-moss-firewatch-river.png","title":"Moss Firewatch River","author":"Olly","tags":["firewatch"],"format":"png"},{"id":220,"filename":"olly-moss-firewatch-stag.jpg","title":"Moss Firewatch Stag","author":"Olly","tags":["firewatch"],"format":"jpg"},{"id":221,"filename":"olly-moss-firewatch-yellow.jpg","title":"Moss Firewatch Yellow","author":"Olly","tags":["firewatch"],"format":"jpg"},{"id":222,"filename":"olly-moss-sunset-mountains-firewatch.jpg","title":"Moss Sunset Mountains Firewatch","author":"Olly","tags":["mountain","sunset","firewatch"],"format":"jpg"},{"id":223,"filename":"P82En-cherry-blossom-mountain-range.jpg","title":"Cherry Blossom Mountain Range","author":"P82En","tags":["mountain"],"format":"jpg"},{"id":224,"filename":"paralloid-reaching-the-stars-over-mountain.jpg","title":"Reaching The Stars Over Mountain","author":"Paralloid","tags":["mountain"],"format":"jpg"},{"id":225,"filename":"partenoxenese-blue-faro.jpg","title":"Blue Faro","author":"Partenoxenese","tags":["minimalist"],"format":"jpg"},{"id":226,"filename":"phantomghostx-mountains.jpg","title":"Mountains","author":"Phantomghostx","tags":["mountain"],"format":"jpg"},{"id":227,"filename":"quentinmarsollier-unexplored.png","title":"Unexplored","author":"Quentinmarsollier","tags":["minimalist"],"format":"png"},{"id":228,"filename":"raven2cz-sunset-river-among-trees.png","title":"Sunset River Among Trees","author":"Raven2cz","tags":["sunset"],"format":"png"},{"id":229,"filename":"redditislikefb-astral-summit.png","title":"Astral Summit","author":"Redditislikefb","tags":["minimalist"],"format":"png"},{"id":230,"filename":"refiend-carmine-rock.jpg","title":"Carmine Rock","author":"Refiend","tags":["minimalist"],"format":"jpg"},{"id":231,"filename":"rhads-survivors.png","title":"Survivors","author":"Rhads","tags":["minimalist"],"format":"png"},{"id":232,"filename":"richarddorran-city-of-life.jpg","title":"City Of Life","author":"Richarddorran","tags":["city"],"format":"jpg"},{"id":233,"filename":"ricodz-lost.jpg","title":"Lost","author":"Ricodz","tags":["minimalist"],"format":"jpg"},{"id":234,"filename":"rmradev-alien-moon.jpg","title":"Alien Moon","author":"Rmradev","tags":["moon"],"format":"jpg"},{"id":235,"filename":"rmradev-colorful-landscape.png","title":"Colorful Landscape","author":"Rmradev","tags":["landscape"],"format":"png"},{"id":236,"filename":"rmradev-colorful-mountains.jpg","title":"Colorful Mountains","author":"Rmradev","tags":["mountain"],"format":"jpg"},{"id":237,"filename":"rmradev-evening-forest.png","title":"Evening Forest","author":"Rmradev","tags":["forest"],"format":"png"},{"id":238,"filename":"rmradev-moon-sunset-landscape.png","title":"Moon Sunset Landscape","author":"Rmradev","tags":["landscape","sunset","moon"],"format":"png"},{"id":239,"filename":"rmradev-mountain-retreat.jpg","title":"Mountain Retreat","author":"Rmradev","tags":["mountain"],"format":"jpg"},{"id":240,"filename":"rmradev-mountains.jpg","title":"Mountains","author":"Rmradev","tags":["mountain"],"format":"jpg"},{"id":241,"filename":"rmradev-peaceful-lake.png","title":"Peaceful Lake","author":"Rmradev","tags":["lake"],"format":"png"},{"id":242,"filename":"rmradev-sunset-landscape.jpg","title":"Sunset Landscape","author":"Rmradev","tags":["landscape","sunset"],"format":"jpg"},{"id":243,"filename":"rmradev-tranquility.png","title":"Tranquility","author":"Rmradev","tags":["minimalist"],"format":"png"},{"id":244,"filename":"rmradev-vampire-castle.jpg","title":"Vampire Castle","author":"Rmradev","tags":["minimalist"],"format":"jpg"},{"id":245,"filename":"roboturtle_-purple-sky.jpg","title":"Purple Sky","author":"Roboturtle","tags":["minimalist"],"format":"jpg"},{"id":246,"filename":"romain-trystram-Neon-Alleyway.jpg","title":"Trystram Neon Alleyway","author":"Romain","tags":["minimalist"],"format":"jpg"},{"id":247,"filename":"romen-deva-awakening.jpg","title":"Deva Awakening","author":"Romen","tags":["minimalist"],"format":"jpg"},{"id":248,"filename":"rook-rip-mt-fuji.png","title":"Rip Mt Fuji","author":"Rook","tags":["minimalist"],"format":"png"},{"id":249,"filename":"ryky-sky-wave.png","title":"Sky Wave","author":"Ryky","tags":["minimalist"],"format":"png"},{"id":250,"filename":"ryky-the-rest.png","title":"The Rest","author":"Ryky","tags":["minimalist"],"format":"png"},{"id":251,"filename":"sabbathbl00dysabbath-desert-synthwave-ai-landscape.png","title":"Desert Synthwave Ai Landscape","author":"Sabbathbl00dysabbath","tags":["landscape","desert"],"format":"png"},{"id":252,"filename":"saisho-moonlit-night-wedding.jpg","title":"Moonlit Night Wedding","author":"Saisho","tags":["moon","night"],"format":"jpg"},{"id":253,"filename":"salman-illustrator-japanese-landscape.png","title":"Illustrator Japanese Landscape","author":"Salman","tags":["landscape"],"format":"png"},{"id":254,"filename":"samantha-lee-purple-deer.png","title":"Lee Purple Deer","author":"Samantha","tags":["deer"],"format":"png"},{"id":255,"filename":"sandace11-dusk.jpg","title":"Dusk","author":"Sandace11","tags":["minimalist"],"format":"jpg"},{"id":256,"filename":"significancefit6753-samurai-evening-jonah-edit.jpg","title":"Samurai Evening Jonah Edit","author":"Significancefit6753","tags":["minimalist"],"format":"jpg"},{"id":257,"filename":"skavrx-mountain.png","title":"Mountain","author":"Skavrx","tags":["mountain"],"format":"png"},{"id":258,"filename":"stable-diffusion-wavymulder-cyberpunk-sunset.png","title":"Diffusion Wavymulder Cyberpunk Sunset","author":"Stable","tags":["sunset","cyberpunk"],"format":"png"},{"id":259,"filename":"strigonian-far-north.png","title":"Far North","author":"Strigonian","tags":["minimalist"],"format":"png"},{"id":260,"filename":"surendra-rajawat-butterflies.png","title":"Rajawat Butterflies","author":"Surendra","tags":["minimalist"],"format":"png"},{"id":261,"filename":"surendra-rajawat-island-in-the-sky.jpg","title":"Rajawat Island In The Sky","author":"Surendra","tags":["minimalist"],"format":"jpg"},{"id":262,"filename":"surendra-rajawat-natures-beauty.png","title":"Rajawat Natures Beauty","author":"Surendra","tags":["nature"],"format":"png"},{"id":263,"filename":"surendra-rajawat-the-magic-unfolds.png","title":"Rajawat The Magic Unfolds","author":"Surendra","tags":["minimalist"],"format":"png"},{"id":264,"filename":"tacosauceninja-blossoms.jpg","title":"Blossoms","author":"Tacosauceninja","tags":["minimalist"],"format":"jpg"},{"id":265,"filename":"tacosauceninja-i-cant-stop-what-you-began.png","title":"I Cant Stop What You Began","author":"Tacosauceninja","tags":["minimalist"],"format":"png"},{"id":266,"filename":"tacosauceninja-remembering.jpg","title":"Remembering","author":"Tacosauceninja","tags":["minimalist"],"format":"jpg"},{"id":267,"filename":"tacosauceninja-rooftop.jpg","title":"Rooftop","author":"Tacosauceninja","tags":["minimalist"],"format":"jpg"},{"id":268,"filename":"tacosauceninja-shadows-die-twice.png","title":"Shadows Die Twice","author":"Tacosauceninja","tags":["minimalist"],"format":"png"},{"id":269,"filename":"tanvdesign-fantasy-landscape.png","title":"Fantasy Landscape","author":"Tanvdesign","tags":["landscape"],"format":"png"},{"id":270,"filename":"tanvdesign-wolf.jpg","title":"Wolf","author":"Tanvdesign","tags":["minimalist"],"format":"jpg"},{"id":271,"filename":"the-gate-to-serenity-danisogen.png","title":"Gate To Serenity Danisogen","author":"The","tags":["minimalist"],"format":"png"},{"id":272,"filename":"thedigitalrob-separated-by-fate.jpg","title":"Separated By Fate","author":"Thedigitalrob","tags":["minimalist"],"format":"jpg"},{"id":273,"filename":"thomasshifflett31-beautiful-city-sunset.jpg","title":"Beautiful City Sunset","author":"Thomasshifflett31","tags":["sunset","city"],"format":"jpg"},{"id":274,"filename":"tienphat-night-landscape.jpg","title":"Night Landscape","author":"Tienphat","tags":["landscape","night"],"format":"jpg"},{"id":275,"filename":"tongxinfen-extraterrestrial.jpg","title":"Extraterrestrial","author":"Tongxinfen","tags":["minimalist"],"format":"jpg"},{"id":276,"filename":"totalcoconut-midjourney-landscape-wallpaper.jpg","title":"Midjourney Landscape Wallpaper","author":"Totalcoconut","tags":["landscape"],"format":"jpg"},{"id":277,"filename":"tyler-smith-blue-lagoon-port.jpg","title":"Smith Blue Lagoon Port","author":"Tyler","tags":["minimalist"],"format":"jpg"},{"id":278,"filename":"tyler-smith-redwoods-wolf.jpg","title":"Smith Redwoods Wolf","author":"Tyler","tags":["minimalist"],"format":"jpg"},{"id":279,"filename":"uagami-cherry-blossoms.jpg","title":"Cherry Blossoms","author":"Uagami","tags":["minimalist"],"format":"jpg"},{"id":280,"filename":"unknown-anime-sunset.jpg","title":"Anime Sunset","author":"Unknown","tags":["sunset","anime"],"format":"jpg"},{"id":281,"filename":"unknown-bird-landing-on-water.jpg","title":"Bird Landing On Water","author":"Unknown","tags":["minimalist"],"format":"jpg"},{"id":282,"filename":"unknown-blue-moon-planets-over-lake-trees.jpg","title":"Blue Moon Planets Over Lake Trees","author":"Unknown","tags":["moon","lake"],"format":"jpg"},{"id":283,"filename":"unknown-couple-on-red-mountains.jpg","title":"Couple On Red Mountains","author":"Unknown","tags":["mountain"],"format":"jpg"},{"id":284,"filename":"unknown-cyberpunk-city.jpg","title":"Cyberpunk City","author":"Unknown","tags":["cyberpunk","city"],"format":"jpg"},{"id":285,"filename":"unknown-dark-mojave-desert.jpg","title":"Dark Mojave Desert","author":"Unknown","tags":["desert"],"format":"jpg"},{"id":286,"filename":"unknown-deer-in-the-light.jpg","title":"Deer In The Light","author":"Unknown","tags":["deer"],"format":"jpg"},{"id":287,"filename":"unknown-downtown-minneapolis.jpg","title":"Downtown Minneapolis","author":"Unknown","tags":["minimalist"],"format":"jpg"},{"id":288,"filename":"unknown-elephants-green-mountain.jpg","title":"Elephants Green Mountain","author":"Unknown","tags":["mountain"],"format":"jpg"},{"id":289,"filename":"unknown-green-mountains-and-hills.jpg","title":"Green Mountains And Hills","author":"Unknown","tags":["mountain"],"format":"jpg"},{"id":290,"filename":"unknown-ice-mountain-trees.png","title":"Ice Mountain Trees","author":"Unknown","tags":["mountain"],"format":"png"},{"id":291,"filename":"unknown-minimalist-desert-landscape.jpg","title":"Minimalist Desert Landscape","author":"Unknown","tags":["landscape","desert","minimal"],"format":"jpg"},{"id":292,"filename":"unknown-mountain-birds.png","title":"Mountain Birds","author":"Unknown","tags":["mountain"],"format":"png"},{"id":293,"filename":"unknown-multicolor-rocket-launch.jpg","title":"Multicolor Rocket Launch","author":"Unknown","tags":["minimalist"],"format":"jpg"},{"id":294,"filename":"unknown-orange-sunset-over-blue-hills.jpg","title":"Orange Sunset Over Blue Hills","author":"Unknown","tags":["sunset"],"format":"jpg"},{"id":295,"filename":"unknown-pink-mountains.png","title":"Pink Mountains","author":"Unknown","tags":["mountain"],"format":"png"},{"id":296,"filename":"unknown-pink-rocky-cliffs-and-water.jpg","title":"Pink Rocky Cliffs And Water","author":"Unknown","tags":["minimalist"],"format":"jpg"},{"id":297,"filename":"unknown-pink-sunset-mountain-trees.png","title":"Pink Sunset Mountain Trees","author":"Unknown","tags":["mountain","sunset"],"format":"png"},{"id":298,"filename":"unknown-purple-lake.jpg","title":"Purple Lake","author":"Unknown","tags":["lake"],"format":"jpg"},{"id":299,"filename":"unknown-purple-mountain-landscape-with-ship.jpg","title":"Purple Mountain Landscape With Ship","author":"Unknown","tags":["landscape","mountain"],"format":"jpg"},{"id":300,"filename":"unknown-samurai-forest.jpg","title":"Samurai Forest","author":"Unknown","tags":["forest"],"format":"jpg"},{"id":301,"filename":"unknown-snowy-landscape.jpg","title":"Snowy Landscape","author":"Unknown","tags":["landscape"],"format":"jpg"},{"id":302,"filename":"unknown-sunset-behind-island-palm-trees.jpg","title":"Sunset Behind Island Palm Trees","author":"Unknown","tags":["sunset"],"format":"jpg"},{"id":303,"filename":"unknown-sunset-fishing.jpg","title":"Sunset Fishing","author":"Unknown","tags":["sunset"],"format":"jpg"},{"id":304,"filename":"unknown-whale-tail-at-sunset.jpg","title":"Whale Tail At Sunset","author":"Unknown","tags":["sunset"],"format":"jpg"},{"id":305,"filename":"unkown-purple-mountains.png","title":"Purple Mountains","author":"Unkown","tags":["mountain"],"format":"png"},{"id":306,"filename":"unreal-midjourney-a-stunning-sunset.jpg","title":"Midjourney A Stunning Sunset","author":"Unreal","tags":["sunset"],"format":"jpg"},{"id":307,"filename":"vorgbardo-ancient-oriental-temple.jpg","title":"Ancient Oriental Temple","author":"Vorgbardo","tags":["minimalist"],"format":"jpg"},{"id":308,"filename":"VorgBardo-midjourney-1960s-sci-fi-planet.jpg","title":"Midjourney 1960s Sci Fi Planet","author":"VorgBardo","tags":["minimalist"],"format":"jpg"},{"id":309,"filename":"voyager-bequem-almost-spring-prev-2.jpg","title":"Bequem Almost Spring Prev 2","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":310,"filename":"voyager-board-man-moonlit-nights-f.jpg","title":"Board Man Moonlit Nights F","author":"Voyager","tags":["moon","night"],"format":"jpg"},{"id":311,"filename":"voyager-camino-de-kazul-arte.jpg","title":"Camino De Kazul Arte","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":312,"filename":"voyager-cloud-break-day-drifting.png","title":"Cloud Break Day Drifting","author":"Voyager","tags":["minimalist"],"format":"png"},{"id":313,"filename":"voyager-coldbrew-backyard-gardens.jpg","title":"Coldbrew Backyard Gardens","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":314,"filename":"voyager-cosmonkey-leaves.jpg","title":"Cosmonkey Leaves","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":315,"filename":"voyager-lofi-exposure.jpg","title":"Lofi Exposure","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":316,"filename":"voyager-nogymx-marauders.jpg","title":"Nogymx Marauders","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":317,"filename":"voyager-otaam-tonion-lush-space.jpg","title":"Otaam Tonion Lush Space","author":"Voyager","tags":["space"],"format":"jpg"},{"id":318,"filename":"voyager-quilla-teaser-traders.jpg","title":"Quilla Teaser Traders","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":319,"filename":"voyager-sai-t-inownlove-overseas.jpg","title":"Sai T Inownlove Overseas","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":320,"filename":"voyager-samurai-bebop-acoolrocket-edit.png","title":"Samurai Bebop Acoolrocket Edit","author":"Voyager","tags":["minimalist"],"format":"png"},{"id":321,"filename":"voyager-simber-tibeauthetraveler-eternal-sunshine.jpg","title":"Simber Tibeauthetraveler Eternal Sunshine","author":"Voyager","tags":["minimalist"],"format":"jpg"},{"id":322,"filename":"wallpapersden-purple-artistic-landscape.png","title":"Purple Artistic Landscape","author":"Wallpapersden","tags":["landscape"],"format":"png"},{"id":323,"filename":"wallpapersden.com_cool-red-mountains-4k.jpg","title":"Cool Red Mountains 4k","author":"Wallpapersden.Com","tags":["mountain"],"format":"jpg"},{"id":324,"filename":"wallpapersden.com_landscape-moon-digital-evening.jpg","title":"Landscape Moon Digital Evening","author":"Wallpapersden.Com","tags":["landscape","moon"],"format":"jpg"},{"id":325,"filename":"wallpapersden.com_minimal-reflection-sunset.jpg","title":"Minimal Reflection Sunset","author":"Wallpapersden.Com","tags":["sunset","minimal"],"format":"jpg"},{"id":326,"filename":"wallpapersden.com_nature-sunset-simple-minimal-illustration.jpg","title":"Nature Sunset Simple Minimal Illustration","author":"Wallpapersden.Com","tags":["nature","sunset","minimal"],"format":"jpg"},{"id":327,"filename":"wallpapersden.com_pyramid-minimal-landscape.jpg","title":"Pyramid Minimal Landscape","author":"Wallpapersden.Com","tags":["landscape","minimal"],"format":"jpg"},{"id":328,"filename":"wheazzy-birds-mountain.jpg","title":"Birds Mountain","author":"Wheazzy","tags":["mountain"],"format":"jpg"},{"id":329,"filename":"wheazzy-blue-mountains.jpg","title":"Blue Mountains","author":"Wheazzy","tags":["mountain"],"format":"jpg"},{"id":330,"filename":"wp5102649-neon-retro-city-ps4-wallpapers.png","title":"Neon Retro City Ps4 Wallpapers","author":"Wp5102649","tags":["city","retro"],"format":"png"},{"id":331,"filename":"wp5998347-retro-4k-wallpapers.jpg","title":"Retro 4k Wallpapers","author":"Wp5998347","tags":["retro"],"format":"jpg"},{"id":332,"filename":"wp6504516-monument-valley-sunset-ultra-hd-wallpapers.jpg","title":"Monument Valley Sunset Ultra Hd Wallpapers","author":"Wp6504516","tags":["sunset"],"format":"jpg"},{"id":333,"filename":"yefedlger-eolyn.jpg","title":"Eolyn","author":"Yefedlger","tags":["minimalist"],"format":"jpg"},{"id":334,"filename":"zakoriart-commission-piece-for-game.jpg","title":"Commission Piece For Game","author":"Zakoriart","tags":["minimalist"],"format":"jpg"},{"id":335,"filename":"zakoriart-flow.jpg","title":"Flow","author":"Zakoriart","tags":["minimalist"],"format":"jpg"},{"id":336,"filename":"zakoriart-if-silence-could-be-heard.jpg","title":"If Silence Could Be Heard","author":"Zakoriart","tags":["minimalist"],"format":"jpg"},{"id":337,"filename":"zeoluwang-journey.jpg","title":"Journey","author":"Zeoluwang","tags":["minimalist"],"format":"jpg"}];
-        const PAGE_SIZE = 40;
 
-        const CONFIG = {
-            repo: 'SumanCH8514/Wallpaper-Collection-Project',
-            branch: 'main',
-            get proxyBaseUrl() {
-                return '/api/images/';
-            },
-            get rawBaseUrl() {
-                return 'https://raw.githubusercontent.com/' + this.repo + '/' + this.branch + '/images/';
-            },
-            get imgProxyPrefix() {
-                return 'https://dc1imgproxy.fly.dev/x/rs:auto:480:270:1/plain/' + encodeURIComponent(this.rawBaseUrl);
-            }
-        };
-
-        let filteredWallpapers = allWallpapers;
-        let activeTag = 'all';
-        let searchQuery = '';
-        let currentPage = 1;
-        let lightboxInstance = null;
-
-        const galleryGrid = document.getElementById('galleryGrid');
-        const paginationContainer = document.getElementById('paginationContainer');
-        const searchInput = document.getElementById('searchInput');
-        const tagsContainer = document.getElementById('tagsContainer');
-        const statsCount = document.getElementById('statsCount');
-        const randomBtn = document.getElementById('randomBtn');
-        const backToTopBtn = document.getElementById('backToTop');
-        const toastContainer = document.getElementById('toastContainer');
-        const gallerySection = document.getElementById('gallerySection');
-
-        function showToast(message, icon) {
-            icon = icon || '✓';
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.innerHTML = '<span>' + icon + '</span><span>' + message + '</span>';
-            toastContainer.appendChild(toast);
-            setTimeout(function() {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(10px)';
-                setTimeout(function() { toast.remove(); }, 250);
-            }, 2500);
-        }
-
-        function copyLink(url, e) {
-            if (e) e.stopPropagation();
-            const absoluteUrl = new URL(url, window.location.origin).href;
-            navigator.clipboard.writeText(absoluteUrl).then(function() {
-                showToast('Proxy image link copied to clipboard!');
-            }).catch(function() {
-                showToast('Failed to copy link', '✕');
-            });
-        }
-
-        function openRandomWallpaper() {
-            if (allWallpapers.length === 0) return;
-            const randomItem = allWallpapers[Math.floor(Math.random() * allWallpapers.length)];
-            const targetElement = document.querySelector('.glightbox[data-id="' + randomItem.id + '"]');
-            if (targetElement) {
-                targetElement.click();
-            } else {
-                window.open('/api/random', '_blank');
-            }
-        }
-
-        function goToPage(pageNumber, shouldScroll) {
-            const totalPages = Math.ceil(filteredWallpapers.length / PAGE_SIZE) || 1;
-            currentPage = Math.max(1, Math.min(pageNumber, totalPages));
-
-            // Sync URL query param
-            const url = new URL(window.location);
-            if (currentPage > 1) {
-                url.searchParams.set('page', currentPage);
-            } else {
-                url.searchParams.delete('page');
-            }
-            window.history.replaceState({}, '', url);
-
-            renderCurrentPage();
-
-            if (shouldScroll && gallerySection) {
-                const navHeight = document.querySelector('.navbar')?.offsetHeight || 60;
-                const topPos = gallerySection.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
-                window.scrollTo({ top: Math.max(0, topPos), behavior: 'smooth' });
-            }
-        }
-
-        function renderPagination(totalItems) {
-            paginationContainer.innerHTML = '';
-            const totalPages = Math.ceil(totalItems / PAGE_SIZE);
-
-            if (totalPages <= 1) {
-                paginationContainer.style.display = 'none';
-                return;
-            }
-
-            paginationContainer.style.display = 'flex';
-            const fragment = document.createDocumentFragment();
-
-            // Previous Button
-            const prevBtn = document.createElement('button');
-            prevBtn.className = 'page-btn';
-            prevBtn.innerHTML = '&lsaquo; Prev';
-            prevBtn.disabled = currentPage <= 1;
-            prevBtn.title = 'Previous Page';
-            prevBtn.addEventListener('click', function() {
-                if (currentPage > 1) goToPage(currentPage - 1, true);
-            });
-            fragment.appendChild(prevBtn);
-
-            // Pagination Number Generator with Ellipsis
-            function createPageButton(p) {
-                const btn = document.createElement('button');
-                btn.className = 'page-btn ' + (p === currentPage ? 'active' : '');
-                btn.textContent = p;
-                btn.setAttribute('aria-label', 'Page ' + p);
-                btn.addEventListener('click', function() {
-                    goToPage(p, true);
-                });
-                return btn;
-            }
-
-            function createEllipsis() {
-                const span = document.createElement('span');
-                span.className = 'page-ellipsis';
-                span.textContent = '...';
-                return span;
-            }
-
-            if (totalPages <= 7) {
-                for (let i = 1; i <= totalPages; i++) {
-                    fragment.appendChild(createPageButton(i));
-                }
-            } else {
-                fragment.appendChild(createPageButton(1));
-
-                if (currentPage > 3) {
-                    fragment.appendChild(createEllipsis());
-                }
-
-                const start = Math.max(2, currentPage - 1);
-                const end = Math.min(totalPages - 1, currentPage + 1);
-
-                for (let i = start; i <= end; i++) {
-                    fragment.appendChild(createPageButton(i));
-                }
-
-                if (currentPage < totalPages - 2) {
-                    fragment.appendChild(createEllipsis());
-                }
-
-                fragment.appendChild(createPageButton(totalPages));
-            }
-
-            // Next Button
-            const nextBtn = document.createElement('button');
-            nextBtn.className = 'page-btn';
-            nextBtn.innerHTML = 'Next &rsaquo;';
-            nextBtn.disabled = currentPage >= totalPages;
-            nextBtn.title = 'Next Page';
-            nextBtn.addEventListener('click', function() {
-                if (currentPage < totalPages) goToPage(currentPage + 1, true);
-            });
-            fragment.appendChild(nextBtn);
-
-            paginationContainer.appendChild(fragment);
-        }
-
-        function renderCurrentPage() {
-            galleryGrid.innerHTML = '';
-            const totalItems = filteredWallpapers.length;
-
-            if (totalItems === 0) {
-                galleryGrid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>No wallpapers found</h3><p>Try searching with another keyword or resetting the category filter.</p></div>';
-                statsCount.textContent = 'Showing 0 wallpapers';
-                paginationContainer.style.display = 'none';
-                return;
-            }
-
-            const totalPages = Math.ceil(totalItems / PAGE_SIZE);
-            if (currentPage > totalPages) currentPage = 1;
-
-            const startIndex = (currentPage - 1) * PAGE_SIZE;
-            const endIndex = Math.min(startIndex + PAGE_SIZE, totalItems);
-            const items = filteredWallpapers.slice(startIndex, endIndex);
-
-            const fragment = document.createDocumentFragment();
-
-            items.forEach(function(item) {
-                const proxyUrl = CONFIG.proxyBaseUrl + encodeURIComponent(item.filename);
-                const rawUrl = CONFIG.rawBaseUrl + encodeURIComponent(item.filename);
-                const thumbUrl = CONFIG.imgProxyPrefix + encodeURIComponent(item.filename);
-
-                const card = document.createElement('div');
-                card.className = 'wallpaper-card';
-
-                const cardMedia = document.createElement('div');
-                cardMedia.className = 'card-media';
-
-                const link = document.createElement('a');
-                link.href = proxyUrl;
-                link.className = 'glightbox';
-                link.setAttribute('data-id', item.id);
-                link.setAttribute('data-gallery', 'wallpaper-gallery');
-                link.setAttribute('data-alt', item.title);
-                link.setAttribute('data-description', item.title + ' • By ' + item.author);
-
-                const img = document.createElement('img');
-                img.src = thumbUrl;
-                img.loading = 'lazy';
-                img.decoding = 'async';
-                img.alt = item.title;
-                img.title = item.title;
-                img.className = 'img-skeleton';
-                img.onload = function() { this.classList.remove('img-skeleton'); };
-                img.onerror = function() { this.src = rawUrl; };
-
-                link.appendChild(img);
-                cardMedia.appendChild(link);
-                card.appendChild(cardMedia);
-
-                const cardInfo = document.createElement('div');
-                cardInfo.className = 'card-info';
-
-                const cardText = document.createElement('div');
-                cardText.className = 'card-text';
-
-                const titleDiv = document.createElement('div');
-                titleDiv.className = 'card-title';
-                titleDiv.title = item.title;
-                titleDiv.textContent = item.title;
-
-                const authorDiv = document.createElement('div');
-                authorDiv.className = 'card-author';
-                authorDiv.textContent = item.author;
-
-                cardText.appendChild(titleDiv);
-                cardText.appendChild(authorDiv);
-                cardInfo.appendChild(cardText);
-
-                const cardActions = document.createElement('div');
-                cardActions.className = 'card-actions';
-
-                const copyBtn = document.createElement('button');
-                copyBtn.className = 'icon-btn copy-btn';
-                copyBtn.title = 'Copy Proxy Link';
-                copyBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
-                copyBtn.addEventListener('click', function(e) { copyLink(proxyUrl, e); });
-
-                const downloadLink = document.createElement('a');
-                downloadLink.href = proxyUrl;
-                downloadLink.download = item.filename;
-                downloadLink.className = 'icon-btn';
-                downloadLink.title = 'Download Image';
-                downloadLink.target = '_blank';
-                downloadLink.rel = 'noopener';
-                downloadLink.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
-
-                cardActions.appendChild(copyBtn);
-                cardActions.appendChild(downloadLink);
-                cardInfo.appendChild(cardActions);
-                card.appendChild(cardInfo);
-
-                fragment.appendChild(card);
-            });
-
-            galleryGrid.appendChild(fragment);
-
-            statsCount.textContent = 'Showing ' + (startIndex + 1) + '–' + endIndex + ' of ' + totalItems + ' wallpapers (Page ' + currentPage + ' of ' + totalPages + ')';
-
-            renderPagination(totalItems);
-
-            if (lightboxInstance) {
-                lightboxInstance.destroy();
-            }
-
-            if (typeof GLightbox !== 'undefined') {
-                lightboxInstance = GLightbox({
-                    selector: '.glightbox',
-                    touchNavigation: true,
-                    loop: true,
-                    zoomable: true
-                });
-
-                lightboxInstance.on('slide_after_load', function(slide) {
-                    const img = slide.slide.querySelector('img');
-                    if (img && img.naturalWidth && img.naturalHeight) {
-                        const desc = slide.slideConfig.description;
-                        const descElem = slide.slide.querySelector('.gslide-desc');
-                        if (descElem) {
-                            descElem.innerText = desc + ' (' + img.naturalWidth + ' × ' + img.naturalHeight + ')';
-                        }
-                    }
-                });
-            }
-        }
-
-        function applyFilters(resetPage) {
-            if (resetPage) currentPage = 1;
-
-            filteredWallpapers = allWallpapers.filter(function(item) {
-                const matchesTag = activeTag === 'all' || item.tags.indexOf(activeTag) !== -1;
-                const matchesSearch = !searchQuery || 
-                    item.title.toLowerCase().indexOf(searchQuery) !== -1 ||
-                    item.author.toLowerCase().indexOf(searchQuery) !== -1 ||
-                    item.filename.toLowerCase().indexOf(searchQuery) !== -1 ||
-                    item.tags.some(function(t) { return t.toLowerCase().indexOf(searchQuery) !== -1; });
-                return matchesTag && matchesSearch;
-            });
-
-            goToPage(currentPage, false);
-        }
-
-        function setupTags() {
-            const popularTags = ['all', 'landscape', 'mountain', 'nature', 'space', 'sunset', 'forest', 'cyberpunk', 'retro', 'minimalist'];
-
-            tagsContainer.innerHTML = '';
-            popularTags.forEach(function(tag) {
-                const btn = document.createElement('button');
-                btn.className = 'tag-btn ' + (tag === activeTag ? 'active' : '');
-                btn.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
-                btn.dataset.tag = tag;
-
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.tag-btn').forEach(function(b) { b.classList.remove('active'); });
-                    btn.classList.add('active');
-                    activeTag = tag;
-                    applyFilters(true);
-                });
-
-                tagsContainer.appendChild(btn);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Read initial page from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const initialPage = parseInt(urlParams.get('page') || '1', 10);
-            if (!isNaN(initialPage) && initialPage > 1) {
-                currentPage = initialPage;
-            }
-
-            setupTags();
-            applyFilters(false);
-
-            let debounceTimer;
-            searchInput.addEventListener('input', function(e) {
-                clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(function() {
-                    searchQuery = e.target.value.trim().toLowerCase();
-                    applyFilters(true);
-                }, 150);
-            });
-
-            if (randomBtn) {
-                randomBtn.addEventListener('click', openRandomWallpaper);
-            }
-
-            window.addEventListener('keydown', function(e) {
-                if (e.key === '/' && document.activeElement !== searchInput) {
-                    e.preventDefault();
-                    searchInput.focus();
-                    searchInput.select();
-                } else if (e.key === 'Escape' && document.activeElement === searchInput) {
-                    searchInput.value = '';
-                    searchQuery = '';
-                    applyFilters(true);
-                    searchInput.blur();
-                } else if ((e.key === 'r' || e.key === 'R') && document.activeElement !== searchInput) {
-                    openRandomWallpaper();
-                } else if (e.key === 'ArrowRight' && document.activeElement !== searchInput) {
-                    const totalPages = Math.ceil(filteredWallpapers.length / PAGE_SIZE) || 1;
-                    if (currentPage < totalPages) goToPage(currentPage + 1, true);
-                } else if (e.key === 'ArrowLeft' && document.activeElement !== searchInput) {
-                    if (currentPage > 1) goToPage(currentPage - 1, true);
-                }
-            });
-
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 400) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            });
-
-            backToTopBtn.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-    </script>
+    <!-- Main Controller Script -->
+    <script src="/js/app.js"></script>
 </body>
 </html>
