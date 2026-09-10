@@ -3,7 +3,7 @@
  * Endpoint: /api/wallpapers
  */
 
-const wallpapers = require('../data/wallpapers.json');
+const wallpapers = require("../data/wallpapers.json");
 
 module.exports = (req, res) => {
   // CORS headers
