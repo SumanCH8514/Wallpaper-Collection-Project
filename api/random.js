@@ -3,6 +3,7 @@
  * Endpoint: /api/random
  */
 
+const wallpapers = require("./wallpapers.json");
 const wallpapers = require("./_data/wallpapers.json");
 
 module.exports = (req, res) => {
@@ -54,7 +55,7 @@ module.exports = (req, res) => {
 
   const item = pool[Math.floor(Math.random() * pool.length)];
   const fullImageUrl = `${rawBaseUrl}${encodeURIComponent(item.filename)}`;
-  const thumbnailUrl = `https://dc1imgproxy.fly.dev/x/rs:auto:480:270:1/plain/${encodeURIComponent(rawBaseUrl)}${encodeURIComponent(item.filename)}`;
+  const thumbnailUrl = `https://wsrv.nl/?url=${encodeURIComponent(fullImageUrl)}&w=640&h=360&fit=cover&output=webp`;
 
   if (asJson) {
     res.setHeader("Content-Type", "application/json; charset=utf-8");

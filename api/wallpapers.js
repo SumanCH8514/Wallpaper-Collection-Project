@@ -3,7 +3,8 @@
  * Endpoint: /api/wallpapers
  */
 
-const wallpapers = require('./_data/wallpapers.json');
+const wallpapers = require("./wallpapers.json");
+const wallpapers = require("./_data/wallpapers.json");
 
 module.exports = (req, res) => {
   // CORS headers
@@ -61,7 +62,7 @@ module.exports = (req, res) => {
   const formatted = results.map((item) => ({
     ...item,
     url: `${rawBaseUrl}${encodeURIComponent(item.filename)}`,
-    thumbnail: `https://dc1imgproxy.fly.dev/x/rs:auto:480:270:1/plain/${encodeURIComponent(rawBaseUrl)}${encodeURIComponent(item.filename)}`,
+    thumbnail: `https://wsrv.nl/?url=${encodeURIComponent(rawBaseUrl + encodeURIComponent(item.filename))}&w=640&h=360&fit=cover&output=webp`,
   }));
 
   res.setHeader("Content-Type", "application/json; charset=utf-8");

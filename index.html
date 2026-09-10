@@ -15,7 +15,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Minimalistic Wallpaper Collection">
     <meta property="og:description" content="Curated gallery of 300+ minimalistic and nature wallpapers with random API.">
-    <meta property="og:image" content="https://user-images.githubusercontent.com/20955511/186479660-475532e8-427d-4df1-a19d-7f94090805b1.png">
+    <meta property="og:image" content="https://raw.githubusercontent.com/SumanCH8514/Wallpaper-Collection-Project/main/images/acoolrocket-dalle2-hokusai-non-prompt-landscape.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -4029,8 +4029,8 @@ body {
             get rawBaseUrl() {
                 return 'https://raw.githubusercontent.com/' + this.repo + '/' + this.branch + '/images/';
             },
-            get imgProxyPrefix() {
-                return 'https://dc1imgproxy.fly.dev/x/rs:auto:480:270:1/plain/' + encodeURIComponent(this.rawBaseUrl);
+            getThumbnailUrl(fullUrl) {
+                return 'https://wsrv.nl/?url=' + encodeURIComponent(fullUrl) + '&w=640&h=360&fit=cover&output=webp';
             }
         };
 
@@ -4092,7 +4092,7 @@ body {
 
             items.forEach(item => {
                 const fullUrl = CONFIG.rawBaseUrl + encodeURIComponent(item.filename);
-                const thumbUrl = CONFIG.imgProxyPrefix + encodeURIComponent(item.filename);
+                const thumbUrl = CONFIG.getThumbnailUrl(fullUrl);
 
                 const card = document.createElement('div');
                 card.className = 'wallpaper-card';
