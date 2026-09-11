@@ -6,7 +6,8 @@
   let filteredWallpapers = [];
   let currentPage = 1;
   let currentCategory = "all";
-  let currentViewMode = localStorage.getItem("wallpaper_view_mode") || "grid";
+  let currentViewMode =
+    localStorage.getItem("wallpaper_view_mode") || "masonry";
   let searchQuery = "";
   let glightboxInstance = null;
 
